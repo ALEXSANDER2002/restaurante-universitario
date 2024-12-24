@@ -1,0 +1,184 @@
+*{
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.questrial-regular {
+    font-family: "Questrial", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+body {
+    margin: 0;
+    font-family: 'Questrial', sans-serif;
+    overflow: hidden;
+    overflow: auto;
+    font-family: 'Open sans', sans-serif;
+   
+}
+
+header {
+    justify-content: space-between;
+    display: flex;
+    background-color: #ffffff; /* Cor de fundo da header */
+    color: #ffffff; /* Cor do texto */
+    padding: 24px; /* Ajuste o espaçamento interno conforme necessário */
+    position: fixed; /* Fixa a header no topo */
+    top: 0; /* Garante que fique no topo */
+    left: 0; /* Começa no lado esquerdo */
+    width: 100%; /* Faz a header ocupar toda a largura */
+    z-index: 1000; /* Fica acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+    
+}
+
+.logo img {
+    width: 215px;
+    height: 60px;
+    margin-left: 31vh;
+    
+}
+.logo:hover{
+    opacity: 0.18;
+    transition: 0.4s;
+}
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: #ffffff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0)), 
+    url(../72e4e1b23135dd6c22a3eb6eea9b63a8.jpeg);    background-size: cover; /* Mantém a imagem cobrindo a área */
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 90vh; /* Define a altura como metade da viewport */
+    color: white; /* Para garantir que o texto seja visível */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adiciona sombra ao texto para contraste */
+    padding-left: 10px; /* Ajusta o espaço interno da header */
+    background-attachment: fixed;
+}
+
+
+
+
+.hero-text {
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-text h1 {
+    font-size: 48px; /* Ajuste para o tamanho desejado */
+    font-weight: 700;
+    margin: 0;
+}
+
+.hero-text p {
+    font-size: 17px;
+    font-weight: 400;
+    margin: 10px 0 20px 0;
+}
+
+.cta-button {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 17px;
+    background-color: #457b9d;
+    color: #ffffff;
+    padding: 20px 60px;
+    text-decoration: none;
+    border-radius: 37px;
+    transition: 0.4s;
+    font-weight: bold;
+}
+
+.cta-button:hover {
+    background-color: #365f77;
+    transform: scale(1.05);
+}
+
+
+.nav-menu {
+    display: flex; /* Alinha os itens horizontalmente */
+    justify-content: flex-end; /* Move o menu para o lado direito */
+    gap: 30px; /* Espaçamento entre os links */
+    position: relative; /* Permite ajuste com left */
+    right: 30vh; /* Move o menu mais para a esquerda */
+}
+
+.nav-menu a {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000000;
+    
+}
+
+.nav-menu a:hover{
+    text-decoration: underline;
+}
+
+.about {
+    max-width: 80%; /* Ajustar para ocupar mais espaço na tela */
+    margin: 0 auto; /* Centralizar horizontalmente */
+    text-align: center;
+}
+
+.about p{
+    color: rgb(86, 88, 94);
+    font-size: 20px;
+    max-width: 60vh;
+    font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+    justify-content: space-between;
+}
+
+.about h2 {
+    max-width: 50%;
+    margin-top: 100px;
+    margin-left: 30px;
+    padding: 30px;
+    color: #1d1e20;
+    font-size: 40px; /* Ajustar tamanho do texto */
+    margin-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.about h3 {   
+     max-width: 50%;
+    color: #1d1e20;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family:'Open Sans', sans-serif;
+  }
+
+  .about h4 {
+    max-width: 50%;
+    color: #1d1e20;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family:'Open Sans', sans-serif;
+  }
+
+.about .content {
+    display: flex;
+    flex-wrap: wrap; /* Permitir quebra de linha em telas menores */
+    justify-content: center; /* Alinhar conteúdo ao centro */
+    gap: 20px; /* Espaçamento entre os itens */
+    margin-bottom: 30px;
+}
+
+.about .content div {
+    flex: 0 0 45%; /* Ocupa 45% da largura no layout */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+.about .main-image {
+    width: 97%;
+    border-radius: 20px; /* Bordas arredondadas */
+    margin-top: 20px;
+}
