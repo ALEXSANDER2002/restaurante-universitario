@@ -35,8 +35,8 @@ header {
     
 }
 .logo:hover{
-    opacity: 0.18;
-    transition: 0.4s;
+    opacity: 0.4;
+    transition: 0.8s;
 }
 
 .hero {
@@ -175,4 +175,80 @@ header {
     width: 97%;
     border-radius: 20px; /* Bordas arredondadas */
     margin-top: 20px;
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    background-color: #A7D8DD; /* Cor de fundo */
+    margin-top: 40px;
+
+}
+
+.container h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.services2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.service {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    padding: 15px;
+    width: 100%;
+    transition: transform 0.3s;
+}
+
+.service:hover {
+    transform: scale(1.05);
+}
+
+.service img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.service h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.service p {
+    font-size: 14px;
+    color: #666;
+}
+
+.service button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #457b9d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.service button:hover {
+    background-color: #365f77;
 }
