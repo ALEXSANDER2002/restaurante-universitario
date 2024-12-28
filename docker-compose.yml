@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: restaurante
+    ports:
+      - "3307:3306"  # Mapeia a porta 3307 no host para 3306 no container
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+
+  backend:
+    build: ./backend          # Caminho para o Dockerfile do backend
+    container_name: backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql                  # O backend depende do MySQL
+    environment:
+      MYSQL_HOST: mysql        # Variáveis de ambiente para a conexão com o MySQL
+
+  frontend:
+    build: ./frontend         # Caminho para o Dockerfile do frontend
+    container_name: frontend
+    ports:
+      - "80:80"                # Acessível na porta 80 do host
+
+volumes:
+  mysql_data:
