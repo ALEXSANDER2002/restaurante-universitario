@@ -13,7 +13,7 @@ Para começar a contribuir, clone o repositório para sua máquina local. Execut
 ```bash
 git clone https://github.com/ALEXSANDER2002/restaurante-universitario.git
 
-
+```
 Para começar a contribuir, clone o repositório para sua máquina local. Execute o seguinte comando no terminal:
 
 ## 2. Inicializar o Repositório Git (se necessário)
