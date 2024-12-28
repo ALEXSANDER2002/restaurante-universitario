@@ -10,6 +10,12 @@ Aqui estão os passos para começar a contribuir para este projeto:
 
 Para começar a contribuir, clone o repositório para sua máquina local. Execute o seguinte comando no terminal:
 
+```bash
+git clone https://github.com/ALEXSANDER2002/restaurante-universitario.git
+
+
+Para começar a contribuir, clone o repositório para sua máquina local. Execute o seguinte comando no terminal:
+
 ## 2. Inicializar o Repositório Git (se necessário)
 
 Se você está começando um repositório do zero ou quer colaborar em um repositório recém-criado, inicie o Git na pasta do projeto:
