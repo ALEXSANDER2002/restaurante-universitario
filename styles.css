@@ -429,4 +429,38 @@ header {
     margin-top: 10px;
     font-size: 12px;
   }
-  
+
+  /* Media Queries */
+@media (max-width: 768px) {
+    
+
+    .nav-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .hero-text h1 {
+        font-size: 24px;
+    }
+
+    .hero-text p {
+        font-size: 12px;
+    }
+
+    .about h2 {
+        font-size: 24px;
+    }
+
+    .about p {
+        font-size: 14px;
+    }
+
+    .services2 {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        padding: 15px;
+    }
+}
+    
