@@ -1,0 +1,163 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header {
+    text-align: center;
+    background-color: #004d40;
+    color: #fff;
+    padding: 20px;
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.main-content {
+    display: flex;
+    padding: 20px;
+}
+
+
+.image-section {
+    max-height: 50%; /* Garante que não ultrapasse 50% */
+    flex: 0 0 50%; /* Ocupa 50% da altura do contêiner */
+    display: flex;
+    flex-direction: column; /* Alinha itens verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    text-align: center;
+    padding: 10px;
+
+}
+
+
+
+.image-section p {
+    font-size: 1.2em; /* Aumenta o tamanho do texto */
+    line-height: 2em; /* Melhora o espaçamento entre as linhas */
+    color: #333; /* Ajusta a cor para melhor legibilidade */
+    margin-top: 50px; /* Espaçamento entre a imagem e o texto */
+    max-width: 600px; /* Limita a largura para alinhar com a imagem */
+    font-weight: bolder;
+}
+
+
+.group-photo {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+.login-section {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+}
+
+.login-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #004d40;
+    outline: none;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #004d40;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #00332c;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.links a {
+    color: #004d40;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+.admin-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #ccc;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.admin-btn:hover {
+    background-color: #bbb;
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+p a {
+    color: #004d40;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
