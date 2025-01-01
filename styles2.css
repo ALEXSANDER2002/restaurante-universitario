@@ -1,3 +1,10 @@
+/* Resets e estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,6 +16,7 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Container principal */
 .container {
     width: 90%;
     max-width: 1100px;
@@ -18,10 +26,11 @@ body {
     overflow: hidden;
 }
 
+/* Cabeçalho */
 .header {
     text-align: center;
-    background-color: #004d40;
-    color: #fff;
+    background-color: #1b641b;
+    color: #ffffff;
     padding: 20px;
 }
 
@@ -30,49 +39,53 @@ body {
     margin-bottom: 10px;
 }
 
+/* Conteúdo principal */
 .main-content {
     display: flex;
     padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-
+/* Seção de imagem */
 .image-section {
-    max-height: 50%; /* Garante que não ultrapasse 50% */
-    flex: 0 0 50%; /* Ocupa 50% da altura do contêiner */
+    flex: 0 0 50%;
     display: flex;
-    flex-direction: column; /* Alinha itens verticalmente */
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 10px;
-
 }
-
-
 
 .image-section p {
-    font-size: 1.2em; /* Aumenta o tamanho do texto */
-    line-height: 2em; /* Melhora o espaçamento entre as linhas */
-    color: #333; /* Ajusta a cor para melhor legibilidade */
-    margin-top: 50px; /* Espaçamento entre a imagem e o texto */
-    max-width: 600px; /* Limita a largura para alinhar com a imagem */
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #333;
+    margin-top: 20px;
+    max-width: 600px;
     font-weight: bolder;
+    text-align: justify;
 }
-
 
 .group-photo {
     width: 100%;
-    max-width: 400px;
+    max-width: 300px;
+    height: auto;
     border-radius: 8px;
 }
 
+/* Seção de login */
 .login-section {
     flex: 1;
     padding: 20px;
     background-color: #f9f9f9;
     border-left: 1px solid #ddd;
+    max-width: 500px;
+    width: 100%;
 }
 
+/* Títulos e formulários */
 .login-section h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -102,6 +115,7 @@ input:focus {
     outline: none;
 }
 
+/* Botões */
 .btn {
     padding: 10px;
     background-color: #004d40;
@@ -115,22 +129,6 @@ input:focus {
 
 .btn:hover {
     background-color: #00332c;
-}
-
-.links {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-    font-size: 12px;
-}
-
-.links a {
-    color: #004d40;
-    text-decoration: none;
-}
-
-.links a:hover {
-    text-decoration: underline;
 }
 
 .admin-btn {
@@ -147,6 +145,24 @@ input:focus {
     background-color: #bbb;
 }
 
+/* Links */
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.links a {
+    color: #004d40;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+/* Texto de ajuda */
 p {
     text-align: center;
     margin-top: 20px;
@@ -160,4 +176,77 @@ p a {
 
 p a:hover {
     text-decoration: underline;
+}
+
+/* Responsividade - Ajustes para dispositivos menores */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .image-section {
+    
+        flex: 0 0 50%;
+        padding: 1px;
+    }
+
+    .login-section {
+        max-width: 100%;
+        padding: 15px;
+    }
+
+    .group-photo {
+        max-width: 90%;
+    }
+
+    .image-section p {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .login-section h2 {
+        font-size: 1.5rem;
+    }
+
+    label, input {
+        font-size: 14px;
+    }
+
+    .btn, .admin-btn {
+        font-size: 14px;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .image-section p {
+        margin-right: 30vh;
+        font-size: 0.9rem;
+        line-height: 1.4em;
+        text-align: justify;
+    }
+
+    .group-photo {
+        max-width: 100%;
+        height: 20%;
+    }
+
+    .login-section h2 {
+        font-size: 1.3rem;
+    }
+
+    .btn, .admin-btn {
+        font-size: 13px;
+        padding: 8px;
+    }
 }
