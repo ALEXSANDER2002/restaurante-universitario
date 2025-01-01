@@ -29,9 +29,9 @@ header {
 }
 
 .logo img {
-    width: 215px;
+    width: 200px;
     height: 60px;
-    margin-left: 31vh;
+    margin-left: 10px;
     
 }
 .logo:hover{
@@ -57,8 +57,6 @@ header {
     padding-left: 10px; /* Ajusta o espaço interno da header */
     background-attachment: fixed;
 }
-
-
 
 
 .hero-text {
@@ -91,19 +89,35 @@ header {
     font-weight: bold;
 }
 
-.cta-button:hover {
+.cta-button2:hover {
     background-color: #011d01;
     transform: scale(1.05);
 }
 
-
-.nav-menu {
-    display: flex; /* Alinha os itens horizontalmente */
-    justify-content: flex-end; /* Move o menu para o lado direito */
-    gap: 30px; /* Espaçamento entre os links */
-    position: relative; /* Permite ajuste com left */
-    right: 30vh; /* Move o menu mais para a esquerda */
+.cta-button2 {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 17px;
+    background-color: #0F8F0F;
+    color: #ffffff;
+    padding: 20px 60px;
+    text-decoration: none;
+    border-radius: 37px;
+    transition: 0.4s;
+    font-weight: bold;
 }
+
+.cta-button:hover {
+    background-color: #011d01;
+    transform: scale(1.05);
+}
+.nav-menu {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    gap: 15px; /* Ajustando para melhor espaçamento */
+}
+
 
 .nav-menu a {
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
