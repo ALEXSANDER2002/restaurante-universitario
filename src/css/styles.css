@@ -1,0 +1,104 @@
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.login-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.login-header .icon {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  background-color: hsl(120, 12%, 92%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.login-header .icone img {
+  width: 30px;
+  height: 30px;
+}
+
+.login-header h1 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  color: #007d00; 
+}
+
+.login-header p {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.login-form .form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.login-form .form-group label {
+  display: block;
+  font-size: 0.9em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.login-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.login-form .form-group input::placeholder {
+  color: #aaa;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.9em;
+}
+
+.form-footer a {
+  color: #007d00; 
+  text-decoration: none;
+}
+
+.btn-login {
+  background-color: #007d00; 
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 100%;
+}
+
+.btn-login:hover {
+  background-color: #005c00; 
+}
+
+.signup-text {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.signup-text a {
+  color: #007d00; 
+  text-decoration: none;
+}
