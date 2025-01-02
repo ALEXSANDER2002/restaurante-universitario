@@ -448,11 +448,7 @@ header {
 @media (max-width: 768px) {
     
 
-    .nav-menu {
-        flex-direction: column;
-        gap: 10px;
-    }
-
+   
     .hero-text h1 {
         font-size: 24px;
     }
