@@ -14,9 +14,11 @@
 <body>
     <header>
         <div class="logo">
-            <img src="logo-Yanqjz5bwku3KD7g.avif" alt="Logo da Empresa"> 
-        </a>
+
+          <a href="#">  <img src="logo-Yanqjz5bwku3KD7g.avif" alt="Logo da Empresa"></a>
+       
         </div>
+
         <nav>       <!--LINK DE NAVEGAÇÃO-->
             <ul class="nav-menu">     <!--LISTA DE ITENS-->
                 <a href="#">Inicio</a> <!--ITENS DENTRO DA LISTA-->
@@ -25,12 +27,25 @@
                 <a href="#">Recargas</a>
 
                
-            </div>
+           
             
             </ul>
+
+            <div id="mySidebar" class="sidebar">
+              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+              <a href="#">Inicio</a>
+              <a href="#">ingresso</a>
+              <a href="#">Saldo</a>
+              <a href="#">Recargas</a>
+              </div>
             
+              <div id="main">
+                <button class="openbtn" onclick="openNav()">☰ </button>  
+                
+              </div>
+
         </nav>
-        <a href="#" class="cta-button2">Entrar</a> <!--BUTAO-->
+        <a href="#" onclick="window.location.href='index2.html';" class="cta-button2">Entrar</a> <!--BUTAO-->
     </header>
     <main>
         
@@ -162,8 +177,8 @@
                       </div>
                         
                       </div>
-                      <span>&copy; 2024. <br><br> Projeto Restaurante Universitario. <br>Murilo.</span>
-                    </div>
+                     
+                   
                     <div>
                       <h3>Suporte</h3>
                       <p>+55 4002-8922</p>
@@ -176,7 +191,17 @@
                     </div>
                   </footer>
             </section>
-           
+            <script>
+              function openNav() {
+                document.getElementById("mySidebar").style.width = "250px";
+                document.getElementById("main").style.marginLeft = "250px";
+              }
+              
+              function closeNav() {
+                document.getElementById("mySidebar").style.width = "0";
+                document.getElementById("main").style.marginLeft= "0";
+              }
+              </script>
     </main>
 </body>
 </html>
