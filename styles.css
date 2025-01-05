@@ -106,6 +106,7 @@ header {
    
 }
 
+
 .cta-button:hover {
     background-color: #011d01;
     transform: scale(1.05);
@@ -476,12 +477,28 @@ header {
     font-size: 36px;
     margin-left: 50px;
   }
+
+  .sidebar .cta-button3 {
+          box-sizing: border-box;
+            display: inline-block;
+            font-weight: 3px;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-left: 25px;
+            background-color: #0F8F0F;
+            color: #000000;
+            padding: 12px 80px;
+            text-decoration: none;
+            border-radius: 37px;
+            transition: 0.4s;
+            font-weight: bold;
+        }
   
   .openbtn {
     display: none; /* Esconde o botão por padrão */
   }
   .openbtn:hover{
-    background-color: #13290d;
+    background-color: #ffffff;
   }
   
 
@@ -513,6 +530,9 @@ header {
         .services2{
            grid-template-columns: 1fr;
         }
+
+        
+        
           .nav-menu {
                 display: none; /* Esconde o menu inicialmente */
                 flex-direction: column;
