@@ -1,4 +1,4 @@
-*{
+*{ 
     padding: 0;
     box-sizing: border-box;
 }
@@ -18,7 +18,7 @@ header {
     display: flex;
     background-color: #ffffff; /* Cor de fundo da header */
     color: #ffffff; /* Cor do texto */
-    padding: 24px; /* Ajuste o espaçamento interno conforme necessário */
+    padding: 10px; /* Ajuste o espaçamento interno conforme necessário */
     position: fixed; /* Fixa a header no topo */
     top: 0; /* Garante que fique no topo */
     left: 0; /* Começa no lado esquerdo */
@@ -31,13 +31,10 @@ header {
 .logo img {
     width: 200px;
     height: 60px;
-    margin-left: 10px;
-    
+    margin-left: 100px;
+
 }
-.logo:hover{
-    opacity: 0.4;
-    transition: 0.8s;
-}
+
 
 .hero {
     display: flex;
@@ -95,16 +92,18 @@ header {
 }
 
 .cta-button2 {
+    box-sizing: border-box;
     display: inline-block;
-    font-weight: 300;
+    font-weight: 3px;
     font-size: 17px;
     background-color: #0F8F0F;
     color: #ffffff;
-    padding: 20px 60px;
+    padding: 16px 40px;
     text-decoration: none;
     border-radius: 37px;
     transition: 0.4s;
     font-weight: bold;
+   
 }
 
 .cta-button:hover {
@@ -115,6 +114,8 @@ header {
     display: flex;
     justify-content: flex-end;
     margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
     gap: 15px; /* Ajustando para melhor espaçamento */
 }
 
@@ -438,39 +439,114 @@ header {
     transition: 0.4s;
   }
   
-  .footer span {
-    display: block;
-    margin-top: 10px;
-    font-size: 12px;
+  
+
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #13290d;
+    overflow-y: hidden;
+    transition: 0.5s;
+    width: 300px;
+    padding-top: 80px;
   }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fcf7f7;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    display: none; /* Esconde o botão por padrão */
+  }
+  .openbtn:hover{
+    background-color: #13290d;
+  }
+  
 
-  /* Media Queries */
-@media (max-width: 768px) {
-    
-
-   
-    .hero-text h1 {
-        font-size: 24px;
+  @media (max-width: 768px) {
+    .openbtn {
+      display: block; /* Torna o botão visível */
+      background-color: #ffffff; /* Estilo do botão */
+      color: #000000; /* Cor do texto do botão */
+      padding: 20px 40px; /* Tamanho do botão */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
     }
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
 
-    .hero-text p {
-        font-size: 12px;
-    }
+        
+       @media (max-width: 768px) {
+        .services2{
+           grid-template-columns: 1fr;
+        }
+          .nav-menu {
+                display: none; /* Esconde o menu inicialmente */
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 20px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+            .logo img{
+                padding: 10px;
+                margin-top: 10px;
+            }
+            
+            .cta-button2{
+                display: none;
+            }
 
-    .about h2 {
-        font-size: 24px;
-    }
+            .footer {
+                flex-direction: column; /* Empilha os itens verticalmente */
+                padding: 0px 20px; /* Ajusta o padding */
+              }
+            
+              .footer div {
+                margin: 20px 0; /* Espaçamento maior entre os elementos */
+              }
+            
+              .footer .social-icons a {
+                font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
+              }
+            
+              .footer .contact input {
+                width: 100%; /* O input ocupa toda a largura disponível */
+              }
 
-    .about p {
-        font-size: 14px;
-    }
-
-    .services2 {
-        grid-template-columns: 1fr;
-    }
-
-    .footer {
-        padding: 15px;
-    }
-}
-    
+        }
