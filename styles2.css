@@ -180,73 +180,50 @@ p a:hover {
 
 /* Responsividade - Ajustes para dispositivos menores */
 @media (max-width: 768px) {
-    .main-content {
-        flex-direction: column;
-        padding: 10px;
-    }
-
     .image-section {
-    
-        flex: 0 0 50%;
-        padding: 1px;
-    }
-
-    .login-section {
-        max-width: 100%;
-        padding: 15px;
+        flex: 0 0 100%; /* Garante que ocupa toda a largura */
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centraliza horizontalmente */
+        justify-content: center; /* Centraliza verticalmente */
     }
 
     .group-photo {
-        max-width: 90%;
+        width: auto; /* Garante que a largura se ajuste ao conteúdo */
+        height: auto; /* Mantém a proporção */
+        max-width: 100%; /* Limita a largura ao tamanho da tela */
+        max-height: 100%; /* Limita a altura ao tamanho da seção */
     }
 
     .image-section p {
         font-size: 1rem;
         max-width: 100%;
-    }
-
-    .login-section h2 {
-        font-size: 1.5rem;
-    }
-
-    label, input {
-        font-size: 14px;
-    }
-
-    .btn, .admin-btn {
-        font-size: 14px;
-    }
-
-    .links {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    p {
-        font-size: 14px;
+        text-align: center; /* Centraliza o texto */
     }
 }
 
 @media (max-width: 480px) {
-    .image-section p {
-        margin-right: 30vh;
-        font-size: 0.9rem;
-        line-height: 1.4em;
-        text-align: justify;
+    .image-section {
+        flex: 0 0 100%; /* Garante largura total */
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centraliza horizontalmente */
+        justify-content: center; /* Centraliza verticalmente */
     }
 
     .group-photo {
-        max-width: 100%;
-        height: 20%;
+        width: auto; /* Não força largura fixa */
+        height: auto; /* Mantém proporção da imagem */
+        max-width: 100%; /* Garante que a imagem se ajuste à tela */
+        max-height: 100%; /* Garante que a imagem não seja cortada */
     }
 
-    .login-section h2 {
-        font-size: 1.3rem;
-    }
-
-    .btn, .admin-btn {
-        font-size: 13px;
-        padding: 8px;
+    .image-section p {
+        font-size: 12px;
+        line-height: 1.5em;
+        font-weight: bold;
+        text-align: center; /* Texto centralizado */
     }
 }
