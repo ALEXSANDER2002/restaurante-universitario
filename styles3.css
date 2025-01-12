@@ -14,11 +14,12 @@
   }
   
   header {
+    align-items: center;
     justify-content: space-between;
     display: flex;
     background-color: #ffffff; /* Cor de fundo da header */
     color: #ffffff; /* Cor do texto */
-    padding: 10px; /* Ajuste o espaçamento interno conforme necessário */
+    padding: 10px 80px; /* Ajuste o espaçamento interno conforme necessário */
     position: fixed; /* Fixa a header no topo */
     top: 0; /* Garante que fique no topo */
     left: 0; /* Começa no lado esquerdo */
@@ -69,17 +70,16 @@ main {
   
   .cta-button2 {
     box-sizing: border-box;
-    display: inline-block;
-    font-weight: 3px;
-    font-size: 17px;
-    background-color: #0F8F0F;
-    color: #ffffff;
-    padding: 16px 40px;
-    text-decoration: none;
-    border-radius: 37px;
-    transition: 0.4s;
-    font-weight: bold;
-   
+  display: inline-block;
+  font-weight: 3px;
+  font-size: 17px;
+  background-color: #0F8F0F;
+  color: #ffffff;
+  padding: 16px 40px;
+  text-decoration: none;
+  border-radius: 37px;
+  transition: 0.4s;
+  font-weight: bold;
   }
 
 .ticket-management {
@@ -339,8 +339,12 @@ footer .footer-section button:hover {
         .services2{
            grid-template-columns: 1fr;
         }
+
+        .ticket-management .options {
+          flex-direction: column; /* Alinha os tickets em uma coluna */
+          gap: 9px; /* Ajusta o espaçamento entre os itens */
+      }
   
-        
         
           .nav-menu {
                 display: none; /* Esconde o menu inicialmente */
