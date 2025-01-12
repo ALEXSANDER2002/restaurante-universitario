@@ -113,6 +113,11 @@ main {
     flex-direction: column-reverse; /* Inverte a ordem do texto e da imagem */
     align-items: center;
     gap: 10px; /* Espaçamento entre texto e imagem */
+    transition: 0.5s;
+}
+
+.ticket-management .option:hover{
+  transform: scale(1.1);
 }
 
 .ticket-management .option p {
