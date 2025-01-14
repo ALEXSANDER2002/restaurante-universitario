@@ -284,7 +284,7 @@ header {
 
 .contact-section {
   padding: 50px;
-  background-color: #f9f9f9;
+  background-color: #ffff;
 }
 
 .contact-header {
@@ -308,10 +308,9 @@ header {
   justify-content: center;
   max-width: 1200px;
   margin: 0 auto;
-  background-color: white;
+  background-color: #ffff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
 }
 
@@ -325,7 +324,7 @@ header {
   display: block;
   font-size: 0.9rem;
   margin-bottom: 5px;
-  color: #333;
+ 
 }
 
 .form-area input,
@@ -503,8 +502,17 @@ header {
   background-color: #ffffff;
 }
 
-
 @media (max-width: 768px) {
+
+ .form-area{
+  margin-left: 130px;
+  border-radius: 20px;
+ }
+
+  .image-area img{
+    display: none;
+  }
+
   .openbtn {
     display: block; /* Torna o botão visível */
     background-color: #ffffff; /* Estilo do botão */
@@ -529,10 +537,11 @@ header {
 
       
      @media (max-width: 768px) {
+      
       .services2{
          grid-template-columns: 1fr;
       }
-
+    
       
       
         .nav-menu {
