@@ -178,6 +178,78 @@ p a:hover {
     text-decoration: underline;
 }
 
+.footer {
+  background-color: #2D6921;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.footer div {
+  text-align: center;
+}
+
+.footer h2, .footer h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.footer p {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.footer .social-icons {
+  display: inline-block; /* Alinha os itens horizontalmente */
+  justify-content: center; /* Centraliza os ícones */
+  gap: 15px; /* Espaçamento entre os ícones */
+  margin-top: 10px;
+  transition:  0.4s;
+
+}
+
+.footer .social-icons a {
+  display: inline-block;
+  margin: 0 5px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 18px;
+  transition: 0.4s;
+
+}
+
+.footer .social-icons:hover{
+  transform: scale(1.3);
+  transition: 0.4s;
+
+}
+
+.footer .contact input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 80%;
+}
+
+.footer .contact button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #0F8F0F;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition:  0.4s;
+
+}
+
+.footer .contact button:hover {
+  background-color: #011d01;
+  transition: 0.4s;
+}
+
 /* Responsividade - Ajustes para dispositivos menores */
 @media (max-width: 768px) {
     .image-section {
