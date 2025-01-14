@@ -45,7 +45,7 @@ header {
   padding: 0;
   background-color: #ffffff;
   background-image: linear-gradient(rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0)), 
-  url(image/72e4e1b23135dd6c22a3eb6eea9b63a8.jpeg);    background-size: cover; /* Mantém a imagem cobrindo a área */
+  url(72e4e1b23135dd6c22a3eb6eea9b63a8.jpeg);    background-size: cover; /* Mantém a imagem cobrindo a área */
   background-position: center;
   background-repeat: no-repeat;
   width: 100%;
