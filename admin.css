@@ -1,0 +1,470 @@
+*{ 
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    margin: 0;
+    font-family: 'Questrial', sans-serif;
+    overflow: hidden;
+    overflow: auto;
+    font-family: 'Open sans', sans-serif;
+   
+  }
+  
+  header {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    background-color: #ffffff; /* Cor de fundo da header */
+    color: #ffffff; /* Cor do texto */
+    padding: 10px; /* Ajuste o espaçamento interno conforme necessário */
+    position: fixed; /* Fixa a header no topo */
+    top: 0; /* Garante que fique no topo */
+    left: 0; /* Começa no lado esquerdo */
+    width: 100%; /* Faz a header ocupar toda a largura */
+    z-index: 1000; /* Fica acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+    
+  }
+  
+  .logo img {
+    width: 200px;
+    height: 60px;
+    margin-left: 100px;
+  
+  }
+  
+  
+
+  .nav-menu {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
+    gap: 15px; /* Ajustando para melhor espaçamento */
+  }
+  
+  
+  .nav-menu a {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000000;
+    
+  }
+  
+  .nav-menu a:hover{
+    text-decoration: underline;
+  }
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+main h2{
+    margin-top: 150px;
+}
+
+.dashboard-title {
+    color: #0d730d;
+    margin-bottom: 50px;
+}
+
+.table-container {
+    margin: 0 auto;
+    width: 80%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: #0d730d;
+    color: white;
+}
+
+thead th {
+    padding: 10px;
+    text-align: left;
+}
+
+th:nth-child(4){
+  text-align: center;
+}
+
+th:nth-child(3){
+  text-align: center;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody td {
+  gap: 20px;
+    position: relative; /* Para posicionamento interno */
+    padding: 10px;
+    text-align: left; /* Mantém o texto à esquerda */
+}
+
+tr.red-line{
+  display: none;
+}
+
+
+/* Estilos do botão */
+.btn-danger {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-danger:hover {
+  transform: scale(1.1);
+  transition: 0.3;
+}
+
+
+
+
+main .table-container .button:hover {
+  background-color: #011d01;
+  transition: 0.5s;
+}
+
+
+
+
+
+
+
+.footer {
+    background-color: #2D6921;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 0;
+    margin-top: 300px;
+  }
+  
+  .footer div {
+    text-align: center;
+  }
+  
+  .footer h2, .footer h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .footer p {
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  .footer .social-icons {
+    display: inline-block; /* Alinha os itens horizontalmente */
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px; /* Espaçamento entre os ícones */
+    margin-top: 10px;
+    transition:  0.4s;
+  
+  }
+  
+  .footer .social-icons a {
+    display: inline-block;
+    margin: 0 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.4s;
+  
+  }
+  
+  .footer .social-icons:hover{
+    transform: scale(1.3);
+    transition: 0.4s;
+  
+  }
+  
+  .footer .contact input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 80%;
+  }
+
+  .cta-button2:hover {
+    background-color: #011d01;
+    transform: scale(1.05);
+  }
+  
+  .cta-button2 {
+    box-sizing: border-box;
+    display: inline-block;
+    font-weight: 3px;
+    font-size: 17px;
+    background-color: #0F8F0F;
+    color: #ffffff;
+    padding: 16px 40px;
+    text-decoration: none;
+    border-radius: 37px;
+    transition: 0.4s;
+    font-weight: bold;
+   
+  }
+  
+  .footer .contact button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0F8F0F;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition:  0.4s;
+  
+  }
+  
+  .footer .contact button:hover {
+    background-color: #011d01;
+    transition: 0.4s;
+  }
+  
+  
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #13290d;
+    overflow-y: hidden;
+    transition: 0.5s;
+    width: 300px;
+    padding-top: 80px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 20px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fcf7f7;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .sidebar .cta-button3 {
+          box-sizing: border-box;
+            display: inline-block;
+            font-weight: 3px;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-left: 25px;
+            background-color: #0F8F0F;
+            color: #000000;
+            padding: 12px 80px;
+            text-decoration: none;
+            border-radius: 37px;
+            transition: 0.4s;
+            font-weight: bold;
+        }
+  
+  .openbtn {
+    display: none; /* Esconde o botão por padrão */
+  }
+  .openbtn:hover{
+    background-color: #ffffff;
+  }
+
+  @media (min-width: 768px) {
+    .sidebar{
+      display: none;
+    }
+    
+  }
+
+  @media (max-width: 768px) {
+
+     .image-area img{
+       display: none;
+     }
+     .logo img{
+       margin: auto;
+     }
+   
+     .openbtn {
+       display: block; /* Torna o botão visível */
+       background-color: #ffffff; /* Estilo do botão */
+       color: #000000; /* Cor do texto do botão */
+       padding: 20px 40px; /* Tamanho do botão */
+       border: none;
+       border-radius: 5px;
+       cursor: pointer;
+     }
+   }
+   
+   #main {
+     transition: margin-left .5s;
+     padding: 16px;
+   }
+   
+   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+         @media screen and (max-height: 450px) {
+             .sidebar {padding-top: 15px;}
+             .sidebar a {font-size: 18px;}
+         }
+   
+         
+        @media (max-width: 768px) {
+         
+         .services2{
+            grid-template-columns: 1fr;
+         }
+       
+         
+         
+         .nav-menu {
+           display: none; /* Esconde o menu inicialmente */
+           flex-direction: column;
+           position: absolute;
+           top: 60px;
+           right: 20px;
+           background-color: #fff;
+           border: 1px solid #ccc;
+           padding: 10px;
+       }
+             .logo img{
+                 margin: auto;
+             }
+             
+             .cta-button2{
+                 display: none;
+             }
+   
+             .footer {
+                 flex-direction: column; /* Empilha os itens verticalmente */
+                 padding: 0px 20px; /* Ajusta o padding */
+               }
+             
+               .footer div {
+                 margin: 20px 0; /* Espaçamento maior entre os elementos */
+               }
+             
+               .footer .social-icons a {
+                 font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
+               }
+             
+               .footer .contact input {
+                 width: 100%; /* O input ocupa toda a largura disponível */
+               }
+              }
+              @media (max-width: 768px) {
+                main .table-container {
+                    padding: 20px;
+                    margin: 0 auto; /* Centraliza o container */
+                    text-align: center;
+                }
+            
+                table {
+                    width: 100%; /* Garante que a tabela ocupe a largura disponível */
+                    border-collapse: collapse;
+                    margin: 0 auto; /* Centraliza a tabela */
+                }
+            
+                table thead {
+                    display: block; /* Mantém o cabeçalho visível em telas pequenas */
+                }
+            
+                table tbody tr {
+                    display: flex;
+                    flex-direction: column; /* Empilha as colunas verticalmente */
+                    margin-bottom: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                    padding: 10px;
+                }
+                
+                main .table-container .btn-danger{
+                  border-radius: 15px;
+                  padding: 10px;
+                }
+            
+                table tbody td {
+                    display: flex;
+                    text-align: left; /* Ajusta o alinhamento do texto */
+                    padding: 5px 10px;
+                    position: relative;
+                }
+            
+                table tbody td::before {
+                    content: attr(data-label); /* Mostra o cabeçalho correspondente */
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 120px; /* Define a largura para alinhar as colunas */
+                    color: #006400; /* Verde escuro */
+                }
+                main table thead{
+                  display: none;
+                }
+            }
+            
+            @media (min-width: 768px) {
+              main .table-container .btn-danger{
+                border-radius: 15px;
+              }
+          
+
+                table {
+                    width: 100%;
+                    margin: 0 auto; /* Centraliza a tabela */
+                    border-collapse: collapse;
+                }
+            
+                table thead th {
+                    text-align: center;
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    background-color: #006400; /* Verde escuro */
+                    color: #fff;
+                }
+            
+                table tbody tr {
+                    display: table-row;
+                    border: none;
+                }
+            
+                table tbody td {
+                    border: 1px solid #ddd;
+                    padding: 10px;
+                    text-align: center;
+                }
+            }
+            

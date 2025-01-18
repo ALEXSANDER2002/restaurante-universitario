@@ -1,0 +1,338 @@
+*{ 
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    margin: 0;
+    font-family: 'Questrial', sans-serif;
+    overflow: hidden;
+    
+    font-family: 'Open sans', sans-serif;
+    height: 100%;
+  }
+  
+  header {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  background-color: #ffffff; /* Cor de fundo da header */
+  color: #ffffff; /* Cor do texto */
+  padding: 10px; /* Ajuste o espaçamento interno conforme necessário */
+  position: fixed; /* Fixa a header no topo */
+  top: 0; /* Garante que fique no topo */
+  left: 0; /* Começa no lado esquerdo */
+  width: 100%; /* Faz a header ocupar toda a largura */
+  z-index: 1000; /* Fica acima de outros elementos */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+  
+}
+  
+  .logo img {
+    width: 200px;
+    height: 60px;
+    margin-left: 80px;
+  
+  }
+
+
+
+.nav-menu {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 70px;
+    margin-left: 20px;
+    text-align: center;
+    gap: 15px; /* Ajustando para melhor espaçamento */
+  }
+  
+  
+  .nav-menu a {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000000;
+    
+  }
+  
+  .nav-menu a:hover{
+    text-decoration: underline;
+  }
+
+.cta-button2:hover {
+    background-color: #011d01;
+    transform: scale(1.05);
+  }
+  
+  .cta-button2 {
+    box-sizing: border-box;
+  display: inline-block;
+  font-weight: 3px;
+  font-size: 17px;
+  background-color: #0F8F0F;
+  color: #ffffff;
+  padding: 16px 40px;
+  text-decoration: none;
+  border-radius: 37px;
+  transition: 0.4s;
+  font-weight: bold;
+  }
+
+
+#main {
+    flex-grow: 1;
+    padding: 20px;
+    text-align: center;
+    transition: margin-left 0.5s;
+}
+
+main h1 {
+    text-align: center;
+    color: #2e7d32;
+    margin-bottom: 20px;
+    margin-top: 200px;
+}
+
+main h2{
+    margin-left: 30px;
+    color: #2e7d32;
+}
+
+
+.tickets {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+    border-radius: 16px;
+    border: 4px solid #F3F4F6;
+    background: #FFF;
+    box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.10), 10px 20px 30px 10px rgba(0, 0, 0, 0.10);
+}
+
+
+.tickets .ticket {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tickets .ticket .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #0F8F0F; /* Fundo do quadrado */
+    border: 2px;
+    border-radius: 8px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor indicando clicável */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+    transition: transform 0.2s ease;
+}
+
+.tickets .ticket .button:hover {
+    transform: scale(1.1); /* Efeito ao passar o mouse */
+}
+
+
+.tickets .ticket .button svg {
+    
+    height: 20px;
+}
+
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #13290d;
+    overflow-y: hidden;
+    transition: 0.5s;
+    width: 300px;
+    padding-top: 80px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 15px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #fcf7f7;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .sidebar .cta-button3 {
+          box-sizing: border-box;
+            display: inline-block;
+            font-weight: 3px;
+            font-size: 17px;
+            margin-top: 10px;
+            margin-left: 25px;
+            background-color: #0F8F0F;
+            color: #000000;
+            padding: 12px 80px;
+            text-decoration: none;
+            border-radius: 37px;
+            transition: 0.4s;
+            font-weight: bold;
+        }
+  
+  .openbtn {
+    display: none;
+  }
+
+  .openbtn:hover{
+    background-color: #ffffff;
+  }
+
+  .footer {
+    width: 100%; /* O rodapé ocupa toda a largura */
+    position: relative;
+    background-color: #2D6921;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 60px 0;
+    height: 100%;
+  }
+  
+  .footer div {
+    text-align: center;
+  }
+  
+  .footer h2, .footer h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .footer p {
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  .footer .social-icons {
+    display: inline-block; /* Alinha os itens horizontalmente */
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px; /* Espaçamento entre os ícones */
+    margin-top: 10px;
+    transition:  0.4s;
+  
+  }
+  
+  .footer .social-icons a {
+    display: inline-block;
+    margin: 0 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.4s;
+  
+  }
+  
+  .footer .social-icons:hover{
+    transform: scale(1.3);
+    transition: 0.4s;
+  
+  }
+  
+  .footer .contact input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 80%;
+  }
+  
+  .footer .contact button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0F8F0F;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition:  0.4s;
+  
+  }
+  
+  .footer .contact button:hover {
+    background-color: #011d01;
+    transition: 0.4s;
+  }
+
+  @media (min-width: 768px) {
+    .sidebar{
+      display: none;
+    }
+    
+  }
+
+  @media (max-width: 768px) {
+    .logo img{
+        margin: auto;
+    }
+
+    .openbtn {
+    display: block; /* Torna o botão visível */
+    background-color: #ffffff; /* Estilo do botão */
+    color: #000000; /* Cor do texto do botão */
+    padding: 20px 40px; /* Tamanho do botão */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+    .nav-menu {
+        display: none; /* Esconde o menu inicialmente */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+  
+    .footer {
+      flex-direction: column; /* Empilha os itens verticalmente */
+      padding: 0px 20px; /* Ajusta o padding */
+    }
+  
+    .footer div {
+      margin: 20px 0; /* Espaçamento maior entre os elementos */
+    }
+  
+    .footer .social-icons a {
+      font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
+    }
+  
+    .footer .contact input {
+      width: 100%; /* O input ocupa toda a largura disponível */
+    }
+    .cta-button2{
+      display: none;
+    }
+  }
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
