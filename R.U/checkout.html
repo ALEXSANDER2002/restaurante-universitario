@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout Pro</title>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+</head>
+<body>
+    <h1>Bem-vindo ao Checkout Pro</h1>
+    <div id="wallet_container"></div>
+
+    <script>
+        // Inicializa o Mercado Pago
+        const mp = new MercadoPago('TEST-6498946812529546-061619-f920949259a1b8a40fb2f64bd79f6a67', {
+            locale: 'pt-BR',
+        });
+
+        // Configura o Brick de Checkout Pro
+        mp.bricks().create("wallet", "wallet_container", {
+            initialization: {
+                preferenceId: "<PREFERENCE_ID>", // Substitua pelo ID gerado no backend
+            },
+            customization: {
+                texts: {
+                    valueProp: 'Pague com segurança usando Mercado Pago.',
+                },
+            },
+        }).then((response) => {
+            console.log("Brick criado com sucesso:", response);
+        }).catch((error) => {
+            console.error("Erro ao criar o Brick:", error);
+        });
+    </script>
+</body>
+</html>

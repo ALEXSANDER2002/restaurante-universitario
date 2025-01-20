@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/CSS/card.css">
+</head>
+<body>
+    <header>
+        <img src="/IMG/logo.png" alt="UNIFESSPA">
+        <div class="profile" id="profile-menu-toggle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
+            <span>Minha Conta</span>
+        </div>
+    </header>
+
+    <div class="login-container">
+        <div class="image-section">
+            <img src="/IMG/ru.jpeg" alt="Exemplo de Imagem">
+        </div>
+        <div class="form-section">
+            <h2>login ADM</h2>
+            <form id="login-form">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" placeholder="Email SIGAA" name="email">
+
+                <label for="matricula">Senha</label>
+                <input type="password" id="matricula" placeholder="Digite sua matrícula" name="password">
+
+                <button type="submit">Entrar</button>
+            </form>
+
+           
+
+            
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Gestão eficiente de tickets de alimentação universitária.</p>
+        </div>
+        <div class="social-icons">
+            <a href="#">&#xf09a;</a>
+            <a href="#">&#xf16d;</a>
+            <a href="#">&#xf08c;</a>
+        </div>
+        <p>&copy; 2025 Os Miseráveis</p>
+    </footer>
+
+    <script src="../ESTILOS/JS/app.js"></script>
+    <script>
+        // Enviar os dados para o backend (Node.js) para autenticação
+        const form = document.getElementById('login-form');
+
+        form.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    if (!email || !password) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+    if (response.ok && data.token) {
+        alert('Login bem-sucedido!');
+        localStorage.setItem('token', data.token); // Armazenar o token
+        window.location.href = 'index.html'; // Redirecionar para o dashboard
+    } else {
+        alert('Erro no login: ' + data.message);
+    }
+});
+
+    </script>
+</body>
+</html>

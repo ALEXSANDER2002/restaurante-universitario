@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recarga de Ticket</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <style>
+        .cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 350px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            color: #2e7d32;
+            font-size: 22px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card strong {
+            display: block;
+            font-size: 28px;
+            color: #2e7d32;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            color: #999;
+        }
+
+        .card select option[value=""] {
+            display: none; /* Esconde a opção padrão ao selecionar outra */
+        }
+
+        .card button {
+            background-color: #2e7d32;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #2e7d32;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .cards {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .card {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/IMG/logo.png" alt="UNIFESSPA">
+        <div class="profile" id="profile-menu-toggle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
+            <span>Minha Conta</span>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <div class="sidebar" id="sidebar">
+        <a href="#perfil">Perfil</a>
+        <a href="#configuracoes">Configurações</a>
+        <a href="#logout">Sair</a>
+    </div>
+
+    <div class="content">
+        <h1>Recarga de Ticket</h1>
+        <div class="cards">
+            <div class="card">
+                <h3>Padrão</h3>
+                <p>Aqueles que não têm direito a subsídio</p>
+                <strong>R$13</strong>
+                <div>
+                    <label for="campus-select-1">Campus</label>
+                    <select id="campus-select-1">
+                        <option value="" selected disabled>Selecione o campus</option>
+                        <option value="campus1">Campus 1</option>
+                        <option value="campus2">Campus 2</option>
+                        <option value="campus3">Campus 3</option>
+                    </select>
+                </div>
+                <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/payment-link'">Comprar</button>
+            </div>
+            <div class="card">
+                <h3>Subsididada</h3>
+                <p>Para aqueles que têm direito à refeição subsidiada de acordo com o artigo 171</p>
+                <strong>R$2</strong>
+                <div>
+                    <label for="campus-select-2">Campus</label>
+                    <select id="campus-select-2">
+                        <option value="" selected disabled>Selecione o campus</option>
+                        <option value="campus1">Campus 1</option>
+                        <option value="campus2">Campus 2</option>
+                        <option value="campus3">Campus 3</option>
+                    </select>
+                </div>
+                <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/payment-link'">Comprar</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Gestão eficiente de tickets de alimentação universitária.</p>
+        </div>
+        <div class="social-icons">
+            <a href="#">&#xf09a;</a>
+            <a href="#">&#xf16d;</a>
+            <a href="#">&#xf08c;</a>
+        </div>
+        <p>&copy; 2025 Os Miseráveis</p>
+    </footer>
+
+    <script src="../ESTILOS/JS/app.js"></script>
+    <script src="../server.js"></script>
+   
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+</body>
+</html>

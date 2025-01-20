@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard com Pesquisa</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <style>
+        .dashboard-container {
+            margin: 50px auto;
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .dashboard-container h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .search-container input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-container input:focus {
+            border-color: #2e7d32;
+            outline: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        table td {
+            color: #555;
+            font-size: 14px;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        table tr.closed {
+            background-color: #ffe5e5;
+        }
+
+        .action-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+   /* Modal */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    max-width: 80%;
+    display: none; /* Inicialmente escondido */
+}
+
+.modal.visible {
+    display: block;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: red;
+}
+
+.close-order-btn {
+    background: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.close-order-btn:hover {
+    background: #b71c1c;
+}
+
+//* Linha fechada (vermelha) */
+tr.closed {
+    background-color: #ffcdd2; /* Vermelho claro */
+    color: #b71c1c; /* Texto vermelho escuro */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+tr.closed td {
+    font-weight: bold;
+}
+
+
+
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                width: 95%;
+            }
+
+            table th,
+            table td {
+                padding: 10px;
+            }
+
+            .action-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/IMG/logo.png" alt="UNIFESSPA">
+        <div class="profile" id="profile-menu-toggle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
+            <span>Minha Conta</span>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Digite para pesquisar...">
+        </div>
+        <div class="table-container">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Campus</th>
+                        <th>Data e Hora</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>234</td>
+                        <td>Kalleb Araujo Sousa</td>
+                        <td>202240601016</td>
+                        <td>CAMPUS 2</td>
+                        <td>2025-01-12 10:35</td>
+                        <td><button class="action-btn" data-id="234" data-name="Kalleb Araujo Sousa" data-matricula="202240601016" data-campus="CAMPUS 2" data-date="2025-01-12 10:35">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>235</td>
+                        <td>Alex Sander Baiano</td>
+                        <td>202240601017</td>
+                        <td>CAMPUS 1</td>
+                        <td>2025-01-12 11:00</td>
+                        <td><button class="action-btn" data-id="235" data-name="Alex Sander Baiano" data-matricula="202240601017" data-campus="CAMPUS 1" data-date="2025-01-12 11:00">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>236</td>
+                        <td>Muliro the Vasco</td>
+                        <td>202240601018</td>
+                        <td>CAMPUS 3</td>
+                        <td>2025-01-12 11:30</td>
+                        <td><button class="action-btn" data-id="236" data-name="Muliro the Vasco" data-matricula="202240601018" data-campus="CAMPUS 3" data-date="2025-01-12 11:30">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>237</td>
+                        <td>João da Silva</td>
+                        <td>202240601019</td>
+                        <td>CAMPUS 2</td>
+                        <td>2025-01-12 11:45</td>
+                        <td><button class="action-btn" data-id="237" data-name="João da Silva" data-matricula="202240601019" data-campus="CAMPUS 2" data-date="2025-01-12 11:45">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>238</td>
+                        <td>Maria Oliveira</td>
+                        <td>202240601020</td>
+                        <td>CAMPUS 1</td>
+                        <td>2025-01-12 12:00</td>
+                        <td><button class="action-btn" data-id="238" data-name="Maria Oliveira" data-matricula="202240601020" data-campus="CAMPUS 1" data-date="2025-01-12 12:00">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>239</td>
+                        <td>Pedro Almeida</td>
+                        <td>202240601021</td>
+                        <td>CAMPUS 3</td>
+                        <td>2025-01-12 12:15</td>
+                        <td><button class="action-btn" data-id="239" data-name="Pedro Almeida" data-matricula="202240601021" data-campus="CAMPUS 3" data-date="2025-01-12 12:15">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>240</td>
+                        <td>Ana Souza</td>
+                        <td>202240601022</td>
+                        <td>CAMPUS 2</td>
+                        <td>2025-01-12 12:30</td>
+                        <td><button class="action-btn" data-id="240" data-name="Ana Souza" data-matricula="202240601022" data-campus="CAMPUS 2" data-date="2025-01-12 12:30">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>241</td>
+                        <td>Carlos Pereira</td>
+                        <td>202240601023</td>
+                        <td>CAMPUS 1</td>
+                        <td>2025-01-12 12:45</td>
+                        <td><button class="action-btn" data-id="241" data-name="Carlos Pereira" data-matricula="202240601023" data-campus="CAMPUS 1" data-date="2025-01-12 12:45">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>242</td>
+                        <td>Fernanda Gomes</td>
+                        <td>202240601024</td>
+                        <td>CAMPUS 3</td>
+                        <td>2025-01-12 13:00</td>
+                        <td><button class="action-btn" data-id="242" data-name="Fernanda Gomes" data-matricula="202240601024" data-campus="CAMPUS 3" data-date="2025-01-12 13:00">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>243</td>
+                        <td>Rafael Santos</td>
+                        <td>202240601025</td>
+                        <td>CAMPUS 2</td>
+                        <td>2025-01-12 13:15</td>
+                        <td><button class="action-btn" data-id="243" data-name="Rafael Santos" data-matricula="202240601025" data-campus="CAMPUS 2" data-date="2025-01-12 13:15">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>244</td>
+                        <td>Juliana Costa</td>
+                        <td>202240601026</td>
+                        <td>CAMPUS 1</td>
+                        <td>2025-01-12 13:30</td>
+                        <td><button class="action-btn" data-id="244" data-name="Juliana Costa" data-matricula="202240601026" data-campus="CAMPUS 1" data-date="2025-01-12 13:30">🔍</button></td>
+                    </tr>
+                    <tr>
+                        <td>245</td>
+                        <td>Lucas Dias</td>
+                        <td>202240601027</td>
+                        <td>CAMPUS 3</td>
+                        <td>2025-01-12 13:45</td>
+                        <td><button class="action-btn" data-id="245" data-name="Lucas Dias" data-matricula="202240601027" data-campus="CAMPUS 3" data-date="2025-01-12 13:45">🔍</button></td>
+                    </tr>
+                </tbody>
+                
+                
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h3>Detalhes do Pedido</h3>
+            <p><strong>Número:</strong> <span id="modal-numero"></span></p>
+            <p><strong>Nome:</strong> <span id="modal-nome"></span></p>
+            <p><strong>Matrícula:</strong> <span id="modal-matricula"></span></p>
+            <p><strong>Campus:</strong> <span id="modal-campus"></span></p>
+            <button id="close-order" class="close-order-btn">Fechar Pedido</button>
+        </div>
+    </div>
+    
+
+    <footer>
+        <div class="footer-content">
+            <p>Gestão eficiente de tickets de alimentação universitária.</p>
+        </div>
+        <div class="social-icons">
+            <a href="#">&#xf09a;</a>
+            <a href="#">&#xf16d;</a>
+            <a href="#">&#xf08c;</a>
+        </div>
+        <p>&copy; 2025 Os Miseráveis</p>
+    </footer>
+
+    <script>
+        const searchBar = document.getElementById('search-bar');
+        const tableRows = document.querySelectorAll('#data-table tbody tr');
+
+        searchBar.addEventListener('input', () => {
+            const searchText = searchBar.value.toLowerCase();
+
+            tableRows.forEach(row => {
+                const cells = Array.from(row.children);
+                const matches = cells.some(cell => cell.textContent.toLowerCase().includes(searchText));
+                row.style.display = matches ? '' : 'none';
+            });
+        });
+
+        // Seleção de elementos
+const modal = document.getElementById("modal");
+const closeModalBtn = document.getElementById("close-modal");
+const closeOrderBtn = document.getElementById("close-order");
+
+// Campos dinâmicos no modal
+const modalNumero = document.getElementById("modal-numero");
+const modalNome = document.getElementById("modal-nome");
+const modalMatricula = document.getElementById("modal-matricula");
+const modalCampus = document.getElementById("modal-campus");
+
+// Botões de ação (lupas)
+const actionButtons = document.querySelectorAll(".action-btn");
+
+// Abrir modal
+actionButtons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        const numero = e.target.getAttribute("data-id");
+        const nome = e.target.getAttribute("data-name");
+        const matricula = e.target.getAttribute("data-matricula");
+        const campus = e.target.getAttribute("data-campus");
+
+        // Preenche os dados no modal
+        modalNumero.textContent = numero;
+        modalNome.textContent = nome;
+        modalMatricula.textContent = matricula;
+        modalCampus.textContent = campus;
+
+        // Exibe o modal
+        modal.classList.add("visible");
+    });
+});
+
+// Fechar modal
+closeModalBtn.addEventListener("click", () => {
+    modal.classList.remove("visible");
+});
+
+// Fechar pedido
+closeOrderBtn.addEventListener("click", () => {
+    const numero = modalNumero.textContent;
+
+    // Encontra a linha correspondente na tabela pelo número
+    const row = Array.from(document.querySelectorAll("table tr")).find(
+        (tr) => tr.querySelector("td:first-child")?.textContent.trim() === numero
+    );
+
+    if (row) {
+        // Adiciona a classe de estado fechado (vermelho)
+        row.classList.add("closed");
+    }
+
+    // Fecha o modal
+    modal.classList.remove("visible");
+});
+
+
+
+
+    </script>
+</body>
+</html>
