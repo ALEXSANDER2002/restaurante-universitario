@@ -113,7 +113,7 @@
     <header>
         <img src="/IMG/logo.png" alt="UNIFESSPA">
         <div class="profile" id="profile-menu-toggle">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
+            <img src="https://cdn-icons-png.flaticon.com/512/7216/7216128.png" alt="Minha Conta">
             <span>Minha Conta</span>
         </div>
     </header>
@@ -141,8 +141,17 @@
                         <option value="campus3">Campus 3</option>
                     </select>
                 </div>
+                <div>
+                    <label for="comida-select-1">Tipo de Comida</label>
+                    <select id="comida-select-1">
+                        <option value="" selected disabled>Selecione o tipo de comida</option>
+                        <option value="vegetariana">Comida Vegetariana</option>
+                        <option value="nao-vegetariana">Comida Não Vegetariana</option>
+                    </select>
+                </div>
                 <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/payment-link'">Comprar</button>
             </div>
+        
             <div class="card">
                 <h3>Subsididada</h3>
                 <p>Para aqueles que têm direito à refeição subsidiada de acordo com o artigo 171</p>
@@ -156,8 +165,18 @@
                         <option value="campus3">Campus 3</option>
                     </select>
                 </div>
+                <div>
+                    <label for="comida-select-2">Tipo de Comida</label>
+                    <select id="comida-select-2">
+                        <option value="" selected disabled>Selecione o tipo de comida</option>
+                        <option value="vegetariana">Comida Vegetariana</option>
+                        <option value="nao-vegetariana">Comida Não Vegetariana</option>
+                    </select>
+                </div>
                 <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/payment-link'">Comprar</button>
             </div>
+        </div>
+        
         </div>
     </div>
 
@@ -173,7 +192,7 @@
         <p>&copy; 2025 Os Miseráveis</p>
     </footer>
 
-    <script src="../ESTILOS/JS/app.js"></script>
+    <script src="/JS/app.js"></script>
     <script src="../server.js"></script>
    
 <script src="https://sdk.mercadopago.com/js/v2"></script>

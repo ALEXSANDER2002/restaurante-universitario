@@ -7,7 +7,7 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-app.use(express.json()); 
+app.use(express.json()); // Usado para converter as requisições em JSON
 
 // Servir arquivos estáticos (CSS, JS, imagens, etc)
 app.use(express.static(path.join(__dirname, 'R.U')));  
@@ -34,7 +34,7 @@ connection.connect(err => {
 app.post('/register', (req, res) => {
   const { email, password } = req.body;
 
-  const query = 'INSERT INTO usuario (email, password) VALUES (?, ?)';
+  const query = 'INSERT INTO usuarios (email, password) VALUES (?, ?)';
   connection.query(query, [email, password], (err, results) => {
     if (err) {
       console.error('Erro ao inserir o usuário:', err);
@@ -46,9 +46,9 @@ app.post('/register', (req, res) => {
 
 // Rota de login
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
+  const { matricula, password } = req.body;
 
-  connection.query('SELECT * FROM usuario WHERE email = ?', [email], (err, results) => {
+  connection.query('SELECT * FROM usuario WHERE matricula = ?', [matricula], (err, results) => {
     if (err) {
       console.error('Erro ao consultar o banco:', err);
       return res.status(500).send('Erro no servidor');
@@ -60,11 +60,16 @@ app.post('/login', (req, res) => {
 
     const user = results[0];
 
+    // Verifica se o usuário tem o plano subsidiado
+    if (user.plano !== 'Subsidado') {
+      return res.status(400).send({ message: 'Usuário não autorizado a realizar compras subsidiadas' });
+    }
+
     if (password !== user.password) {
       return res.status(400).send({ message: 'Senha incorreta' });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, 'secretrandomkey', {
+    const token = jwt.sign({ id: user.id, matricula: user.matricula, email: user.email }, 'secretrandomkey', {
       expiresIn: '1h',
     });
 
