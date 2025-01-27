@@ -1,32 +1,52 @@
-// Configuração inicial para o Mercado Pago
-const mercadoPagoConfig = {
-    publicKey: "SUA_CHAVE_PUBLICA_AQUI", // Substitua pela sua chave pública
-    accessToken: "SEU_ACCESS_TOKEN_AQUI", // Substitua pelo seu token de acesso
-    endpoint: "https://api.mercadopago.com/v1/payments", // Endpoint da API de pagamento
-};
+const mercadopago = require('mercadopago');
 
-// Função para criar o link de pagamento
-async function criarPagamento(dados) {
-    try {
-        const resposta = await fetch(mercadoPagoConfig.endpoint, {
-            method: "POST",
-            headers: {
-                "Authorization": `Bearer ${mercadoPagoConfig.accessToken}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(dados),
-        });
+// Configuração correta para v2.x+ do SDK
+const client = new mercadopago.MercadoPagoConfig({
+  accessToken: 'APP_USR-8540766672404155-012611-18119369f6e3b8b42eeea53446a27387-2231764145',
+  options: { timeout: 5000 }
+});
 
-        if (!resposta.ok) {
-            throw new Error("Erro ao criar o pagamento");
+const preference = new mercadopago.Preference(client);
+
+async function criarPreferencia() {
+  try {
+    const result = await preference.create({
+      body: {
+        items: [
+          {
+            id: "1",
+            title: "TICKET_RU",
+            quantity: 1,
+            currency_id: "BRL",
+            unit_price: 2.0
+          }
+        ],
+        back_urls: {
+          success: "http://localhost:5000/compracerta",
+          failure: "http://localhost:5000/compraerrada",
+          pending: "http://localhost:5000/compraerrada"
+        },
+        auto_return: "approved",
+        payment_methods: {
+          excluded_payment_types: [{ id: "atm" }],
+          installments: 1
         }
+      }
+    });
 
-        const dadosPagamento = await resposta.json();
-        return dadosPagamento.init_point; // Retorna o link de pagamento
-    } catch (erro) {
-        console.error("Erro ao criar o pagamento:", erro);
-    }
+    console.log("\n✅ PREFERÊNCIA CRIADA!");
+    console.log("URL:", result.init_point);
+    console.log("ID:", result.id);
+    return result;
+
+  } catch (error) {
+    console.error("\n❌ ERRO:", error.message);
+    console.log("Detalhes:", error);
+    return null;
+  }
 }
 
-// Exportar as funções para uso em outros scripts
-export { mercadoPagoConfig, criarPagamento };
+// Executar somente se chamado diretamente
+if (require.main === module) {
+  criarPreferencia();
+}

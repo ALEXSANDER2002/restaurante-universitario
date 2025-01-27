@@ -1,3 +1,13 @@
+
+const { criarPreferencia } = require('./API/config.js');
+
+// Uso em outro arquivo
+async function main() {
+  const preference = await criarPreferencia();
+  console.log("Preferência criada:", preference);
+}
+
+main();
 // Controle do menu lateral
 const profileMenuToggle = document.getElementById('profile-menu-toggle');
 const sidebar = document.getElementById('sidebar');

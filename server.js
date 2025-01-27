@@ -86,3 +86,13 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
+
+
+http://localhost:5000/compracerta?collection_id=100105355743&collection_status=approved&
+// payment_id=100105355743&
+// status=approved&
+// external_reference=null&
+// payment_type=account_money&merchant_order_id=27724550216&
+// preference_id=2231764145-0645c8ba-bd2a-46c5-a4f3-dd0640f70df8&site_id=MLB&
+// processing_mode=aggregator&
+// merchant_account_id=null
