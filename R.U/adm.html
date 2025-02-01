@@ -202,19 +202,28 @@
             <p><strong>Matrícula:</strong> <span id="modal-matricula"></span></p>
             <p><strong>Campus:</strong> <span id="modal-campus"></span></p>
             <p><strong>Tipo de Comida:</strong> <span id="modal-comida"></span></p>
-            <button id="close-order" class="close-order-btn">Fechar Pedido</button>
+            <p><strong>Data e Hora:</strong> <span id="modal-data"></span></p> 
+            <button id="close-order" class="close-order-btn" data-id="">Fechar Pedido</button>
         </div>
     </div>
 
     <script>
-        async function carregarCompras() {
+        async function carregarTodosOsPedidos() {
             try {
-                const response = await fetch("http://localhost:3000/compras");
+                console.log("🔍 Buscando todos os pedidos...");
+    
+                const response = await fetch(`http://localhost:3000/compras-todos`);
+    
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+                }
+    
                 const compras = await response.json();
-
+                console.log("📦 Todos os pedidos recebidos:", compras);
+    
                 const tbody = document.querySelector("#data-table tbody");
-                tbody.innerHTML = "";
-
+                tbody.innerHTML = ""; // Limpa a tabela antes de adicionar os novos pedidos
+    
                 compras.forEach(compra => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
@@ -224,35 +233,110 @@
                         <td>${compra.campus}</td>
                         <td>${compra.tipo_comida}</td>
                         <td>${new Date(compra.created_at).toLocaleString("pt-BR")}</td>
-                        <td><button class="action-btn" data-id="${compra.id}" data-name="${compra.usuario_nome}" data-matricula="${compra.matricula}" data-campus="${compra.campus}" data-comida="${compra.tipo_comida}" data-date="${compra.created_at}">🔍</button></td>
+                        <td>
+                            <button class="action-btn"
+                                data-id="${compra.id}"
+                                data-name="${compra.usuario_nome}"
+                                data-matricula="${compra.matricula}"
+                                data-campus="${compra.campus}"
+                                data-comida="${compra.tipo_comida}"
+                                data-date="${compra.created_at}">🔍</button>
+                        </td>
                     `;
                     tbody.appendChild(row);
                 });
-
-                adicionarEventosAosBotoes();
+    
+                console.log("🔍 Adicionando eventos aos botões...");
+                adicionarEventosAosBotoes(); // Garante que os eventos são adicionados após a renderização da tabela
             } catch (error) {
-                console.error("❌ Erro ao carregar compras:", error);
+                console.error("❌ Erro ao carregar todos os pedidos:", error);
             }
         }
-
+    
+        // 🔹 Executa a função ao carregar a página
+        window.onload = () => {
+            carregarTodosOsPedidos();
+        };
+    
         function adicionarEventosAosBotoes() {
-            document.querySelectorAll(".action-btn").forEach(btn => {
-                btn.addEventListener("click", (e) => {
+            const botoes = document.querySelectorAll(".action-btn");
+    
+            if (botoes.length === 0) {
+                console.warn("⚠️ Nenhum botão encontrado para adicionar eventos.");
+                return;
+            }
+    
+            botoes.forEach(btn => {
+                console.log("🎯 Adicionando evento no botão:", btn.dataset.id);
+    
+                btn.addEventListener("click", () => {
+                    console.log("🔍 Abrindo modal para pedido:", btn.dataset.id);
+    
+                    // Preenche os dados do modal com as informações do pedido
                     document.getElementById("modal-numero").textContent = btn.dataset.id;
                     document.getElementById("modal-nome").textContent = btn.dataset.name;
                     document.getElementById("modal-matricula").textContent = btn.dataset.matricula;
                     document.getElementById("modal-campus").textContent = btn.dataset.campus;
                     document.getElementById("modal-comida").textContent = btn.dataset.comida;
-                    document.getElementById("modal").classList.add("visible");
+                    document.getElementById("modal-data").textContent = new Date(btn.dataset.date).toLocaleString("pt-BR");
+    
+                    // Salva o ID da compra no botão "Fechar Pedido"
+                    document.getElementById("close-order").setAttribute("data-id", btn.dataset.id);
+    
+                    // Exibe o modal removendo qualquer classe oculta
+                    const modal = document.getElementById("modal");
+                    modal.classList.add("visible");
+                    modal.style.display = "block"; // Garante que o modal aparece
                 });
             });
         }
-
+    
+        // 🔹 Evento para fechar o modal ao clicar no botão de fechar (X)
         document.getElementById("close-modal").addEventListener("click", () => {
-            document.getElementById("modal").classList.remove("visible");
+            console.log("❌ Fechando modal.");
+            const modal = document.getElementById("modal");
+            modal.classList.remove("visible");
+            modal.style.display = "none"; // Esconde o modal corretamente
         });
-
-        window.onload = carregarCompras;
-    </script>
+    
+        // 🔹 Evento para excluir um pedido ao clicar em "Fechar Pedido"
+        document.getElementById("close-order").addEventListener("click", async () => {
+            const compraId = document.getElementById("close-order").getAttribute("data-id");
+    
+            if (!compraId) {
+                alert("❌ Erro: Nenhum pedido selecionado.");
+                return;
+            }
+    
+            try {
+                const response = await fetch(`http://localhost:3000/deletar-compra/${compraId}`, {
+                    method: "DELETE"
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Erro ao excluir pedido.");
+                }
+    
+                const result = await response.json();
+                console.log("🚀 Pedido removido:", result);
+    
+                // Remove a linha correspondente da tabela
+                const btn = document.querySelector(`button[data-id='${compraId}']`);
+                if (btn) {
+                    btn.closest("tr").remove();
+                }
+    
+                // Fecha o modal
+                const modal = document.getElementById("modal");
+                modal.classList.remove("visible");
+                modal.style.display = "none";
+    
+                alert("✅ Pedido fechado com sucesso!");
+            } catch (error) {
+                console.error("❌ Erro ao fechar pedido:", error);
+                alert("Erro ao fechar pedido.");
+            }
+        });
+    </script>    
 </body>
 </html>

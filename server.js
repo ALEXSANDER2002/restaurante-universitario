@@ -81,7 +81,46 @@ app.post('/login', (req, res) => {
 });
 
 // 🚀 Rota para obter as compras do banco de dados com o nome do usuário
+// 🚀 Rota para obter apenas as compras do usuário logado
 app.get('/compras', (req, res) => {
+  const { user_id } = req.query;
+
+  if (!user_id) {
+    return res.status(400).json({ error: "Usuário não especificado" });
+  }
+
+  const sql = `
+      SELECT compras.id, usuarios.nome AS usuario_nome, usuarios.matricula, 
+             CASE 
+                 WHEN compras.campus = 'campus1' THEN 'Campus 1'
+                 WHEN compras.campus = 'campus2' THEN 'Campus 2'
+                 WHEN compras.campus = 'campus3' THEN 'Campus 3'
+                 ELSE compras.campus
+             END AS campus,
+             CASE 
+                 WHEN compras.tipo_comida = 'vegetariana' THEN 'Vegetariana'
+                 WHEN compras.tipo_comida = 'nao-vegetariana' THEN 'Não Vegetariana'
+                 ELSE compras.tipo_comida
+             END AS tipo_comida,
+             compras.valor, compras.status, compras.created_at
+      FROM compras
+      JOIN usuarios ON compras.user_id = usuarios.id_usuario
+      WHERE compras.user_id = ?
+      ORDER BY compras.created_at DESC
+  `;
+
+  connection.query(sql, [user_id], (err, results) => {
+      if (err) {
+          console.error("❌ Erro ao buscar compras:", err);
+          return res.status(500).json({ error: "Erro ao buscar compras" });
+      }
+
+      console.log(`✅ Compras do usuário ${user_id} retornadas:`, results);
+      res.json(results);
+  });
+});
+
+app.get('/compras-todos', (req, res) => {
   const sql = `
       SELECT compras.id, usuarios.nome AS usuario_nome, usuarios.matricula, 
              CASE 
@@ -103,13 +142,17 @@ app.get('/compras', (req, res) => {
 
   connection.query(sql, (err, results) => {
       if (err) {
-          console.error("❌ Erro ao buscar compras:", err);
-          return res.status(500).json({ error: "Erro ao buscar compras" });
+          console.error("❌ Erro ao buscar todas as compras:", err);
+          return res.status(500).json({ error: "Erro ao buscar todas as compras" });
       }
 
+      console.log("✅ Todas as compras retornadas:", results);
       res.json(results);
   });
 });
+
+
+
 
 
 
@@ -166,3 +209,28 @@ cron.schedule("0 0 * * *", () => {
       console.log("✅ Todos os pedidos foram removidos com sucesso!");
   });
 });
+
+// 🚀 Rota para deletar uma compra pelo ID
+// 🚀 Rota para deletar uma compra pelo ID
+app.delete('/deletar-compra/:id', (req, res) => {
+  const compraId = req.params.id;
+
+  console.log(`🛠 Recebendo pedido para deletar: ${compraId}`); // LOG PARA DEBUG
+
+  if (!compraId) {
+      return res.status(400).json({ error: "ID da compra não informado" });
+  }
+
+  const sql = `DELETE FROM compras WHERE id = ?`;
+
+  connection.query(sql, [compraId], (err, result) => {
+      if (err) {
+          console.error("❌ Erro ao deletar a compra:", err);
+          return res.status(500).json({ error: "Erro ao excluir a compra" });
+      }
+
+      console.log(`✅ Compra ${compraId} removida com sucesso!`);
+      res.json({ message: "Compra removida com sucesso!" });
+  });
+});
+
