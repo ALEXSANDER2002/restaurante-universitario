@@ -83,3 +83,44 @@ app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
 
+app.post('/comprar-ticket', (req, res) => {
+  const { id_usuario, campus, tipo_comida, plano, preco } = req.body;
+
+  if (!id_usuario || !campus || !tipo_comida || !plano || !preco) {
+      return res.status(400).json({ message: 'Todos os campos são obrigatórios.' });
+  }
+
+  // Verificar se o usuário pode comprar o plano subsidiado
+  pool.query("SELECT plano FROM usuarios WHERE id_usuario = ?", [id_usuario], (err, results) => {
+      if (err) {
+          console.error("❌ Erro ao consultar o banco:", err);
+          return res.status(500).json({ message: "Erro no servidor" });
+      }
+
+      if (results.length === 0) {
+          return res.status(404).json({ message: "Usuário não encontrado" });
+      }
+
+      const userPlano = results[0].plano.toLowerCase();
+
+      if (plano === "Subsidado" && userPlano !== "subsidado") {
+          return res.status(400).json({ message: "Usuário não autorizado a comprar refeição subsidiada" });
+      }
+
+      // Salvar diretamente no banco como "Confirmado"
+      pool.query(
+          "INSERT INTO tickets (id_usuario, campus, tipo_comida, plano, preco, status_pagamento) VALUES (?, ?, ?, ?, ?, ?)",
+          [id_usuario, campus, tipo_comida, plano, preco, 'Confirmado'],
+          (err) => {
+              if (err) {
+                  console.error("❌ Erro ao registrar ticket:", err);
+                  return res.status(500).json({ message: "Erro ao registrar ticket" });
+              }
+
+              res.json({ message: "✅ Ticket registrado com sucesso!", success: true });
+          }
+      );
+  });
+});
+
+
