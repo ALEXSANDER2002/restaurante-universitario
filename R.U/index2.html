@@ -149,7 +149,8 @@
                         <option value="nao-vegetariana">Comida Não Vegetariana</option>
                     </select>
                 </div>
-                <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-76b4d4b4-b36e-4110-9d3e-ebdaef1f8b9a'">Comprar</button>
+                <!-- <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-76b4d4b4-b36e-4110-9d3e-ebdaef1f8b9a'">Comprar</button> -->
+                <button onclick="gerarPedido(13)">Comprar</button>
             </div>
         
             <div class="card">
@@ -173,8 +174,8 @@
                         <option value="nao-vegetariana">Comida Não Vegetariana</option>
                     </select>
                 </div>
-                <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-76b4d4b4-b36e-4110-9d3e-ebdaef1f8b9a'">Comprar</button>
-                <button onclick="comprarTicket(2, 'vegetariana', 'Campus 1', 2)">Comprar</button>
+                <!-- <button onclick="window.location.href='https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-76b4d4b4-b36e-4110-9d3e-ebdaef1f8b9a'">Comprar</button> -->
+                <button onclick="gerarPedido(2)">Comprar</button> <!-- Exemplo com valor R$2 -->
 
             </div>
         </div>
@@ -198,5 +199,93 @@
     <script src="../server.js"></script>
    
 <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<script>
+    function gerarPedido() {
+        // Obtendo os valores selecionados nos <select>
+        const campus = document.getElementById("campus-select-2").value;
+        const tipo_comida = document.getElementById("comida-select-2").value;
+        const valor = 2.0; // Valor fixo da refeição subsidiada
+
+        // Pegando o user_id do localStorage (deve estar salvo após o login)
+        const user_id = localStorage.getItem("user_id");
+
+        // Verificando se os campos foram preenchidos
+        if (!user_id) {
+            alert("❌ Erro: Usuário não identificado. Faça login novamente.");
+            return;
+        }
+        if (!campus || !tipo_comida) {
+            alert("❌ Por favor, selecione todas as opções antes de comprar.");
+            return;
+        }
+
+        // Chamar a função que envia os dados para o backend
+        comprarTicket(user_id, tipo_comida, campus, valor);
+    }
+
+    async function comprarTicket(user_id, tipo_comida, campus, valor) {
+        try {
+            const response = await fetch("http://localhost:3000/salvar-compra", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id, tipo_comida, campus, valor })
+            });
+
+            const data = await response.json();
+
+            if (data.message) {
+                alert("✅ Compra registrada com sucesso!");
+                console.log("✅ Compra salva no banco:", data);
+            } else {
+                alert("❌ Erro ao salvar a compra.");
+            }
+        } catch (error) {
+            console.error("❌ Erro ao conectar ao servidor:", error);
+            alert("❌ Erro ao conectar ao servidor.");
+        }
+    }
+</script>
+<script>
+    async function gerarPedido(valor) {
+        // Obter user_id do localStorage
+        const user_id = localStorage.getItem("user_id");
+
+        if (!user_id) {
+            alert("⚠️ Erro: Usuário não autenticado!");
+            return;
+        }
+
+        // Capturar as seleções do formulário
+        const tipo_comida = document.getElementById("comida-select-2").value;
+        const campus = document.getElementById("campus-select-2").value;
+
+        if (!tipo_comida || !campus) {
+            alert("⚠️ Selecione o campus e o tipo de comida!");
+            return;
+        }
+
+        try {
+            const response = await fetch("http://localhost:3000/criar-compra", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ user_id, tipo_comida, campus, valor })
+            });
+
+            const data = await response.json();
+
+            if (data.message) {
+                alert("✅ Pedido criado com sucesso!");
+                console.log("✅ Compra salva no banco:", data);
+            } else {
+                alert("❌ Erro ao salvar a compra.");
+            }
+        } catch (error) {
+            console.error("❌ Erro ao conectar ao servidor:", error);
+            alert("❌ Erro ao conectar ao servidor.");
+        }
+    }
+</script>
+
 </body>
 </html>

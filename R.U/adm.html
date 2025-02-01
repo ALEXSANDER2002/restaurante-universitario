@@ -74,10 +74,6 @@
             background-color: #f9f9f9;
         }
 
-        table tr.closed {
-            background-color: #ffe5e5;
-        }
-
         .action-btn {
             display: flex;
             justify-content: center;
@@ -97,67 +93,53 @@
             background-color: #45a049;
         }
 
-   /* Modal */
-.modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    width: 300px;
-    max-width: 80%;
-    display: none; /* Inicialmente escondido */
-}
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 300px;
+            max-width: 80%;
+            display: none;
+        }
 
-.modal.visible {
-    display: block;
-}
+        .modal.visible {
+            display: block;
+        }
 
-.modal-content {
-    text-align: center;
-}
+        .modal-content {
+            text-align: center;
+        }
 
-.close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: red;
-}
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: red;
+        }
 
-.close-order-btn {
-    background: #d32f2f;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s ease;
-}
+        .close-order-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
 
-.close-order-btn:hover {
-    background: #b71c1c;
-}
-
-/* Linha fechada (vermelha) */
-tr.closed {
-    background-color: #ffcdd2; /* Vermelho claro */
-    color: #b71c1c; /* Texto vermelho escuro */
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-tr.closed td {
-    font-weight: bold;
-}
-
-
-
+        .close-order-btn:hover {
+            background: #b71c1c;
+        }
 
         @media (max-width: 768px) {
             .dashboard-container {
@@ -199,77 +181,18 @@ tr.closed td {
                         <th>Nome</th>
                         <th>Matrícula</th>
                         <th>Campus</th>
+                        <th>Tipo de Comida</th>
                         <th>Data e Hora</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    <script>
-                        // Função para buscar compras do banco e preencher a tabela
-                        // Função para buscar compras do banco e preencher a tabela
-async function carregarCompras() {
-    try {
-        const response = await fetch("http://localhost:3000/compras");
-        const compras = await response.json();
-
-        const tbody = document.querySelector("#data-table tbody");
-        tbody.innerHTML = ""; // Limpa a tabela antes de adicionar novos dados
-
-        compras.forEach(compra => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${compra.id}</td>
-                <td>${compra.usuario_nome}</td>
-                <td>${compra.matricula}</td>
-                <td>${compra.campus}</td>
-                <td>${new Date(compra.created_at).toLocaleString("pt-BR")}</td>
-                <td><button class="action-btn" data-id="${compra.id}" data-name="${compra.usuario_nome}" data-matricula="${compra.matricula}" data-campus="${compra.campus}" data-date="${compra.created_at}">🔍</button></td>
-            `;
-            tbody.appendChild(row);
-        });
-
-        adicionarEventosAosBotoes();
-    } catch (error) {
-        console.error("❌ Erro ao carregar compras:", error);
-    }
-}
-
-                    
-                        // Função para adicionar eventos aos botões depois de carregar os dados
-                        function adicionarEventosAosBotoes() {
-                            const actionButtons = document.querySelectorAll(".action-btn");
-                    
-                            actionButtons.forEach((btn) => {
-                                btn.addEventListener("click", (e) => {
-                                    const numero = e.target.getAttribute("data-id");
-                                    const nome = e.target.getAttribute("data-name");
-                                    const matricula = e.target.getAttribute("data-matricula");
-                                    const campus = e.target.getAttribute("data-campus");
-                    
-                                    document.getElementById("modal-numero").textContent = numero;
-                                    document.getElementById("modal-nome").textContent = nome;
-                                    document.getElementById("modal-matricula").textContent = matricula;
-                                    document.getElementById("modal-campus").textContent = campus;
-                    
-                                    document.getElementById("modal").classList.add("visible");
-                                });
-                            });
-                        }
-                    
-                        // Chamando a função ao carregar a página
-                        window.onload = carregarCompras;
-                    </script>
-                    
-
                 </tbody>
-                
-                
-                </tbody>
-                
             </table>
         </div>
     </div>
+
+    <!-- Modal -->
     <div id="modal" class="modal hidden">
         <div class="modal-content">
             <span class="close-btn" id="close-modal">&times;</span>
@@ -278,96 +201,58 @@ async function carregarCompras() {
             <p><strong>Nome:</strong> <span id="modal-nome"></span></p>
             <p><strong>Matrícula:</strong> <span id="modal-matricula"></span></p>
             <p><strong>Campus:</strong> <span id="modal-campus"></span></p>
+            <p><strong>Tipo de Comida:</strong> <span id="modal-comida"></span></p>
             <button id="close-order" class="close-order-btn">Fechar Pedido</button>
         </div>
     </div>
-    
-
-    <footer>
-        <div class="footer-content">
-            <p>Gestão eficiente de tickets de alimentação universitária.</p>
-        </div>
-        <div class="social-icons">
-            <a href="#">&#xf09a;</a>
-            <a href="#">&#xf16d;</a>
-            <a href="#">&#xf08c;</a>
-        </div>
-        <p>&copy; 2025 Os Miseráveis</p>
-    </footer>
 
     <script>
-        const searchBar = document.getElementById('search-bar');
-        const tableRows = document.querySelectorAll('#data-table tbody tr');
+        async function carregarCompras() {
+            try {
+                const response = await fetch("http://localhost:3000/compras");
+                const compras = await response.json();
 
-        searchBar.addEventListener('input', () => {
-            const searchText = searchBar.value.toLowerCase();
+                const tbody = document.querySelector("#data-table tbody");
+                tbody.innerHTML = "";
 
-            tableRows.forEach(row => {
-                const cells = Array.from(row.children);
-                const matches = cells.some(cell => cell.textContent.toLowerCase().includes(searchText));
-                row.style.display = matches ? '' : 'none';
+                compras.forEach(compra => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${compra.id}</td>
+                        <td>${compra.usuario_nome}</td>
+                        <td>${compra.matricula}</td>
+                        <td>${compra.campus}</td>
+                        <td>${compra.tipo_comida}</td>
+                        <td>${new Date(compra.created_at).toLocaleString("pt-BR")}</td>
+                        <td><button class="action-btn" data-id="${compra.id}" data-name="${compra.usuario_nome}" data-matricula="${compra.matricula}" data-campus="${compra.campus}" data-comida="${compra.tipo_comida}" data-date="${compra.created_at}">🔍</button></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                adicionarEventosAosBotoes();
+            } catch (error) {
+                console.error("❌ Erro ao carregar compras:", error);
+            }
+        }
+
+        function adicionarEventosAosBotoes() {
+            document.querySelectorAll(".action-btn").forEach(btn => {
+                btn.addEventListener("click", (e) => {
+                    document.getElementById("modal-numero").textContent = btn.dataset.id;
+                    document.getElementById("modal-nome").textContent = btn.dataset.name;
+                    document.getElementById("modal-matricula").textContent = btn.dataset.matricula;
+                    document.getElementById("modal-campus").textContent = btn.dataset.campus;
+                    document.getElementById("modal-comida").textContent = btn.dataset.comida;
+                    document.getElementById("modal").classList.add("visible");
+                });
             });
+        }
+
+        document.getElementById("close-modal").addEventListener("click", () => {
+            document.getElementById("modal").classList.remove("visible");
         });
 
-        // Seleção de elementos
-const modal = document.getElementById("modal");
-const closeModalBtn = document.getElementById("close-modal");
-const closeOrderBtn = document.getElementById("close-order");
-
-// Campos dinâmicos no modal
-const modalNumero = document.getElementById("modal-numero");
-const modalNome = document.getElementById("modal-nome");
-const modalMatricula = document.getElementById("modal-matricula");
-const modalCampus = document.getElementById("modal-campus");
-
-// Botões de ação (lupas)
-const actionButtons = document.querySelectorAll(".action-btn");
-
-// Abrir modal
-actionButtons.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-        const numero = e.target.getAttribute("data-id");
-        const nome = e.target.getAttribute("data-name");
-        const matricula = e.target.getAttribute("data-matricula");
-        const campus = e.target.getAttribute("data-campus");
-
-        // Preenche os dados no modal
-        modalNumero.textContent = numero;
-        modalNome.textContent = nome;
-        modalMatricula.textContent = matricula;
-        modalCampus.textContent = campus;
-
-        // Exibe o modal
-        modal.classList.add("visible");
-    });
-});
-
-// Fechar modal
-closeModalBtn.addEventListener("click", () => {
-    modal.classList.remove("visible");
-});
-
-// Fechar pedido
-closeOrderBtn.addEventListener("click", () => {
-    const numero = modalNumero.textContent;
-
-    // Encontra a linha correspondente na tabela pelo número
-    const row = Array.from(document.querySelectorAll("table tr")).find(
-        (tr) => tr.querySelector("td:first-child")?.textContent.trim() === numero
-    );
-
-    if (row) {
-        // Adiciona a classe de estado fechado (vermelho)
-        row.classList.add("closed");
-    }
-
-    // Fecha o modal
-    modal.classList.remove("visible");
-});
-
-
-
-
+        window.onload = carregarCompras;
     </script>
 </body>
 </html>

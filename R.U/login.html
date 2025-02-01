@@ -63,13 +63,20 @@
             });
 
             const data = await response.json();
-            if (data.token) {
-                alert('Login bem-sucedido!');
-                localStorage.setItem('token', data.token); // Armazenar o token no localStorage
-                window.location.href = 'index.html'; // Redireciona para o dashboard
-            } else {
-                alert('Erro no login: ' + data.message);
-            }
+            if (data.token && data.user_id) {
+    alert('✅ Login bem-sucedido!');
+    
+    // Armazena o token e o user_id no localStorage
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user_id', data.user_id);
+    
+    console.log("🔹 Usuário ID salvo:", data.user_id);
+
+    window.location.href = 'index.html'; // Redireciona para o dashboard
+} else {
+    alert('❌ Erro no login: ' + data.message);
+}
+
         });
     </script>
 </body>
