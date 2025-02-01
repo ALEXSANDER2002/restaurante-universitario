@@ -48,3 +48,27 @@ document.querySelectorAll("button").forEach(button => {
         }
     });
 });
+
+async function comprarTicket(user_id, tipo_comida, campus, valor) {
+    try {
+      const response = await fetch("http://localhost:3000/salvar-compra", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id, tipo_comida, campus, valor })
+      });
+  
+      const data = await response.json();
+  
+      if (data.message) {
+        alert("✅ Compra registrada com sucesso!");
+        console.log("✅ Compra salva no banco:", data);
+      } else {
+        alert("❌ Erro ao salvar a compra.");
+      }
+    } catch (error) {
+      console.error("❌ Erro ao conectar ao servidor:", error);
+      alert("❌ Erro ao conectar ao servidor.");
+    }
+  }
+  
+
