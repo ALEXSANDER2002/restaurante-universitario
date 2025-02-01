@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'admin',
-  database: 'login'
+  database: 'restaurante_universitario'
 });
 
 // Verificação de conexão com o banco
@@ -46,9 +46,9 @@ app.post('/register', (req, res) => {
 
 // Rota de login
 app.post('/login', (req, res) => {
-  const { matricula, password } = req.body;
+  const { matricula} = req.body;
 
-  connection.query('SELECT * FROM usuario WHERE matricula = ?', [matricula], (err, results) => {
+  connection.query('SELECT * FROM usuarios WHERE matricula = ?', [matricula], (err, results) => {
     if (err) {
       console.error('Erro ao consultar o banco:', err);
       return res.status(500).send('Erro no servidor');
@@ -61,15 +61,11 @@ app.post('/login', (req, res) => {
     const user = results[0];
 
     // Verifica se o usuário tem o plano subsidiado
-    if (user.plano !== 'Subsidado') {
+    if (user.plano !== 'Subsidiado') {
       return res.status(400).send({ message: 'Usuário não autorizado a realizar compras subsidiadas' });
     }
 
-    if (password !== user.password) {
-      return res.status(400).send({ message: 'Senha incorreta' });
-    }
-
-    const token = jwt.sign({ id: user.id, matricula: user.matricula, email: user.email }, 'secretrandomkey', {
+    const token = jwt.sign({ id: user.id, matricula: user.matricula}, 'secretrandomkey', {
       expiresIn: '1h',
     });
 
@@ -87,12 +83,3 @@ app.listen(port, () => {
   console.log(`Servidor rodando na porta ${port}`);
 });
 
-
-http://localhost:5000/compracerta?collection_id=100105355743&collection_status=approved&
-// payment_id=100105355743&
-// status=approved&
-// external_reference=null&
-// payment_type=account_money&merchant_order_id=27724550216&
-// preference_id=2231764145-0645c8ba-bd2a-46c5-a4f3-dd0640f70df8&site_id=MLB&
-// processing_mode=aggregator&
-// merchant_account_id=null
