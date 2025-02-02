@@ -201,52 +201,6 @@
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
 <script>
-    function gerarPedido() {
-        // Obtendo os valores selecionados nos <select>
-        const campus = document.getElementById("campus-select-2").value;
-        const tipo_comida = document.getElementById("comida-select-2").value;
-        const valor = 2.0; // Valor fixo da refeição subsidiada
-
-        // Pegando o user_id do localStorage (deve estar salvo após o login)
-        const user_id = localStorage.getItem("user_id");
-
-        // Verificando se os campos foram preenchidos
-        if (!user_id) {
-            alert("❌ Erro: Usuário não identificado. Faça login novamente.");
-            return;
-        }
-        if (!campus || !tipo_comida) {
-            alert("❌ Por favor, selecione todas as opções antes de comprar.");
-            return;
-        }
-
-        // Chamar a função que envia os dados para o backend
-        comprarTicket(user_id, tipo_comida, campus, valor);
-    }
-
-    async function comprarTicket(user_id, tipo_comida, campus, valor) {
-        try {
-            const response = await fetch("http://localhost:3000/salvar-compra", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ user_id, tipo_comida, campus, valor })
-            });
-
-            const data = await response.json();
-
-            if (data.message) {
-                alert("✅ Compra registrada com sucesso!");
-                console.log("✅ Compra salva no banco:", data);
-            } else {
-                alert("❌ Erro ao salvar a compra.");
-            }
-        } catch (error) {
-            console.error("❌ Erro ao conectar ao servidor:", error);
-            alert("❌ Erro ao conectar ao servidor.");
-        }
-    }
-</script>
-<script>
     async function gerarPedido(valor) {
         // Obter user_id do localStorage
         const user_id = localStorage.getItem("user_id");
@@ -256,9 +210,14 @@
             return;
         }
 
-        // Capturar as seleções do formulário
-        const tipo_comida = document.getElementById("comida-select-2").value;
-        const campus = document.getElementById("campus-select-2").value;
+        // Capturar as seleções do formulário com base no valor do pedido
+        const campus = valor === 13 
+            ? document.getElementById("campus-select-1").value 
+            : document.getElementById("campus-select-2").value;
+        
+        const tipo_comida = valor === 13 
+            ? document.getElementById("comida-select-1").value 
+            : document.getElementById("comida-select-2").value;
 
         if (!tipo_comida || !campus) {
             alert("⚠️ Selecione o campus e o tipo de comida!");
@@ -266,6 +225,7 @@
         }
 
         try {
+            // Enviar pedido para o backend
             const response = await fetch("http://localhost:3000/criar-compra", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -275,8 +235,19 @@
             const data = await response.json();
 
             if (data.message) {
-                alert("✅ Pedido criado com sucesso!");
+                
                 console.log("✅ Compra salva no banco:", data);
+
+                // Escolher a URL correta do Mercado Pago com base no valor
+                let url;
+                if (valor === 2) {
+                    url = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-ecd9a18b-b81c-4e61-9476-9172f8c4b39e";
+                } else if (valor === 13) {
+                    url = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-cbe8ea03-d8b9-4afe-9cd8-d97eb8a46ae3";
+                }
+
+                console.log(`🔗 Redirecionando para: ${url}`);
+                window.location.href = url; // Redireciona para o Mercado Pago
             } else {
                 alert("❌ Erro ao salvar a compra.");
             }
@@ -286,6 +257,8 @@
         }
     }
 </script>
+
+
 
 </body>
 </html>

@@ -7,6 +7,7 @@ const cron = require("node-cron");
 const app = express();
 const port = 3000;
 
+
 app.use(express.json());
 app.use(cors()); // Permite requisições de outros domínios
 

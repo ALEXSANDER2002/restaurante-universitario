@@ -1,7 +1,7 @@
 const mercadopago = require('mercadopago');
 const axios = require('axios'); // Para requisições HTTP no Node.js
 
-// ✅ Configuração correta para Mercado Pago SDK 2.x+
+// ✅ Configuração do Mercado Pago
 const mpClient = new mercadopago.MercadoPagoConfig({
   accessToken: "APP_USR-8540766672404155-012611-18119369f6e3b8b42eeea53446a27387-2231764145",
   options: { timeout: 5000 }
@@ -9,15 +9,19 @@ const mpClient = new mercadopago.MercadoPagoConfig({
 
 const preference = new mercadopago.Preference(mpClient);
 
-// Criar uma nova preferência de pagamento
+// ✅ Criar uma nova preferência de pagamento
 async function criarPreferencia(user_id, tipo_comida, campus, valor) {
   try {
+    if (![2, 13].includes(parseFloat(valor))) {
+      throw new Error("Valor inválido. Apenas R$2,00 ou R$13,00 são permitidos.");
+    }
+
     const result = await preference.create({
       body: {
         items: [
           {
-            id: "1",
-            title: "TICKET_RU",
+            id: valor === 2 ? "2R" : "13R",
+            title: `TICKET_RU - R$${valor}`,
             quantity: 1,
             currency_id: "BRL",
             unit_price: parseFloat(valor)
@@ -36,15 +40,7 @@ async function criarPreferencia(user_id, tipo_comida, campus, valor) {
       }
     });
 
-    // ✅ Correção: Acessando diretamente `init_point` e `id`
-    console.log("\n✅ RESPOSTA COMPLETA DO MERCADO PAGO:");
-    console.log(result);
-
-    if (!result || !result.init_point) {
-      throw new Error("A resposta do Mercado Pago não contém 'init_point'. Verifique o erro.");
-    }
-
-    console.log("\n✅ PREFERÊNCIA CRIADA!");
+    console.log(`\n✅ PREFERÊNCIA CRIADA PARA R$${valor}!`);
     console.log("URL:", result.init_point);
     console.log("ID:", result.id);
 
@@ -55,19 +51,50 @@ async function criarPreferencia(user_id, tipo_comida, campus, valor) {
   }
 }
 
+// ✅ Adicionando a função `comprarTicket`
+async function comprarTicket(user_id, tipo_comida, campus, valor) {
+  try {
+    const response = await axios.post("http://localhost:3000/salvar-compra", {
+      user_id,
+      tipo_comida,
+      campus,
+      valor
+    });
 
+    console.log("✅ Compra registrada com sucesso!", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("❌ Erro ao conectar ao servidor:", error);
+    throw new Error("Erro ao registrar compra.");
+  }
+}
 
-
-
-// Exportar funções para reutilização no `server.js`
+// ✅ Exportar corretamente
 module.exports = {
   criarPreferencia,
   comprarTicket
 };
 
-// Executar somente se chamado diretamente (para testes)
+// ✅ Executar automaticamente para testar R$2 e R$13
 if (require.main === module) {
-  criarPreferencia(1, "vegetariana", "Campus 1", 2.0)
-    .then((res) => console.log("Pagamento gerado:", res))
-    .catch((err) => console.error("Erro ao criar pagamento:", err));
+  const user_id = 1;
+  const tipo_comida = "vegetariana";
+  const campus = "Campus 1";
+
+  // Criar preferências para ambos os valores
+  Promise.all([
+    criarPreferencia(user_id, tipo_comida, campus, 2),
+    criarPreferencia(user_id, tipo_comida, campus, 13)
+  ])
+  .then((responses) => {
+    console.log("\n🔗 URLs geradas para pagamento:");
+    responses.forEach((res, index) => {
+      if (res) {
+        console.log(`✅ Pagamento ${index + 1}: ${res.url}`);
+      } else {
+        console.log(`❌ Erro ao criar pagamento ${index + 1}`);
+      }
+    });
+  })
+  .catch((err) => console.error("❌ Erro ao criar pagamentos:", err));
 }
