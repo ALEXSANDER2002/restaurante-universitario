@@ -16,13 +16,13 @@ app.use(express.static(path.join(__dirname, 'R.U')));
 app.use(express.static('ESTILOS'));
 
 // 📌 Conexão com o banco de dados MySQL
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST || '127.0.0.1',  // Usa 127.0.0.1 ao invés de localhost
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'admin',
-  database: process.env.DB_DATABASE || 'restaurante_universitario',
-  port: process.env.DB_PORT || 3306         // Usa a porta configurada
-});
+//const connection = mysql.createConnection({
+  //host: process.env.DB_HOST || '127.0.0.1',  // Usa 127.0.0.1 ao invés de localhost
+  //user: process.env.DB_USER || 'root',
+  //password: process.env.DB_PASSWORD || 'admin',
+  //database: process.env.DB_DATABASE || 'restaurante_universitario',
+  //port: process.env.DB_PORT || 3306         // Usa a porta configurada
+//});
 
 
 connection.connect(err => {
