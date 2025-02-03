@@ -15,12 +15,12 @@ app.use(cors()); // Permite requisições de outros domínios
 app.use(express.static(path.join(__dirname, 'R.U')));
 app.use(express.static('ESTILOS'));
 
-// 📌 Conexão com o banco de dados MySQL
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'admin',
-  database: 'restaurante_universitario'
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'admin',
+  database: process.env.DB_DATABASE || 'restaurante_universitario',
+  port: process.env.DB_PORT || 3306
 });
 
 connection.connect(err => {
