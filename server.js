@@ -16,11 +16,20 @@ app.use(express.static(path.join(__dirname, 'R.U')));
 app.use(express.static('ESTILOS'));
 
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
+  host: process.env.DB_HOST || '127.0.0.1', // Use 127.0.0.1 em vez de localhost
   user: process.env.DB_USER || 'root',
   password: process.env.DB_PASSWORD || 'admin',
   database: process.env.DB_DATABASE || 'restaurante_universitario',
   port: process.env.DB_PORT || 3306
+});
+
+
+connection.connect(err => {
+  if (err) {
+    console.error('❌ Erro ao conectar ao MySQL:', err);
+    return;
+  }
+  console.log('✅ Conectado ao MySQL!');
 });
 
 connection.connect(err => {
