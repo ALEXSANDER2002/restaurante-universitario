@@ -93,8 +93,7 @@ dist
 
 # Gatsby files
 .cache/
-# Comment in the public line in if your project uses Gatsby and not Next.js
-# https://nextjs.org/blog/next-9-1#public-directory-support
+# Uncomment the line below if using Gatsby and not Next.js
 # public
 
 # vuepress build output
@@ -128,3 +127,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Configurações específicas para projetos no Railway
+.railway/ # Logs e dados locais do Railway
