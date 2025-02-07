@@ -1,35 +1,33 @@
-# Restaurante Universitário - UNIFESSPA 🍽️
+# Restaurante Universitário - Aplicação Backend
 
-## Descrição
-Sistema para gestão e compra de tickets do Restaurante Universitário da UNIFESSPA. O projeto visa agilizar o processo utilizando tecnologias modernas e integração com uma API de pagamento.
+Este projeto implementa a API de um sistema para gestão de compras no restaurante universitário, utilizando Node.js, MySQL e Docker.
 
-## Tecnologias Utilizadas
-### Frontend
-- **HTML5**: Estruturação das páginas.
-- **CSS3**: Estilização e design responsivo.
-- **JavaScript**: Funcionalidades dinâmicas e interatividade.
+## Pré-requisitos
 
-### Backend
-- **Node.js**: Servidor para gerenciar a lógica e APIs.
-- **API de Pagamento**: Integração para processar compras de tickets.
+- Docker
+- Docker Compose
+- Node.js (para rodar localmente sem Docker, se preferir)
 
-### Banco de Dados
-- **MySQL** 
+## Instruções de execução com Docker
 
-## Funcionalidades
-- Cadastro de usuários e compra de tickets.
-- Validação de tickets com QR Codes ou outro método.
-- Integração com API de pagamento para transações seguras.
-- Painel administrativo para monitorar vendas e usuários.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/usuario/nome-do-repositorio.git
+   cd nome-do-repositorio
+   ```
 
-## Estrutura do Projeto
-```plaintext
-restaurante-universitario/
-├── src/
-│   ├── frontend/          # Arquivos HTML, CSS, JS
-│   ├── backend/           # Código do servidor em Node.js
-│   ├── database/          # Configuração e scripts do banco de dados
-├── docs/                  # Documentação adicional
-├── .gitignore
-├── README.md
-└── LICENSE
+2. Construa e rode os containers Docker:
+   ```bash
+   docker-compose up --build
+   ```
+
+3. Acesse a aplicação em `http://localhost:3000`.
+
+## Como rodar sem Docker
+
+Se você preferir rodar sem Docker, siga os passos abaixo:
+
+1. Instale as dependências:
+   ```bash
+   npm install
+   ```
