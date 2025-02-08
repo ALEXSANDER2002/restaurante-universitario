@@ -15,30 +15,24 @@ app.use(cors()); // Permite requisições de outros domínios
 app.use(express.static(path.join(__dirname, 'R.U')));
 app.use(express.static('ESTILOS'));
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST || '127.0.0.1', // Use 127.0.0.1 em vez de localhost
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || 'admin',
-  database: process.env.DB_DATABASE || 'restaurante_universitario',
-  port: process.env.DB_PORT || 3306
-});
 
+setTimeout(() => {
+  const connection = mysql.createConnection({
+      host: 'db',
+      user: 'root',
+      password: 'root_password',
+      database: 'restaurante_universitario',
+  });
 
-connection.connect(err => {
-  if (err) {
-    console.error('❌ Erro ao conectar ao MySQL:', err);
-    return;
-  }
-  console.log('✅ Conectado ao MySQL!');
-});
+  connection.connect(err => {
+    if (err) {
+      console.error('❌ Erro ao conectar ao MySQL:', err);
+      return;
+    }
+    console.log('✅ Conectado ao MySQL!');
+  });
+}, 5000); // Aguarda 5 segundos para garantir que o MySQL está pronto
 
-connection.connect(err => {
-  if (err) {
-    console.error('❌ Erro ao conectar ao MySQL:', err);
-    return;
-  }
-  console.log('✅ Conectado ao MySQL!');
-});
 
 // 🚀 Rota para cadastro de usuário
 app.post('/register', (req, res) => {
