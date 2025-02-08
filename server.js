@@ -1,12 +1,11 @@
-const express = require('express');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 const cors = require('cors');
 const cron = require("node-cron");
+const express = require('express');
 const app = express();
 const port = 3000;
-
 
 app.use(express.json());
 app.use(cors()); // Permite requisições de outros domínios
@@ -15,24 +14,21 @@ app.use(cors()); // Permite requisições de outros domínios
 app.use(express.static(path.join(__dirname, 'R.U')));
 app.use(express.static('ESTILOS'));
 
+// 📌 Conexão com o banco de dados MySQL
+const connection = mysql.createConnection({
+  host: 'db',
+  user: 'root',
+  password: 'admin',
+  database: 'restaurante_universitario'
+});
 
-setTimeout(() => {
-  const connection = mysql.createConnection({
-      host: 'db',
-      user: 'root',
-      password: 'root_password',
-      database: 'restaurante_universitario',
-  });
-
-  connection.connect(err => {
-    if (err) {
-      console.error('❌ Erro ao conectar ao MySQL:', err);
-      return;
-    }
-    console.log('✅ Conectado ao MySQL!');
-  });
-}, 5000); // Aguarda 5 segundos para garantir que o MySQL está pronto
-
+connection.connect(err => {
+  if (err) {
+    console.error('❌ Erro ao conectar ao MySQL:', err);
+    return;
+  }
+  console.log('✅ Conectado ao MySQL!');
+});
 
 // 🚀 Rota para cadastro de usuário
 app.post('/register', (req, res) => {
@@ -237,4 +233,3 @@ app.delete('/deletar-compra/:id', (req, res) => {
       res.json({ message: "Compra removida com sucesso!" });
   });
 });
-

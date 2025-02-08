@@ -15,7 +15,6 @@
             <span>Minha Conta</span>
         </div>
     </header>
-
     <div class="login-container">
         <div class="image-section">
             <img src="/IMG/ru.jpeg" alt="Exemplo de Imagem">
@@ -25,14 +24,11 @@
             <form id="login-form">
                 <label for="matricula">Matrícula</label>
                 <input type="text" id="matricula" placeholder="Digite sua matrícula" name="matricula" required>
-
                 <button type="submit">Entrar</button>
             </form>
-
             <div class="admin-button" onclick="window.location.href='login2.html'">Administrador</div>
         </div>
     </div>
-
     <footer>
         <div class="footer-content">
             <p>Gestão eficiente de tickets de alimentação universitária.</p>
@@ -44,15 +40,12 @@
         </div>
         <p>&copy; 2025 Os Miseráveis</p>
     </footer>
-
     <script src="/JS/app.js"></script>
     <script>
         // Captura o formulário
         const form = document.getElementById('login-form');
-
         form.addEventListener('submit', async function(event) {
             event.preventDefault(); // Previne o envio padrão do formulário
-
             const matricula = form.matricula.value; // Captura a matrícula do formulário
             const response = await fetch('http://localhost:3000/login', {
                 method: 'POST',
@@ -65,11 +58,11 @@
             const data = await response.json();
             if (data.token && data.user_id) {
     alert('✅ Login bem-sucedido!');
-    
+
     // Armazena o token e o user_id no localStorage
     localStorage.setItem('token', data.token);
     localStorage.setItem('user_id', data.user_id);
-    
+
     console.log("🔹 Usuário ID salvo:", data.user_id);
 
     window.location.href = 'index.html'; // Redireciona para o dashboard
