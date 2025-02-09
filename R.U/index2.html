@@ -112,10 +112,10 @@
 <body>
     <header>
         <img src="/IMG/logo.png" alt="UNIFESSPA">
-        <div class="profile" id="profile-menu-toggle">
+        <!-- <div class="profile" id="profile-menu-toggle">
             <img src="https://cdn-icons-png.flaticon.com/512/7216/7216128.png" alt="Minha Conta">
             <span>Minha Conta</span>
-        </div>
+        </div> -->
     </header>
 
     <div class="overlay" id="overlay"></div>
@@ -226,7 +226,7 @@
 
         try {
             // Enviar pedido para o backend
-            const response = await fetch("http://localhost:3000/criar-compra", {
+            const response = await fetch("https://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/criar-compra", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_id, tipo_comida, campus, valor })

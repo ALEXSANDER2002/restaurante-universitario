@@ -28,9 +28,9 @@ async function criarPreferencia(user_id, tipo_comida, campus, valor) {
           }
         ],
         back_urls: {
-          success: "http://localhost:3000/compracerta",
-          failure: "http://localhost:3000/compraerrada",
-          pending: "http://localhost:3000/compraerrada"
+          success: "http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/compracerta",
+          failure: "http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/compraerrada",
+          pending: "http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/compraerrada"
         },
         auto_return: "approved",
         payment_methods: {
@@ -54,7 +54,7 @@ async function criarPreferencia(user_id, tipo_comida, campus, valor) {
 // ✅ Adicionando a função `comprarTicket`
 async function comprarTicket(user_id, tipo_comida, campus, valor) {
   try {
-    const response = await axios.post("http://localhost:3000/salvar-compra", {
+    const response = await axios.post("http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/salvar-compra", {
       user_id,
       tipo_comida,
       campus,

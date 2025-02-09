@@ -7,12 +7,7 @@ services:
     depends_on:
       db:
         condition: service_healthy  # ✅ Agora o app espera o MySQL ficar pronto
-    environment:
-      - MYSQL_HOST=db   # Nome do serviço do MySQL no Docker
-      - MYSQL_PORT=3306  # O MySQL dentro do container usa 3306
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=admin
-      - MYSQL_DATABASE=restaurante_universitario
+   
     networks:
       - app-network
 

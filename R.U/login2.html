@@ -10,10 +10,10 @@
 <body>
     <header>
         <img src="/IMG/logo.png" alt="UNIFESSPA">
-        <div class="profile" id="profile-menu-toggle">
+        <!-- <div class="profile" id="profile-menu-toggle">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
             <span>Minha Conta</span>
-        </div>
+        </div> -->
     </header>
 
     <div class="login-container">
@@ -66,7 +66,7 @@
         return;
     }
 
-    const response = await fetch('http://localhost:3000/login', {
+    const response = await fetch('http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

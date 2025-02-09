@@ -79,15 +79,15 @@ COLLATE = utf8mb4_0900_ai_ci;
 INSERT INTO usuarios (nome, matricula, plano)
 VALUES 
   ('João Silva', '123456', 'Subsidiado'),
-  ('Maria Oliveira', '654321', 'Comum'),
+  ('Maria Oliveira', '654321', 'Não subsidiado'),
   ('Pedro Santos', '789456', 'Subsidiado'),
-  ('Ana Costa', '147258', 'Comum'),
+  ('Ana Costa', '147258', 'Não subsidiado'),
   ('Carlos Souza', '258369', 'Subsidiado'),
-  ('Fernanda Lima', '369258', 'Comum'),
+  ('Fernanda Lima', '369258', 'Não subsidiado'),
   ('Lucas Pereira', '456123', 'Subsidiado'),
-  ('Juliana Almeida', '987654', 'Comum'),
+  ('Juliana Almeida', '987654', 'Não subsidiado'),
   ('Eduardo Martins', '321654', 'Subsidiado'),
-  ('Camila Rocha', '741852', 'Comum');
+  ('Camila Rocha', '741852', 'Não subsidiado');
 
 
 

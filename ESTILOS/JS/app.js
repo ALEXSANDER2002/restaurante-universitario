@@ -13,17 +13,17 @@ const profileMenuToggle = document.getElementById('profile-menu-toggle');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('overlay');
 
-// Abrir e fechar o menu lateral ao clicar em "Minha Conta"
-profileMenuToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-    overlay.classList.toggle('show');
-});
+// // Abrir e fechar o menu lateral ao clicar em "Minha Conta"
+// profileMenuToggle.addEventListener('click', () => {
+//     sidebar.classList.toggle('open');
+//     overlay.classList.toggle('show');
+// });
 
-// Fechar o menu lateral ao clicar fora dele (no overlay)
-overlay.addEventListener('click', () => {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('show');
-});
+// // Fechar o menu lateral ao clicar fora dele (no overlay)
+// overlay.addEventListener('click', () => {
+//     sidebar.classList.remove('open');
+//     overlay.classList.remove('show');
+// });
 
 // Função para criar pagamento e redirecionar
 document.querySelectorAll("button").forEach(button => {
@@ -51,7 +51,7 @@ document.querySelectorAll("button").forEach(button => {
 
 async function comprarTicket(user_id, tipo_comida, campus, valor) {
     try {
-      const response = await fetch("http://localhost:3000/salvar-compra", {
+      const response = await fetch("http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/salvar-compra", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id, tipo_comida, campus, valor })

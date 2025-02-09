@@ -126,10 +126,10 @@
 <body>
     <header>
         <img src="/IMG/logo.png" alt="UNIFESSPA">
-        <div class="profile">
+        <!-- <div class="profile">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
             <span>Minha Conta</span>
-        </div>
+        </div> -->
     </header>
 
     <div class="dashboard-container">
@@ -178,7 +178,7 @@ async function carregarPedidosUsuario() {
     try {
         console.log("🔍 Buscando pedidos para user_id:", userId);
 
-        const response = await fetch(`http://localhost:3000/compras?user_id=${userId}`);
+        const response = await fetch(`http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/compras?user_id=${userId}`);
 
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
@@ -253,7 +253,7 @@ document.getElementById("close-order").addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/deletar-compra/${compraId}`, {
+        const response = await fetch(`http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/deletar-compra/${compraId}`, {
             method: "DELETE"
         });
 
