@@ -178,7 +178,7 @@ async function carregarPedidosUsuario() {
     try {
         console.log("🔍 Buscando pedidos para user_id:", userId);
 
-        const response = await fetch(`http://https://localhost:3000/compras?user_id=${userId}`);
+        const response = await fetch(`http://localhost:3000/compras?user_id=${userId}`);
 
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);

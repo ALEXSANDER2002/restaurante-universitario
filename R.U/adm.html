@@ -212,7 +212,7 @@
             try {
                 console.log("🔍 Buscando todos os pedidos...");
     
-                const response = await fetch(`http://https://localhost:3000/compras-todos`);
+                const response = await fetch(`http://localhost:3000/compras-todos`);
     
                 if (!response.ok) {
                     throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
@@ -246,6 +246,15 @@
                     tbody.appendChild(row);
                 });
     
+                document.getElementById("search-bar").addEventListener("input", function() {
+            const searchText = this.value.toLowerCase();
+            document.querySelectorAll("#data-table tbody tr").forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                row.style.display = rowText.includes(searchText) ? "" : "none";
+            });
+        });
+
+
                 console.log("🔍 Adicionando eventos aos botões...");
                 adicionarEventosAosBotoes(); // Garante que os eventos são adicionados após a renderização da tabela
             } catch (error) {
@@ -309,7 +318,7 @@
             }
     
             try {
-                const response = await fetch(`http://https://localhost:3000/deletar-compra/${compraId}`, {
+                const response = await fetch(`http://localhost:3000/deletar-compra/${compraId}`, {
                     method: "DELETE"
                 });
     

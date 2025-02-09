@@ -16,7 +16,7 @@ app.use(express.static('ESTILOS'));
 
 // 📌 Conexão com o banco de dados MySQL
 const connection = mysql.createConnection({
-  host: 'db',
+  host: 'localhost',
   user: 'root',
   password: 'admin',
   database: 'restaurante_universitario'
@@ -232,4 +232,41 @@ app.delete('/deletar-compra/:id', (req, res) => {
       console.log(`✅ Compra ${compraId} removida com sucesso!`);
       res.json({ message: "Compra removida com sucesso!" });
   });
+});
+
+// 🚀 Rota de login do administrador
+app.post('/login-admin', (req, res) => {
+  const { email, senha } = req.body;
+
+  if (!email || !senha) {
+    return res.status(400).json({ message: "❌ E-mail e senha são obrigatórios" });
+  }
+
+  connection.query(
+    'SELECT * FROM admins WHERE email = ? AND senha = ?',
+    [email, senha],
+    (err, results) => {
+      if (err) {
+        console.error('❌ Erro ao consultar o banco:', err);
+        return res.status(500).json({ message: 'Erro no servidor' });
+      }
+
+      if (results.length === 0) {
+        console.error("⚠️ Nenhum administrador encontrado para o e-mail:", email);
+        return res.status(401).json({ message: "E-mail ou senha inválidos." });
+      }
+
+      const admin = results[0];
+      console.log("✅ Administrador encontrado:", admin);
+
+      // Gerar um token JWT para autenticação
+      const token = jwt.sign(
+        { id: admin.id, email: admin.email, role: "admin" },
+        'secretrandomkey',
+        { expiresIn: '2h' }
+      );
+
+      res.json({ message: '✅ Login bem-sucedido!', token });
+    }
+  );
 });

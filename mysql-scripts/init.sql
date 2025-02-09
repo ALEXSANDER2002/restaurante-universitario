@@ -57,22 +57,6 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- -----------------------------------------------------
 -- Table restaurante_universitario.tickets
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS restaurante_universitario.tickets (
-  id INT NOT NULL AUTO_INCREMENT,
-  id_usuario INT NOT NULL,
-  campus VARCHAR(50) NOT NULL,
-  tipo_comida VARCHAR(50) NOT NULL,
-  plano VARCHAR(50) NOT NULL,
-  preco DECIMAL(10,2) NOT NULL,
-  data_compra TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id),
-  INDEX id_usuario (id_usuario ASC) VISIBLE,
-  CONSTRAINT tickets_ibfk_1
-    FOREIGN KEY (id_usuario)
-    REFERENCES restaurante_universitario.usuarios (id_usuario))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
 
 -- Inserindo 10 usuários na tabela 'usuarios'
 
@@ -90,7 +74,16 @@ VALUES
   ('Camila Rocha', '741852', 'Não subsidiado');
 
 
+-- Criando a tabela de administradores
+CREATE TABLE IF NOT EXISTS restaurante_universitario.admins (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  senha VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 
+-- Inserindo um administrador de exemplo
+INSERT INTO admins (email, senha) VALUES ('admin@exemplo.com', '123456');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
