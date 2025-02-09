@@ -51,7 +51,7 @@ document.querySelectorAll("button").forEach(button => {
 
 async function comprarTicket(user_id, tipo_comida, campus, valor) {
     try {
-      const response = await fetch("http://fa42-2804-2084-404-4600-c0e-4c1-9a71-3ea7.ngrok-free.app/salvar-compra", {
+      const response = await fetch("http://https://localhost:3000/salvar-compra", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id, tipo_comida, campus, valor })
