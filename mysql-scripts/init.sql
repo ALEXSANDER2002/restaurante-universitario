@@ -72,6 +72,20 @@ VALUES
   ('Juliana Almeida', '987654', 'Não subsidiado'),
   ('Eduardo Martins', '321654', 'Subsidiado'),
   ('Camila Rocha', '741852', 'Não subsidiado');
+  
+  INSERT INTO restaurante_universitario.compras (user_id, tipo_comida, campus, valor, status, created_at)
+VALUES 
+  (1, 'Vegetariana', 'Campus 1', 2.00, 'pendente', '2025-02-01 12:30:00'),
+  (2, 'Não Vegetariana', 'Campus 2', 13.00, 'concluído', '2025-02-01 13:00:00'),
+  (3, 'Vegetariana', 'Campus 3', 2.00, 'pendente', '2025-02-01 11:45:00'),
+  (4, 'Não Vegetariana', 'Campus 1', 13.00, 'cancelado', '2025-02-02 14:10:00'),
+  (5, 'Vegetariana', 'Campus 2', 2.00, 'concluído', '2025-02-02 12:00:00'),
+  (6, 'Não Vegetariana', 'Campus 3', 13.00, 'pendente', '2025-02-03 15:45:00'),
+  (7, 'Vegetariana', 'Campus 1', 2.00, 'pendente', '2025-02-03 09:30:00'),
+  (8, 'Não Vegetariana', 'Campus 2', 13.00, 'concluído', '2025-02-04 17:15:00'),
+  (9, 'Vegetariana', 'Campus 3', 2.00, 'cancelado', '2025-02-04 18:00:00'),
+  (10, 'Não Vegetariana', 'Campus 1', 13.00, 'pendente', '2025-02-05 13:20:00');
+
 
 
 -- Criando a tabela de administradores
@@ -84,6 +98,83 @@ CREATE TABLE IF NOT EXISTS restaurante_universitario.admins (
 
 -- Inserindo um administrador de exemplo
 INSERT INTO admins (email, senha) VALUES ('admin@exemplo.com', '123456');
+
+-- 1️ Filtrar todas as compras pendentes
+SELECT * FROM restaurante_universitario.compras WHERE status = 'pendente';
+
+-- 2 Filtrar compras concluídas
+SELECT * FROM restaurante_universitario.compras WHERE status = 'concluído';
+
+-- 3 Buscar todas as compras com informações do usuário
+SELECT c.id, u.nome AS usuario_nome, u.matricula, c.campus, c.tipo_comida, 
+       c.valor, c.status, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario;
+
+-- 4 Filtrar todas as compras pendentes
+
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.campus, c.valor, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.status = 'pendente';
+
+
+-- 5 Filtrar compras concluídas e ordenar por data
+
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.valor, c.status, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.status = 'concluído'
+ORDER BY c.created_at DESC;
+
+-- 6  Buscar compras feitas em um campus específico
+
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.valor, c.status, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.campus = 'Campus 1';
+
+-- 7 Contar quantas compras cada usuário fez
+SELECT u.nome AS usuario_nome, COUNT(c.id) AS total_compras
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+GROUP BY u.nome
+ORDER BY total_compras DESC;
+
+-- 8 Filtrar compras feitas nos últimos 3 dias
+
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.valor, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.created_at >= NOW() - INTERVAL 3 DAY;
+
+-- 9 Filtrar apenas compras de R$2,00
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.valor, c.status, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.valor = 2.00;
+
+-- 10 Filtrar apenas compras de R$13,00
+
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.valor, c.status, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.valor = 13.00;
+
+-- 11 Contar quantas compras foram feitas de cada tipo de comida
+
+SELECT c.tipo_comida, COUNT(*) AS total_compras
+FROM restaurante_universitario.compras c
+GROUP BY c.tipo_comida;
+
+-- 12 Buscar compras canceladas e ordenadas por valor
+
+SELECT c.id, u.nome AS usuario_nome, c.tipo_comida, c.valor, c.status, c.created_at
+FROM restaurante_universitario.compras c
+JOIN restaurante_universitario.usuarios u ON c.user_id = u.id_usuario
+WHERE c.status = 'cancelado'
+ORDER BY c.valor DESC;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
