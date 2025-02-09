@@ -28,9 +28,9 @@ async function criarPreferencia(user_id, tipo_comida, campus, valor) {
           }
         ],
         back_urls: {
-          success: "http://https://localhost:3000/compracerta",
-          failure: "http://https://localhost:3000/compraerrada",
-          pending: "http://https://localhost:3000/compraerrada"
+          success: "http://http://localhost:3000/compracerta",
+          failure: "http://http://localhost:3000/compraerrada",
+          pending: "http://http://localhost:3000/compraerrada"
         },
         auto_return: "approved",
         payment_methods: {

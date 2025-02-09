@@ -226,7 +226,7 @@
 
         try {
             // Enviar pedido para o backend
-            const response = await fetch("https://https://localhost:3000/criar-compra", {
+            const response = await fetch("http://localhost:3000/criar-compra", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_id, tipo_comida, campus, valor })
