@@ -21,7 +21,7 @@ class Server {
         this.app.use(express.static(path.join(__dirname, 'src')));
         this.app.use(express.static(path.join(__dirname, 'views')));
         this.app.use(express.static('public'));
-        this.app.use(express.static(path.join(__dirname, 'home')));
+
     }
 
     routes() {

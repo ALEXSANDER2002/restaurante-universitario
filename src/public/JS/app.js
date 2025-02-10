@@ -1,5 +1,6 @@
 
-const { criarPreferencia } = require('./API/config.js');
+import { criarPreferencia } from './API/config.js'; // ✅ Correto no frontend
+
 
 // Uso em outro arquivo
 async function main() {
@@ -51,7 +52,7 @@ document.querySelectorAll("button").forEach(button => {
 
 async function comprarTicket(user_id, tipo_comida, campus, valor) {
     try {
-      const response = await fetch("http://https://localhost:3000/salvar-compra", {
+      const response = await fetch("https://localhost:3000/salvar-compra", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ user_id, tipo_comida, campus, valor })
@@ -70,5 +71,5 @@ async function comprarTicket(user_id, tipo_comida, campus, valor) {
       alert("❌ Erro ao conectar ao servidor.");
     }
   }
-  
+
 

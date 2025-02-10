@@ -33,7 +33,7 @@ const loginUsuario = async (req, res) => {
     }
 };
 
-// Função para o login do administrador
+// Função para o login do administrador (sem bcrypt)
 const loginAdmin = async (req, res) => {
     const { email, senha } = req.body;
 
@@ -42,19 +42,24 @@ const loginAdmin = async (req, res) => {
     }
 
     try {
-        const [results] = await connection.execute(
-            'SELECT * FROM admins WHERE email = ? AND senha = ?',
-            [email, senha]
+        const [rows] = await connection.execute(
+            'SELECT id, email, senha FROM admins WHERE email = ?',
+            [email]
         );
 
-        if (results.length === 0) {
-            return res.status(401).json({ message: "E-mail ou senha inválidos." });
+        if (rows.length === 0) {
+            return res.status(401).json({ message: "❌ E-mail ou senha inválidos." });
         }
 
-        const admin = results[0];
+        const admin = rows[0];
+
+        if (admin.senha !== senha) {
+            return res.status(401).json({ message: "❌ E-mail ou senha inválidos." });
+        }
+
         const token = jwt.sign(
             { id: admin.id, email: admin.email, role: "admin" },
-            'secretrandomkey',
+            'secretrandomkey', // ⚠️ Use variável de ambiente depois!
             { expiresIn: '2h' }
         );
 

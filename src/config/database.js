@@ -1,8 +1,10 @@
+// noinspection JSVoidFunctionReturnValueUsed
+
 const mysql = require('mysql2/promise');
 
 // Criando o pool com mysql2/promise
 const pool = mysql.createPool({
-    host: 'db',
+    host: 'localhost',
     user: 'root',
     password: 'admin',
     database: 'restaurante_universitario',
@@ -12,13 +14,14 @@ const pool = mysql.createPool({
 });
 
 
-// Testar conexão
-pool.getConnection((err, conn) => {
-    if (err) {
-        console.error('❌ Erro ao conectar ao MySQL:', err.message);
-    } else {
+// Testar a conexão usando async/await
+(async () => {
+    try {
+        const connection = await pool.getConnection();
         console.log('✅ Conectado ao MySQL!');
-        conn.release(); // Libera a conexão de teste
+        connection.release(); // Libera a conexão
+    } catch (err) {
+        console.error('❌ Erro ao conectar ao MySQL:', err.message);
     }
-});
+})();
 module.exports = pool;  // Exportando o pool para uso em outros arquivos

@@ -14,7 +14,7 @@ router.get('/login-admin', (req, res) => {
 
 // Rota de tickets do usuario
 router.get('/ticket-user', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'tickets','ticket', 'tickets_user.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views','tickets', 'tickets_user.html'));  // Certifique-se de que o caminho está correto
 });
 
 // Rota do Admin

@@ -21,27 +21,21 @@
     <div class="main-content">
         <div class="image-section">
             <img src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=656,h=459,fit=crop/mp8q07LnMQI802XL/phoca_thumb_l_01-mePbNGR8B2Uk0BZw.png" alt="Foto de Equipe">
-            <p>Facilidades de uso <br>Agilize a compra e o manuseio de tickets <br> de alimentação do Restaurante Universitário com facilidade.</p>
         </div>
         <div class="login-section">
             <h2>Sistema de Autenticação Centralizada</h2>
-            <form action="/login" method="post">
-                <label for="matricula">Matricula</label>
-                <input type="text" id="matricula" name="matricula" placeholder="Digite sua matricula" required>
-                <label for="matricula">Senha</label>
-                <input type="password" id="matricula" placeholder="Digite sua matrícula" name="password">
+            <form id="login-admin-form" action="/login-admin" method="post">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
 
-                <button  class="btn">Entrar</a>
-                </button>
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+                <button class="btn">Entrar</button>
             </form>
-            <div class="links">
-                <a href="#">Recuperar senha</a>                    <a href="#">Primeiro acesso</a>
-            </div>
-            <button onclick="window.location.href='/login-admin';" class="admin-btn">Administrador</button>
-            <p><a href="#">Precisa de ajuda? Clique aqui</a></p>
         </div>
     </div>
-    <section>
+
 
 </div>
 <footer class="footer">
@@ -80,9 +74,9 @@
     </div>
 </footer>
 
-<script src="/public/JS/app.js"></script>
+<script src="/JS/app.js"></script>
 <script>
-    document.getElementById('login-form').addEventListener('submit', async function(event) {
+    document.getElementById('login-admin-form').addEventListener('submit', async function(event) {
         event.preventDefault();
 
         const email = document.getElementById('email').value;
@@ -94,17 +88,23 @@
         }
 
         try {
-            const response = await fetch('http://localhost:3000/auth/login-admin', { // Certifique-se de chamar /login-admin e não /login
+            const response = await fetch('/auth/login-admin', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, senha: password }) // Enviando email e senha corretamente
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: document.getElementById('email').value,
+                    senha: document.getElementById('password').value
+                })
             });
+
 
             const data = await response.json();
             if (response.ok) {
-                localStorage.setItem('token', data.token); // Armazena o token
+                localStorage.setItem('token', data.token);
                 alert('✅ Login bem-sucedido!');
-                window.location.href = '/admin'; // Redireciona para o painel do admin
+                window.location.href = '/admin';
             } else {
                 alert('❌ Erro no login: ' + data.message);
             }
@@ -114,5 +114,6 @@
         }
     });
 </script>
+
 </body>
 </html>
