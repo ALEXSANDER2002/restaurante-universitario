@@ -11,6 +11,17 @@ const listarCompras = async (user_id) => {
     }
 };
 
+// Função para deletar uma compra
+const deletarCompra = async (id) => {
+    try {
+        const resultado = await Compra.deletarCompra(id); // Chama o metodo no Model
+        return resultado;
+    } catch (error) {
+        console.error("Erro ao deletar compra:", error);
+        throw error;
+    }
+};
+
 // Função para criar uma compra
 const criarCompra = async (user_id, tipo_comida, campus, valor) => {
     try {
@@ -24,5 +35,6 @@ const criarCompra = async (user_id, tipo_comida, campus, valor) => {
 
 module.exports = {
     listarCompras,
+    deletarCompra,
     criarCompra
 };

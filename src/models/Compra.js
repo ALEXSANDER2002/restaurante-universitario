@@ -1,4 +1,4 @@
-const { connection } = require('../config/database');
+const  connection  = require('../config/database');
 
 class Compra {
     // Metodo para listar compras de um usuário
@@ -23,9 +23,12 @@ class Compra {
                 VALUES (?, ?, ?, ?, 'pendente')
             `;
             const [result] = await connection.execute(query, [user_id, tipo_comida, campus, valor]);
+
+            console.log("🛒 Compra registrada:", result); // Log para debug
+
             return result.insertId;
         } catch (error) {
-            console.error('Erro ao criar compra:', error);
+            console.error('❌ Erro ao criar compra:', error);
             throw error;
         }
     }

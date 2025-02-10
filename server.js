@@ -18,9 +18,10 @@ class Server {
     middlewares() {
         this.app.use(express.json());
         this.app.use(cors());
-        this.app.use(express.static(path.join(__dirname, 'public')));
+        this.app.use(express.static(path.join(__dirname, 'src')));
         this.app.use(express.static(path.join(__dirname, 'views')));
-        this.app.use(express.static('ESTILOS'));
+        this.app.use(express.static('public'));
+        this.app.use(express.static(path.join(__dirname, 'home')));
     }
 
     routes() {

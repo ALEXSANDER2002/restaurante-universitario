@@ -1,0 +1,368 @@
+/* Resets e estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+/* Container principal */
+.container {
+    width: 50%;
+    max-width: 1200px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Cabeçalho */
+header {
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    background-color: #ffffff; /* Cor de fundo da header */
+    color: #ffffff; /* Cor do texto */
+    padding: 10px; /* Ajuste o espaçamento interno conforme necessário */
+    position: fixed; /* Fixa a header no topo */
+    top: 0; /* Garante que fique no topo */
+    left: 0; /* Começa no lado esquerdo */
+    width: 100%; /* Faz a header ocupar toda a largura */
+    z-index: 1000; /* Fica acima de outros elementos */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+
+}
+
+header img {
+    height: 50px;
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.profile img {
+    height: 40px;
+    border-radius: 50%;
+}
+
+
+/* Conteúdo principal */
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1050px;
+    margin: auto;
+    margin-top: 100px;
+    padding: 20px;
+    flex-grow: 1; /* Faz o main ocupar o espaço disponível */
+}
+
+/* Seção de imagem */
+.image-section {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.image-section p {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #333;
+    margin-top: 20px;
+    max-width: 600px;
+    font-weight: bolder;
+    text-align: justify;
+}
+
+.group-photo {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Seção de login */
+.login-section {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+    max-width: 500px;
+    width: 100%;
+}
+
+/* Títulos e formulários */
+.login-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+input:focus {
+    border-color: #004d40;
+    outline: none;
+}
+
+/* Botões */
+.btn {
+    padding: 10px;
+    background-color: #004d40;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #00332c;
+}
+
+.admin-btn {
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    background-color: #ccc;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.admin-btn:hover {
+    background-color: #bbb;
+}
+
+/* Links */
+.links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.links a {
+    color: #004d40;
+    text-decoration: none;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+/* Texto de ajuda */
+p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+p a {
+    color: #004d40;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    width: 100%;
+    bottom: 0;
+    background-color: #2D6921;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+    margin-top: auto;
+}
+
+.footer div {
+    text-align: center;
+}
+
+.footer h2, .footer h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.footer p {
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.footer .social-icons {
+    display: inline-block; /* Alinha os itens horizontalmente */
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px; /* Espaçamento entre os ícones */
+    margin-top: 10px;
+    transition:  0.4s;
+
+}
+
+.footer .social-icons a {
+    display: inline-block;
+    margin: 0 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.4s;
+
+}
+
+.footer .social-icons:hover{
+    transform: scale(1.3);
+    transition: 0.4s;
+
+}
+
+.footer .contact input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.footer .contact button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0F8F0F;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition:  0.4s;
+
+}
+
+.footer .contact button:hover {
+    background-color: #011d01;
+    transition: 0.4s;
+}
+
+
+/* Responsividade - Ajustes para dispositivos menores */
+@media (max-width: 768px) {
+    .image-section {
+        flex: 0 0 100%; /* Garante que ocupa toda a largura */
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: center; /* Centraliza horizontalmente */
+        justify-content: center; /* Centraliza verticalmente */
+    }
+
+    .group-photo {
+        width: auto; /* Garante que a largura se ajuste ao conteúdo */
+        height: auto; /* Mantém a proporção */
+        max-width: 100%; /* Limita a largura ao tamanho da tela */
+        max-height: 100%; /* Limita a altura ao tamanho da seção */
+    }
+
+    .image-section p {
+        font-size: 1rem;
+        max-width: 100%;
+        text-align: center; /* Centraliza o texto */
+    }
+    .footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        padding: 0px 20px; /* Ajusta o padding */
+    }
+
+    .footer div {
+        margin: 20px 0; /* Espaçamento maior entre os elementos */
+    }
+
+    .footer .social-icons a {
+        font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
+    }
+
+    .footer .contact input {
+        width: 100%; /* O input ocupa toda a largura disponível */
+    }
+}
+
+@media (max-width: 480px) {
+    .image-section {
+        flex: 0 0 100%; /* Garante largura total */
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        align-items: center; /* Centraliza horizontalmente */
+        justify-content: center; /* Centraliza verticalmente */
+    }
+
+    .group-photo {
+        width: auto; /* Não força largura fixa */
+        height: auto; /* Mantém proporção da imagem */
+        max-width: 100%; /* Garante que a imagem se ajuste à tela */
+        max-height: 100%; /* Garante que a imagem não seja cortada */
+    }
+
+    .image-section p {
+        font-size: 12px;
+        line-height: 1.5em;
+        font-weight: bold;
+        text-align: center; /* Texto centralizado */
+    }
+
+    .footer {
+        flex-direction: column; /* Empilha os itens verticalmente */
+        padding: 0px 20px; /* Ajusta o padding */
+    }
+
+    .footer div {
+        margin: 20px 0; /* Espaçamento maior entre os elementos */
+    }
+
+    .footer .social-icons a {
+        font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
+    }
+
+    .footer .contact input {
+        width: 100%; /* O input ocupa toda a largura disponível */
+    }
+
+}
