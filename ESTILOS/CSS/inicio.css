@@ -1,0 +1,546 @@
+*{ 
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    margin: 0;
+    font-family: 'Questrial', sans-serif;
+    overflow: hidden;
+    overflow: auto;
+    font-family: 'Open sans', sans-serif;
+  }
+   
+    header {
+        align-items: center;
+        justify-content: space-between;
+        display: flex;
+        background-color: #ffffff; /* Cor de fundo da header */
+        color: #ffffff; /* Cor do texto */
+        padding: 10px; /* Ajuste o espaçamento interno conforme necessário */
+        position: fixed; /* Fixa a header no topo */
+        top: 0; /* Garante que fique no topo */
+        left: 0; /* Começa no lado esquerdo */
+        width: 100%; /* Faz a header ocupar toda a largura */
+        z-index: 1000; /* Fica acima de outros elementos */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra sutil */
+
+    }
+    
+    header img {
+        height: 50px;
+        cursor: pointer;
+    }
+    
+    .profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+    
+    .profile img {
+        height: 40px;
+        border-radius: 50%;
+    }
+
+  
+  
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: #ffffff;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.699), rgba(0, 0, 0, 0)), 
+    url(https://www.regional360.com.br/images/noticias/4635/72e4e1b23135dd6c22a3eb6eea9b63a8.jpeg);    background-size: cover; /* Mantém a imagem cobrindo a área */
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh; /* Define a altura como metade da viewport */
+    color: white; /* Para garantir que o texto seja visível */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adiciona sombra ao texto para contraste */
+    padding-left: 10px; /* Ajusta o espaço interno da header */
+    background-attachment: fixed;
+  }
+  
+  
+  .hero-text {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .hero-text h1 {
+    font-size: 48px; /* Ajuste para o tamanho desejado */
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .hero-text p {
+    font-size: 17px;
+    font-weight: 400;
+    margin: 10px 0 20px 0;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    font-weight: 300;
+    font-size: 17px;
+    background-color: #0F8F0F;
+    color: #ffffff;
+    padding: 20px 60px;
+    text-decoration: none;
+    border-radius: 37px;
+    transition: 0.4s;
+    font-weight: bold;
+  }
+  
+  .cta-button2:hover {
+    background-color: #011d01;
+    transform: scale(1.05);
+  }
+  
+  .cta-button2 {
+    box-sizing: border-box;
+    display: inline-block;
+    font-weight: 3px;
+    font-size: 17px;
+    background-color: #0F8F0F;
+    color: #ffffff;
+    padding: 16px 40px;
+    text-decoration: none;
+    border-radius: 37px;
+    transition: 0.4s;
+    font-weight: bold;
+   
+  }
+  
+  
+  .cta-button:hover {
+    background-color: #011d01;
+    transform: scale(1.05);
+  }
+  
+  .nav-menu {
+    position: absolute;
+    left: 50%;
+    margin-top: -12px;
+    transform: translateX(-40%);
+    display: flex;
+    gap: 15px;
+}
+  
+  
+  .nav-menu a {
+    font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000000;
+    
+  }
+  
+  .nav-menu a:hover{
+    text-decoration: underline;
+  }
+  
+  .about {
+    max-width: 80%; /* Ajustar para ocupar mais espaço na tela */
+    margin: 0 auto; /* Centralizar horizontalmente */
+    text-align: center;
+  }
+  
+  .about p{
+    color: rgb(86, 88, 94);
+    font-size: 20px;
+    max-width: 60vh;
+    font-family:'Open Sans', 'Helvetica Neue', sans-serif;
+    justify-content: space-between;
+  }
+  
+  .about h2 {
+    max-width: 50%;
+    margin-top: 100px;
+    margin-left: 30px;
+    padding: 30px;
+    color: #1d1e20;
+    font-size: 40px; /* Ajustar tamanho do texto */
+    margin-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .about h3 {   
+     max-width: 50%;
+    color: #1d1e20;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family:'Open Sans', sans-serif;
+  }
+  
+  .about h4 {
+    max-width: 50%;
+    color: #1d1e20;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family:'Open Sans', sans-serif;
+  }
+  
+  .about .content {
+    display: flex;
+    flex-wrap: wrap; /* Permitir quebra de linha em telas menores */
+    justify-content: center; /* Alinhar conteúdo ao centro */
+    gap: 20px; /* Espaçamento entre os itens */
+    margin-bottom: 30px;
+  }
+  
+  .about .content div {
+    flex: 0 0 45%; /* Ocupa 45% da largura no layout */
+    text-align: left; /* Alinha o texto à esquerda */
+  }
+  
+  .about .main-image {
+    width: 97%;
+    border-radius: 20px; /* Bordas arredondadas */
+    margin-top: 20px;
+  }
+  
+  .container {
+    text-align: center;
+    padding: 40px;
+    background-color: #8FE98F; /* Cor de fundo */
+    margin-top: 40px;
+  
+  }
+  
+  .container h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+  
+  .container p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .services2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 0 20px;
+  }
+  
+  .service {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: left;
+    padding: 30px;
+    width: 90%;
+    transition: transform 0.3s;
+    
+  }
+  
+  .service:hover {
+    transform: scale(1.05);
+  }
+  
+  .service img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .service h3 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+  }
+  .service h1 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+  }
+  .service h2 {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+  }
+  
+  .service p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .service button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color:#0F8F0F;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  
+  .service button:hover {
+    background-color: #011d01;
+    transition: 0.3s;
+  }
+  
+  .contact-section {
+    padding: 50px;
+    background-color: #ffff;
+  }
+  
+  .contact-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .contact-header h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .contact-header p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .contact-container {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #ffff;
+    border-radius: 8px;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  
+  .form-area {
+    flex: 3 1 200px;
+    padding: 15px 30px;
+    background-color: #8FE98F;
+  }
+  
+  .form-area label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+   
+  }
+  
+  .form-area input,
+  .form-area textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+  
+  .form-area .contact-button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    background-color: #0F8F0F;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+  
+  .form-area .contact-button:hover {
+    transition: 0.5s;
+    background-color: #1c3f1c;
+  }
+  
+  .image-area {
+    flex: 2;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  
+  .image-area img {
+  
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .footer {
+    background-color: #2D6921;
+   color: #FFFFFF;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   padding: 60px 0;
+   width: 100%;
+
+ }
+    
+    .footer div {
+      text-align: center;
+    }
+    
+    .footer h2, .footer h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+    
+    .footer p {
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    
+    .footer .social-icons {
+      display: inline-block; /* Alinha os itens horizontalmente */
+      justify-content: center; /* Centraliza os ícones */
+      gap: 15px; /* Espaçamento entre os ícones */
+      margin-top: 10px;
+      transition:  0.4s;
+    
+    }
+    
+    .footer .social-icons a {
+      display: inline-block;
+      margin: 0 5px;
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 18px;
+      transition: 0.4s;
+    
+    }
+    
+    .footer .social-icons:hover{
+      transform: scale(1.3);
+      transition: 0.4s;
+    
+    }
+    
+    .footer .contact input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      width: 80%;
+    }
+    
+    .footer .contact button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #0F8F0F;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition:  0.4s;
+    
+    }
+    
+    .footer .contact button:hover {
+      background-color: #011d01;
+      transition: 0.4s;
+    }
+
+  
+  
+  @media (max-width: 768px) {
+  
+   .form-area{
+    margin-left: 130px;
+    border-radius: 20px;
+   }
+  
+    .image-area img{
+      display: none;
+    }
+    header .logo {
+        cursor: pointer;
+      margin: auto;
+    }
+  
+    .openbtn {
+      display: block; /* Torna o botão visível */
+      background-color: #ffffff; /* Estilo do botão */
+      color: #000000; /* Cor do texto do botão */
+      padding: 20px 40px; /* Tamanho do botão */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
+  
+        
+       @media (max-width: 768px) {
+        
+        .services2{
+           grid-template-columns: 1fr;
+        }
+      
+        
+        
+        .nav-menu {
+          display: none; /* Esconde o menu inicialmente */
+          flex-direction: column;
+          position: absolute;
+          top: 60px;
+          right: 20px;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          padding: 10px;
+      }
+            .logo img{
+                margin: auto;
+            }
+            
+            .cta-button2{
+                display: none;
+            }
+  
+            .footer {
+                flex-direction: column; /* Empilha os itens verticalmente */
+                padding: 0px 20px; /* Ajusta o padding */
+              }
+            
+              .footer div {
+                margin: 20px 0; /* Espaçamento maior entre os elementos */
+              }
+            
+              .footer .social-icons a {
+                font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
+              }
+            
+              .footer .contact input {
+                width: 100%; /* O input ocupa toda a largura disponível */
+              }
+  
+        }
+        @media (min-width: 768px) {
+          .sidebar{
+            display: none;
+          }
+          
+        }
