@@ -1,65 +1,35 @@
-#versao do docker compose
-version: '3.8'
-
-#os serviços que serão utilizados, que é o front-end, back-end e o banco de dados
 services:
-  front:
-  #quando fazemos o build do front-end, ele vai pegar o arquivo Dockerfile que está dentro da pasta front-end
-    build:
-        context: ./front-end
+  app:
+    build: .
+    container_name: app
     ports:
-        - "8080:80"
-    #aqui nos mapeamos a pasta front-end para o container
-    volumes:
-    - ./front-end:/usr/share/nginx/html
-    #conectamos o front-end a rede criada
-    networks:
-    - minha-rede
-
-  back:
-  #aqui fazemos o build do back-end, que vai pegar o arquivo Dockerfile que está dentro da pasta back-end
-    build:
-        context: ./back-end
-    ports:
-        - "3000:3000"
-    #aqui conectamos o back-end ao banco de dados com as variáveis de ambiente
-    #que é o nome da pasta, usuário, senha e o nome do banco de dados
-    environment:
-      - DB_HOST=db
-      - DB_USER=admin
-      - DB_PASSWORD=admin123
-      - DB_NAME=bancao
-      - SECRET_KEY=secret
+      - "3000:3000"
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # ✅ Agora o app espera o MySQL ficar pronto
+   
     networks:
-    - minha-rede
+      - app-network
 
-  #aqui criamos o banco de dados mysql
-  db: 
-    image: mysql:latest
-    container_name: mysql
-    #restart sempre que o container cair
-    restart: always
-    #variáveis de ambiente para o banco de dados
-    #que é a senha do root, o nome do banco de dados, o usuário e a senha
+  db:
+    image: mysql:8.0
+    container_name: db
     environment:
-      MYSQL_ROOT_PASSWORD: admin123
-      MYSQL_DATABASE: bancao
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: restaurante_universitario
     ports:
-      - "3307:3306"
-      #aqui mapeamos a pasta do banco de dados para o container
-      #e um arquivo para inicializar o banco de dados que é o init.sql
+      - "3307:3306"  # ✅ Corrigido para que o app se conecte corretamente
     volumes:
-      - ./bancao:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - minha-rede
+      - app-network
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:  # ✅ O MySQL só será considerado "pronto" quando puder aceitar conexões
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
-#criamos a rede para conectar os containers
 networks:
-  minha-rede:
-
-#criamos o volume para o banco de dados
-volumes:
-  bancao:
+  app-network:
+    driver: bridge

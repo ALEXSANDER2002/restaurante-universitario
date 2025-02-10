@@ -1,0 +1,27 @@
+{
+  "name": "testeee",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Sistema para gestão e compra de tickets do Restaurante Universitário da UNIFESSPA. O projeto visa agilizar o processo utilizando tecnologias modernas e integração com uma API de pagamento.",
+  "dependencies": {
+    "@mercadopago/sdk-js": "^0.0.3",
+    "@mercadopago/sdk-react": "^0.0.22",
+    "axios": "^1.7.9",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-simple": "^0.5.6",
+    "mercadopago": "^2.3.0",
+    "mysql2": "^3.12.0",
+    "node-cron": "^3.0.3",
+    "path": "^0.12.7"
+  }
+}

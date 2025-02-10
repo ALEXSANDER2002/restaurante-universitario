@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard com Pesquisa</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <style>
+        .dashboard-container {
+            margin: 50px auto;
+            width: 90%;
+            max-width: 1200px;
+            text-align: center;
+        }
+
+        .dashboard-container h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .search-container {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .search-container input {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-container input:focus {
+            border-color: #2e7d32;
+            outline: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+        table td {
+            color: #555;
+            font-size: 14px;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .action-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            width: 300px;
+            max-width: 80%;
+            display: none;
+        }
+
+        .modal.visible {
+            display: block;
+        }
+
+        .modal-content {
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            color: red;
+        }
+
+        .close-order-btn {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-order-btn:hover {
+            background: #b71c1c;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                width: 95%;
+            }
+
+            table th,
+            table td {
+                padding: 10px;
+            }
+
+            .action-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/IMG/logo.png" alt="UNIFESSPA">
+        <!-- <div class="profile" id="profile-menu-toggle">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
+            <span>Minha Conta</span>
+        </div> -->
+    </header>
+
+    <div class="dashboard-container">
+        <h1>Dashboard</h1>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Digite para pesquisar...">
+        </div>
+        <div class="table-container">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Campus</th>
+                        <th>Tipo de Comida</th>
+                        <th>Data e Hora</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h3>Detalhes do Pedido</h3>
+            <p><strong>Número:</strong> <span id="modal-numero"></span></p>
+            <p><strong>Nome:</strong> <span id="modal-nome"></span></p>
+            <p><strong>Matrícula:</strong> <span id="modal-matricula"></span></p>
+            <p><strong>Campus:</strong> <span id="modal-campus"></span></p>
+            <p><strong>Tipo de Comida:</strong> <span id="modal-comida"></span></p>
+            <p><strong>Data e Hora:</strong> <span id="modal-data"></span></p> 
+            <button id="close-order" class="close-order-btn" data-id="">Fechar Pedido</button>
+        </div>
+    </div>
+
+    <script>
+        async function carregarTodosOsPedidos() {
+            try {
+                console.log("🔍 Buscando todos os pedidos...");
+    
+                const response = await fetch(`http://localhost:3000/buy/compras-todos`);
+    
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+                }
+    
+                const compras = await response.json();
+                console.log("📦 Todos os pedidos recebidos:", compras);
+    
+                const tbody = document.querySelector("#data-table tbody");
+                tbody.innerHTML = ""; // Limpa a tabela antes de adicionar os novos pedidos
+    
+                compras.forEach(compra => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${compra.id}</td>
+                        <td>${compra.usuario_nome}</td>
+                        <td>${compra.matricula}</td>
+                        <td>${compra.campus}</td>
+                        <td>${compra.tipo_comida}</td>
+                        <td>${new Date(compra.created_at).toLocaleString("pt-BR")}</td>
+                        <td>
+                            <button class="action-btn"
+                                data-id="${compra.id}"
+                                data-name="${compra.usuario_nome}"
+                                data-matricula="${compra.matricula}"
+                                data-campus="${compra.campus}"
+                                data-comida="${compra.tipo_comida}"
+                                data-date="${compra.created_at}">🔍</button>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+    
+                document.getElementById("search-bar").addEventListener("input", function() {
+            const searchText = this.value.toLowerCase();
+            document.querySelectorAll("#data-table tbody tr").forEach(row => {
+                const rowText = row.textContent.toLowerCase();
+                row.style.display = rowText.includes(searchText) ? "" : "none";
+            });
+        });
+
+
+                console.log("🔍 Adicionando eventos aos botões...");
+                adicionarEventosAosBotoes(); // Garante que os eventos são adicionados após a renderização da tabela
+            } catch (error) {
+                console.error("❌ Erro ao carregar todos os pedidos:", error);
+            }
+        }
+    
+        // 🔹 Executa a função ao carregar a página
+        window.onload = () => {
+            carregarTodosOsPedidos();
+        };
+    
+        function adicionarEventosAosBotoes() {
+            const botoes = document.querySelectorAll(".action-btn");
+    
+            if (botoes.length === 0) {
+                console.warn("⚠️ Nenhum botão encontrado para adicionar eventos.");
+                return;
+            }
+    
+            botoes.forEach(btn => {
+                console.log("🎯 Adicionando evento no botão:", btn.dataset.id);
+    
+                btn.addEventListener("click", () => {
+                    console.log("🔍 Abrindo modal para pedido:", btn.dataset.id);
+    
+                    // Preenche os dados do modal com as informações do pedido
+                    document.getElementById("modal-numero").textContent = btn.dataset.id;
+                    document.getElementById("modal-nome").textContent = btn.dataset.name;
+                    document.getElementById("modal-matricula").textContent = btn.dataset.matricula;
+                    document.getElementById("modal-campus").textContent = btn.dataset.campus;
+                    document.getElementById("modal-comida").textContent = btn.dataset.comida;
+                    document.getElementById("modal-data").textContent = new Date(btn.dataset.date).toLocaleString("pt-BR");
+    
+                    // Salva o ID da compra no botão "Fechar Pedido"
+                    document.getElementById("close-order").setAttribute("data-id", btn.dataset.id);
+    
+                    // Exibe o modal removendo qualquer classe oculta
+                    const modal = document.getElementById("modal");
+                    modal.classList.add("visible");
+                    modal.style.display = "block"; // Garante que o modal aparece
+                });
+            });
+        }
+    
+        // 🔹 Evento para fechar o modal ao clicar no botão de fechar (X)
+        document.getElementById("close-modal").addEventListener("click", () => {
+            console.log("❌ Fechando modal.");
+            const modal = document.getElementById("modal");
+            modal.classList.remove("visible");
+            modal.style.display = "none"; // Esconde o modal corretamente
+        });
+    
+        // 🔹 Evento para excluir um pedido ao clicar em "Fechar Pedido"
+        document.getElementById("close-order").addEventListener("click", async () => {
+            const compraId = document.getElementById("close-order").getAttribute("data-id");
+    
+            if (!compraId) {
+                alert("❌ Erro: Nenhum pedido selecionado.");
+                return;
+            }
+    
+            try {
+                const response = await fetch(`http://localhost:3000/buy/deletar-compra/${compraId}`, {
+                    method: "DELETE"
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Erro ao excluir pedido.");
+                }
+    
+                const result = await response.json();
+                console.log("🚀 Pedido removido:", result);
+    
+                // Remove a linha correspondente da tabela
+                const btn = document.querySelector(`button[data-id='${compraId}']`);
+                if (btn) {
+                    btn.closest("tr").remove();
+                }
+    
+                // Fecha o modal
+                const modal = document.getElementById("modal");
+                modal.classList.remove("visible");
+                modal.style.display = "none";
+    
+                alert("✅ Pedido fechado com sucesso!");
+            } catch (error) {
+                console.error("❌ Erro ao fechar pedido:", error);
+                alert("Erro ao fechar pedido.");
+            }
+        });
+    </script>    
+</body>
+</html>
