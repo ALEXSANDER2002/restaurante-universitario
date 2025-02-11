@@ -463,16 +463,7 @@ text-align: center; /* Centralizar os títulos e os parágrafos */
     margin: auto;
   }
 
-  .openbtn {
-    display: block; /* Torna o botão visível */
-    background-color: #ffffff; /* Estilo do botão */
-    color: #000000; /* Cor do texto do botão */
-    padding: 20px 40px; /* Tamanho do botão */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-}
+ 
 
 #main {
   transition: margin-left .5s;
@@ -481,17 +472,7 @@ text-align: center; /* Centralizar os títulos e os parágrafos */
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media (max-width: 768px) {
-  .nav-menu {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 60px;
-      right: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 10px;
-  }
-
+  
   .services2 {
       grid-template-columns: 1fr;
   }
@@ -523,4 +504,5 @@ text-align: center; /* Centralizar os títulos e os parágrafos */
     margin-left: 30px;
     text-align: center;
   }
+}
 }

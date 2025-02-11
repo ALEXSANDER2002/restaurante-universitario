@@ -17,6 +17,11 @@ router.get('/ticket-user', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views','tickets', 'tickets_user.html'));  // Certifique-se de que o caminho está correto
 });
 
+// Rota de cardapio
+router.get('/cardapio', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views','cardapio', 'Cardapio.html'));  // Certifique-se de que o caminho está correto
+});
+
 // Rota do Admin
 router.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'views','admin', 'adm.html'));  // Certifique-se de que o caminho está correto

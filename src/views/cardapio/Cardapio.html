@@ -1,37 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestão de Tickets Alimentação</title>
-    <link rel="stylesheet" href="/public/CSS/style.css">
+    <title>Restaurante Universitario Unifesspa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shotcut icon" href="image/image-removebg-preview (2).png">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/public/CSS/cardapio.css">
 </head>
 <body>
     <header>
-        <a href="/"><img src="/public/IMG/logo.png" alt="UNIFESSPA"></a>
+        <div class="logo">
+
+          <a href="/">  <img src="/public/IMG/logo.png" alt="Logo da Empresa"></a>
+       
+        </div>
     </header>
 
-    <div class="overlay" id="overlay"></div>
-    <div class="sidebar" id="sidebar">
-        <a href="#perfil">Perfil</a>
-        <a href="#configuracoes">Configurações</a>
-        <a href="#logout">Sair</a>
-    </div>
-
-    <div class="content">
-        <h1>Gestão de Tickets Alimentação</h1>
-        <div class="cards">
-            <div class="card" onclick="window.location.href='/cardapio'">
-                <img src="https://cdn-icons-png.flaticon.com/512/809/809564.png" alt="Cardápio RU" width="100px">
-                <p>Cardápio RU</p>
-            </div>
-            <div class="card" onclick="window.location.href='/recarga'">
-                <img src="https://cdn-icons-png.flaticon.com/512/785/785581.png" alt="Comprar Ticket R.U." width="100px">
-                <p>Comprar Ticket R.U.</p>
+    <main> 
+        <div class="menu-container">
+        
+            <div class="menu-item">
+              <h2 class="dashboard-title">Cardápio Vegano</h2>
+                <h3>Salada Tropical</h3>
+                <p>Mix de folhas, frutas frescas, nozes e molho de maracujá.</p>
+                <div><a href="#" onclick="window.location.href='/recarga';" class="cta-button3">Comprar</a></div>
+                
+        <div class="menu-item">
+            <h2 class="dashboard-title"> Cardápio Normal</h2>
+                <h3>Costela Assada</h3>
+                <p>Costela bovina lentamente assada com temperos especiais, acompanhada de um molho barbecue artesanal.</p>
+                <div><a href="#" onclick="window.location.href='/recarga';" class="cta-button3">Comprar</a></div>
+                </div>
             </div>
         </div>
-    </div>
+
+            
+        
+    </main>
 
     <footer class="footer">
         <div>
@@ -62,13 +71,8 @@
             <p>+55 4002-8922</p>
             <p>contato@universitario.com</p>
         </div>
+
     </footer>
-
-    <script type="module" src="/public/JS/app.js"></script>
-
-
-
-
-
+   
 </body>
 </html>
