@@ -28,7 +28,7 @@ header {
 
 header h1{
     margin-right: 40px;
-    color: #000000;
+    color: #000000; /* COR DO H1*/
 }
 
 header img {
