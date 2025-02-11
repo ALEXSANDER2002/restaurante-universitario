@@ -25,6 +25,7 @@
       visibility: hidden;
       animation: showNotification 2s forwards;
       transition: .5s;
+      z-index: 9999; /* Coloca a notificação acima do header */
     }
 
     /* Animação de aparecer */
@@ -88,6 +89,14 @@
     }
   </style>
 </head>
+<header>
+  <img src="/public/IMG/logo.png" alt="UNIFESSPA">
+ 
+  <!-- <div class="profile">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Default_pfp.svg/600px-Default_pfp.svg.png" alt="Minha Conta">
+      <span>Minha Conta</span>
+  </div> -->
+</header>
 <body>
   <div class="notification-success">
     <div class="icon">&#x2714;</div> <!-- ícone de "check" -->

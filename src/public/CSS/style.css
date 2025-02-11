@@ -159,34 +159,81 @@ header img {
 }
 
 /* Footer */
-footer {
-    background-color: #2e7d32;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
-    margin-top: auto; /* Garante que o footer sempre estará fixado na parte inferior */
-}
-
-footer p {
-    margin: 5px 0;
-}
-
-.social-icons {
+.footer {
+    width: 100%;
+    bottom: 0;
+    background-color: #2D6921;
+    color: #FFFFFF;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 15px;
+    padding: 40px 0;
+    margin-top: auto;
 }
 
-.social-icons a {
-    color: #fff;
-    text-decoration: none;
+.footer div {
+    text-align: center;
+}
+
+.footer h2, .footer h3 {
+    margin-bottom: 10px;
     font-size: 20px;
 }
 
-.social-icons a:hover {
-    color: #d0d0d0;
+.footer p {
+    margin-bottom: 15px;
+    font-size: 14px;
 }
+
+.footer .social-icons {
+    display: inline-block; /* Alinha os itens horizontalmente */
+    justify-content: center; /* Centraliza os ícones */
+    gap: 15px; /* Espaçamento entre os ícones */
+    margin-top: 10px;
+    transition:  0.4s;
+
+}
+
+.footer .social-icons a {
+    display: inline-block;
+    margin: 0 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.4s;
+
+}
+
+.footer .social-icons:hover{
+    transform: scale(1.3);
+    transition: 0.4s;
+
+}
+
+.footer .contact input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 80%;
+}
+
+.footer .contact button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0F8F0F;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition:  0.4s;
+
+}
+
+.footer .contact button:hover {
+    background-color: #011d01;
+    transition: 0.4s;
+}
+
 
 /* Responsividade */
 @media (max-width: 768px) {
