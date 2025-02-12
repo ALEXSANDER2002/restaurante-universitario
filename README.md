@@ -1,195 +1,191 @@
-# Documentação do Banco de Dados
+# Restaurante Universitário - Banco de Dados
 
-## 1. Ferramenta Utilizada
+Este repositório contém a estrutura do banco de dados para o **Restaurante Universitário**. O banco de dados gerencia usuários, compras e tickets de refeições nos campi.
 
-**Ferramenta Escolhida:** MySQL Workbench
+## 📌 Tecnologias Utilizadas
 
-### Justificativa:
-- **Facilidade de Uso:** Interface gráfica intuitiva para modelagem e manipulação do banco de dados.
-- **Recursos Disponíveis:** Suporte para criação de diagramas MER, execução de scripts SQL e gerenciamento de bancos de dados.
-- **Compatibilidade:** Totalmente compatível com o MySQL, o banco de dados utilizado no projeto.
-- **Familiaridade:** Ferramenta amplamente utilizada e conhecida na comunidade de desenvolvimento.
+- **MySQL**
+- **InnoDB Engine**
+- **UTF-8 Encoding**
 
----
+## 📂 Estrutura do Banco de Dados
 
-## 2. Modelo Entidade-Relacionamento (MER)
+O banco de dados segue a **Terceira Forma Normal (3FN)** para garantir a integridade dos dados e evitar redundâncias.
 
-### Entidades e Atributos:
-- **usuarios**: Armazena informações dos usuários.
-  - `id_usuario` (PK)
-  - `nome`
-  - `matricula`
-  - `plano`
-- **compras**: Registra as compras realizadas.
-  - `id` (PK)
-  - `user_id` (FK referencia `usuarios.id_usuario`)
-  - `tipo_comida`
-  - `campus`
-  - `valor`
-  - `status`
-  - `created_at`
-- **tickets**: Armazena os tickets gerados.
-  - `id` (PK)
-  - `id_usuario` (FK referencia `usuarios.id_usuario`)
-  - `campus`
-  - `tipo_comida`
-  - `plano`
-  - `preco`
-  - `data_compra`
+### 📌 Criação do Schema
 
-### Relacionamentos:
-- Um **usuário** pode realizar **várias compras** (1:N).
-- Um **usuário** pode gerar **vários tickets** (1:N).
-
----
-
-## 3. Modelo Relacional
-
-### Estrutura das Tabelas:
 ```sql
-CREATE TABLE usuarios (
-  id_usuario INT PRIMARY KEY,
-  nome VARCHAR(255) NOT NULL,
-  matricula VARCHAR(20) NOT NULL UNIQUE,
-  plano VARCHAR(50) NOT NULL DEFAULT 'Subsidiado'
-);
+CREATE SCHEMA IF NOT EXISTS restaurante_universitario;
+USE restaurante_universitario;
+```
 
-CREATE TABLE compras (
-  id INT PRIMARY KEY,
-  user_id INT,
+### 📌 Tabelas
+
+#### 🧑‍🎓 Tabela `usuarios`
+Armazena informações dos usuários do restaurante universitário.
+
+```sql
+CREATE TABLE IF NOT EXISTS usuarios (
+  id_usuario INT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(255) NOT NULL,
+  matricula VARCHAR(20) NOT NULL,
+  plano VARCHAR(50) NOT NULL DEFAULT 'Subsidiado',
+  PRIMARY KEY (id_usuario),
+  UNIQUE INDEX matricula (matricula ASC)
+);
+```
+
+**Colunas:**
+| Coluna      | Tipo           | Descrição |
+|------------|--------------|------------|
+| `id_usuario` | INT (PK) | Identificador único do usuário |
+| `nome` | VARCHAR(255) | Nome do usuário |
+| `matricula` | VARCHAR(20) | Número de matrícula (único) |
+| `plano` | VARCHAR(50) | Plano de refeição (padrão: 'Subsidiado') |
+
+---
+
+#### 🛒 Tabela `compras`
+Registra as compras realizadas pelos usuários.
+
+```sql
+CREATE TABLE IF NOT EXISTS compras (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
   tipo_comida VARCHAR(50) NOT NULL,
   campus VARCHAR(50) NOT NULL,
   valor DECIMAL(10,2) NOT NULL,
-  status VARCHAR(20) DEFAULT 'pendente',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  status VARCHAR(20) NULL DEFAULT 'pendente',
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
   FOREIGN KEY (user_id) REFERENCES usuarios(id_usuario)
 );
+```
 
-CREATE TABLE tickets (
-  id INT PRIMARY KEY,
-  id_usuario INT,
+**Colunas:**
+| Coluna      | Tipo           | Descrição |
+|------------|--------------|------------|
+| `id` | INT (PK) | Identificador único da compra |
+| `user_id` | INT (FK) | Chave estrangeira referenciando `usuarios.id_usuario` |
+| `tipo_comida` | VARCHAR(50) | Tipo de refeição (Vegetariano, Não Vegetariano) |
+| `campus` | VARCHAR(50) | Campus onde a compra foi realizada |
+| `valor` | DECIMAL(10,2) | Valor pago na compra |
+| `status` | VARCHAR(20) | Status da compra (pendente/concluído) |
+| `created_at` | TIMESTAMP | Data e hora da compra |
+
+---
+
+#### 🎫 Tabela `tickets`
+Registra os tickets adquiridos pelos usuários para o consumo de refeições.
+
+```sql
+CREATE TABLE IF NOT EXISTS tickets (
+  id INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
   campus VARCHAR(50) NOT NULL,
   tipo_comida VARCHAR(50) NOT NULL,
   plano VARCHAR(50) NOT NULL,
   preco DECIMAL(10,2) NOT NULL,
-  data_compra TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  data_compra TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 ```
 
----
-
-## 4. Scripts SQL (DDL e DML)
-
-### Exemplo de Manipulação de Dados (DML):
-
-**Atualização de Status:**
-```sql
-UPDATE compras
-SET status = 'concluído'
-WHERE id = 2;
-```
-
-**Exclusão de Registro:**
-```sql
-DELETE FROM compras
-WHERE id = 4;
-```
-
-**Consulta de Dados:**
-```sql
-SELECT * FROM compras
-WHERE status = 'concluído';
-```
+**Colunas:**
+| Coluna      | Tipo           | Descrição |
+|------------|--------------|------------|
+| `id` | INT (PK) | Identificador único do ticket |
+| `id_usuario` | INT (FK) | Chave estrangeira referenciando `usuarios.id_usuario` |
+| `campus` | VARCHAR(50) | Campus onde o ticket foi adquirido |
+| `tipo_comida` | VARCHAR(50) | Tipo de refeição vinculada ao ticket |
+| `plano` | VARCHAR(50) | Plano de alimentação do usuário |
+| `preco` | DECIMAL(10,2) | Preço do ticket |
+| `data_compra` | TIMESTAMP | Data de aquisição do ticket |
 
 ---
 
-## 5. Scripts SQL com Operadores Especiais
+#### 🔐 Tabela `admins`
+Tabela para armazenar os administradores do sistema.
 
-**LIKE:** Buscar nomes que comecem com "Jo".
 ```sql
-SELECT * FROM usuarios
-WHERE nome LIKE 'Jo%';
+CREATE TABLE IF NOT EXISTS admins (
+  id INT NOT NULL AUTO_INCREMENT,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  senha VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
 ```
 
-**BETWEEN:** Filtrar compras entre valores.
+**Colunas:**
+| Coluna      | Tipo           | Descrição |
+|------------|--------------|------------|
+| `id` | INT (PK) | Identificador único do administrador |
+| `email` | VARCHAR(255) | E-mail do administrador |
+| `senha` | VARCHAR(255) | Senha criptografada do administrador |
+
+---
+
+## 📌 Inserção de Dados de Exemplo
+
+### 🧑‍🎓 Inserindo Usuários
 ```sql
-SELECT * FROM compras
-WHERE valor BETWEEN 4.00 AND 6.00;
+INSERT INTO usuarios (nome, matricula, plano)
+VALUES
+  ('Alexsander Filipi', '202240601001', 'Subsidiado'),
+  ('Carlos Eduardo', '202240601004', 'Subsidiado');
 ```
 
-**IN:** Filtrar usuários por matrícula.
+### 🛒 Inserindo Compras
 ```sql
-SELECT * FROM usuarios
-WHERE matricula IN ('123456', '654321', '789456');
+INSERT INTO compras (user_id, tipo_comida, campus, valor, status)
+VALUES
+  (1, 'Vegetariano', 'Campus A', 2.00, 'concluído'),
+  (2, 'Não Vegetariano', 'Campus B', 13.00, 'pendente');
+```
+
+### 🎫 Inserindo Tickets
+```sql
+INSERT INTO tickets (id_usuario, campus, tipo_comida, plano, preco)
+VALUES
+  (1, 'Campus A', 'Vegetariano', 'Subsidiado', 2.00);
+```
+
+### 🔐 Inserindo Administrador
+```sql
+INSERT INTO admins (email, senha) VALUES ('admin@exemplo.com', '123456');
 ```
 
 ---
 
-## 6. Funções SQL
+## 📌 Consultas SQL Úteis
 
-**Funções de Agregação:**
+### 🔍 Pesquisar Usuários pelo Nome (LIKE)
+```sql
+SELECT * FROM usuarios WHERE nome LIKE 'Jo%';
+```
+
+### 💰 Total Gasto em Compras
 ```sql
 SELECT SUM(valor) AS total_gasto FROM compras;
 ```
 
-**Funções de Agrupamento:**
+### 📊 Contagem de Compras por Status
 ```sql
-SELECT status, COUNT(*) AS total_compras
-FROM compras
-GROUP BY status;
+SELECT status, COUNT(*) AS total_compras FROM compras GROUP BY status;
 ```
 
-**Ordenação:**
-```sql
-SELECT * FROM usuarios
-ORDER BY nome ASC;
-```
-
----
-
-## 7. Joins entre Tabelas
-
-**INNER JOIN:** Combina compras com usuários.
+### 🔗 INNER JOIN: Compras com Usuários
 ```sql
 SELECT c.id, u.nome, c.tipo_comida, c.valor, c.status
 FROM compras c
 INNER JOIN usuarios u ON c.user_id = u.id_usuario;
 ```
 
-**LEFT JOIN:** Retorna todos os usuários e suas compras (se existirem).
-```sql
-SELECT u.nome, c.tipo_comida, c.valor, c.status
-FROM usuarios u
-LEFT JOIN compras c ON u.id_usuario = c.user_id;
-```
-
 ---
 
-## 8. Verificação de Normalização
+## 📌 Contribuição
+Sinta-se à vontade para contribuir com melhorias, sugestões e otimizações!
 
-- **1ª Forma Normal (1FN):** Todos os atributos são atômicos.
-- **2ª Forma Normal (2FN):** Todos os atributos dependem totalmente das chaves primárias.
-- **3ª Forma Normal (3FN):** Não há dependências transitivas.
 
-### Exemplo de Banco **NÃO Normalizado:**
-```sql
-CREATE TABLE compras_nao_normalizada (
-  id INT PRIMARY KEY,
-  user_id INT,
-  nome_usuario VARCHAR(255), -- Redundância
-  tipo_comida VARCHAR(50),
-  campus VARCHAR(50),
-  valor DECIMAL(10,2),
-  status VARCHAR(20)
-);
-```
-
-### Modelo **Normalizado:**
-As tabelas definidas anteriormente seguem as boas práticas de normalização.
-
----
-
-## Conclusão
-O banco de dados foi projetado seguindo as melhores práticas de modelagem e normalização. Todas as tabelas estão na **3ª Forma Normal (3FN)**, garantindo eficiência e eliminação de redundâncias. Os scripts SQL fornecem as operações necessárias para a criação, manipulação e consulta dos dados. Essa documentação detalhada facilita futuras manutenções e melhorias no sistema.
 
