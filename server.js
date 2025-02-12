@@ -4,7 +4,12 @@ const cors = require('cors');
 const cron = require("node-cron");
 const routes = require('./src/routes');
 const Compra = require('./src/models/Compra');
+const comprasRoutes = require('./src/routes/compraRoutes'); 
+const paginasRoutes = require('./src/routes/paginasRoutes');
 
+// Importar o Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 class Server {
     constructor() {
@@ -13,6 +18,7 @@ class Server {
         this.middlewares();
         this.routes();
         this.cronJobs();
+        this.swaggerDocs();
     }
 
     middlewares() {
@@ -21,15 +27,46 @@ class Server {
         this.app.use(express.static(path.join(__dirname, 'src')));
         this.app.use(express.static(path.join(__dirname, 'views')));
         this.app.use(express.static('public'));
-
     }
-
     routes() {
+        // Registra as demais rotas
         this.app.use(routes);
+        this.app.use(comprasRoutes);
+        this.app.use(paginasRoutes);
+    
+        // Middleware catch-all para rotas não encontradas (404)
+        this.app.use((req, res, next) => {
+            // Se a requisição for para /api-docs, prossiga normalmente
+            if (req.path.startsWith('/api-docs')) {
+                return next();
+            }
+            res.redirect('/404');
+        });
     }
+    
+    
 
     cronJobs() {
         cron.schedule("0 0 * * *", Compra.limparCompras);
+    }
+    
+
+    // Função para configurar o Swagger
+    swaggerDocs() {
+        const swaggerOptions = {
+            definition: {
+                openapi: '3.0.0',
+                info: {
+                    title: 'Minha API',
+                    version: '1.0.0',
+                    description: 'Documentação da API com Swagger',
+                },
+            },
+            apis: ['./src/routes/*.js'], // Caminho para os arquivos de rotas que você quer documentar
+        };
+
+        const swaggerDocs = swaggerJsdoc(swaggerOptions);
+        this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
     }
 
     start() {
@@ -38,6 +75,7 @@ class Server {
         });
     }
 }
+
 
 module.exports = new Server().app;
 new Server().start();

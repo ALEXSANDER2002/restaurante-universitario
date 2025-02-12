@@ -118,6 +118,20 @@
 
     </style>
 </head>
+... <!-- Conteúdo da página -->
+
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper>
+    <div class="vw-plugin-top-wrapper"></div>
+  </div>
+</div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+  new window.VLibras.Widget('https://vlibras.gov.br/app');
+</script>
+
+
 <body>
     <header>
         <a href="https://miseraveis.shop/"><img src="/public/IMG/logo.png" alt="UNIFESSPA"></a>
@@ -248,7 +262,7 @@
 
         try {
             // Enviar pedido para o backend
-            const response = await fetch("https://4b7e-2804-2084-404-4600-b5c8-8517-ac7-c1b4.ngrok-free.app/buy/criar-compra", {
+            const response = await fetch("http://localhost:3000/buy/criar-compra", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ user_id, tipo_comida, campus, valor })
@@ -263,9 +277,9 @@
                 // Escolher a URL correta do Mercado Pago com base no valor
                 let url;
                 if (valor === 2) {
-                    url = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-02e78387-98fd-4030-b636-d9e696bf1d8b";
+                    url = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-a367fbcc-9ce8-4d35-b333-94d5719194b5";
                 } else if (valor === 13) {
-                    url = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-4cd623b2-959d-4be9-a7cd-64fa0b422d16";
+                    url = "https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=2231764145-c7a68aa0-2d8f-4f27-b6ea-6f7578ee1261";
                 }
 
                 console.log(`🔗 Redirecionando para: ${url}`);

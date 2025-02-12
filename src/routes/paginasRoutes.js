@@ -2,59 +2,154 @@ const express = require('express');
 const path = require('path');
 const router = express.Router();
 
-// Rota para a página de login do usuário
+/**
+ * @swagger
+ * /login:
+ *   get:
+ *     description: Rota para a página de login do usuário
+ *     responses:
+ *       200:
+ *         description: Página de login do usuário
+ */
 router.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','login', 'login_usuario.html'));
+    res.sendFile(path.join(__dirname, '..', 'views', 'login', 'login_usuario.html'));
 });
 
-// Rota para a página de login do administrador
+/**
+ * @swagger
+ * /login-admin:
+ *   get:
+ *     description: Rota para a página de login do administrador
+ *     responses:
+ *       200:
+ *         description: Página de login do administrador
+ */
 router.get('/login-admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','login', 'login_admin.html'));
+    res.sendFile(path.join(__dirname, '..', 'views', 'login', 'login_admin.html'));
 });
 
-// Rota de tickets do usuario
+/**
+ * @swagger
+ * /ticket-user:
+ *   get:
+ *     description: Rota de tickets do usuário
+ *     responses:
+ *       200:
+ *         description: Página de tickets do usuário
+ */
 router.get('/ticket-user', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','tickets', 'tickets_user.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'tickets', 'tickets_user.html'));
 });
 
-// Rota de cardapio
+/**
+ * @swagger
+ * /cardapio:
+ *   get:
+ *     description: Rota do cardápio
+ *     responses:
+ *       200:
+ *         description: Página do cardápio
+ */
 router.get('/cardapio', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','cardapio', 'Cardapio.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'cardapio', 'Cardapio.html'));
 });
 
-// Rota do Admin
+/**
+ * @swagger
+ * /admin:
+ *   get:
+ *     description: Rota para a página do admin
+ *     responses:
+ *       200:
+ *         description: Página do admin
+ */
 router.get('/admin', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','admin', 'adm.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'admin', 'adm.html'));
 });
 
-// Rota da gestao de ticket
+/**
+ * @swagger
+ * /menu:
+ *   get:
+ *     description: Rota para o menu de gestão de tickets
+ *     responses:
+ *       200:
+ *         description: Página de gestão de tickets
+ */
 router.get('/menu', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','menu', 'menu.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'menu', 'menu.html'));
 });
 
-// Rota da recarga do ticket
+/**
+ * @swagger
+ * /recarga:
+ *   get:
+ *     description: Rota para a página de recarga de tickets
+ *     responses:
+ *       200:
+ *         description: Página de recarga de tickets
+ */
 router.get('/recarga', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','tickets', 'recarga_ticket.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'tickets', 'recarga_ticket.html'));
 });
 
-// Rota da compra caso dê errado
+/**
+ * @swagger
+ * /compraerrada:
+ *   get:
+ *     description: Rota para a página de erro de compra
+ *     responses:
+ *       200:
+ *         description: Página de erro de compra
+ */
 router.get('/compraerrada', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','transacoes', 'compra_errada.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'transacoes', 'compra_errada.html'));
 });
 
-// Rota da compra caso dê certo
+/**
+ * @swagger
+ * /compracerta:
+ *   get:
+ *     description: Rota para a página de compra certa
+ *     responses:
+ *       200:
+ *         description: Página de compra certa
+ */
 router.get('/compracerta', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','transacoes', 'compra_certa.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'transacoes', 'compra_certa.html'));
 });
 
-// Rota da compra caso seja pendente
+/**
+ * @swagger
+ * /comprapendente:
+ *   get:
+ *     description: Rota para a página de compra pendente
+ *     responses:
+ *       200:
+ *         description: Página de compra pendente
+ */
 router.get('/comprapendente', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','transacoes', 'compra_pendente.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'transacoes', 'compra_pendente.html'));
 });
 
-// Rota da pagina raiz - inicio
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     description: Rota para a página inicial
+ *     responses:
+ *       200:
+ *         description: Página inicial
+ */
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views','home', 'inicio.html'));  // Certifique-se de que o caminho está correto
+    res.sendFile(path.join(__dirname, '..', 'views', 'home', 'inicio.html'));
 });
+
+router.get('/404', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'views', 'Error', '404.html'));
+});
+
+
+
 
 module.exports = router;

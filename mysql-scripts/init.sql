@@ -38,48 +38,19 @@ CREATE TABLE IF NOT EXISTS tickets (
   FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
 );
 
--- Definir a codificação para UTF-8
-
-
--- Inserir os dados
+-- Inserção de Dados na Tabela de Usuários
 INSERT INTO usuarios (nome, matricula, plano)
 VALUES 
-  ('Alexsander Filipi', '202240601001', 'Subsidiado'),
-  ('Carlos Eduardo', '202240601004', 'Subsidiado'),
-  ('Deivid Silva', '202340601003', 'Subsidiado'),
-  ('Enzo Gabriel', '202340601004', 'Subsidiado'),
-  ('Gabriel Martins', '202340601006', 'Subsidiado'),
-  ('Gustavo Bastos', '202240601013', 'Subsidiado'),
-  ('Helton Pessoa', '202340601007', 'Subsidiado'),
-  ('Julio Cesar', '202040601020', 'Subsidiado'),
-  ('Julio Cesar', '202340601012', 'Subsidiado'),
-  ('Kalleb Araujo', '202240601016', 'Subsidiado'),
-  ('Kayo Raphael', '202340601031', 'Subsidiado'),
-  ('Leonardo Farias', '202240601018', 'Subsidiado'),
-  ('Lincoln Moreno', '202340601013', 'Subsidiado'),
-  ('Livia Amaral', '202340601014', 'Subsidiado'),
-  ('Luiz Antonio', '202340601033', 'Subsidiado'),
-  ('Maria Clara', '202240601020', 'Subsidiado'),
-  ('Marina Nogueira', '202140601020', 'Subsidiado'),
-  ('Matheus Guimaraes', '202340601017', 'Subsidiado'),
-  ('Murilo Mauricio', '202240601022', 'Subsidiado'),
-  ('Pedro Arnaldo', '202340601021', 'Subsidiado'),
-  ('Tarlhitur da', '202040601034', 'Subsidiado'),
-  ('Walison de', '202240601028', 'Subsidiado'),
-  ('Wanderson Victor', '202340601024', 'Subsidiado');
-
-
-
-  -- Criando a tabela de administradores
-CREATE TABLE IF NOT EXISTS restaurante_universitario.admins (
-  id INT NOT NULL AUTO_INCREMENT,
-  email VARCHAR(255) NOT NULL UNIQUE,
-  senha VARCHAR(255) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci;
-
--- Inserindo um administrador de exemplo
-INSERT INTO admins (email, senha) VALUES ('admin@exemplo.com', '123456');
+  ('João Silva', '123456', 'Subsidiado'),
+  ('Maria Oliveira', '654321', 'Comum'),
+  ('Pedro Santos', '789456', 'Subsidiado'),
+  ('Ana Costa', '147258', 'Comum'),
+  ('Carlos Souza', '258369', 'Subsidiado'),
+  ('Fernanda Lima', '369258', 'Comum'),
+  ('Lucas Pereira', '456123', 'Subsidiado'),
+  ('Juliana Almeida', '987654', 'Comum'),
+  ('Eduardo Martins', '321654', 'Subsidiado'),
+  ('Camila Rocha', '741852', 'Comum');
 
 -- Inserção de Dados na Tabela de Compras
 INSERT INTO compras (user_id, tipo_comida, campus, valor, status)
