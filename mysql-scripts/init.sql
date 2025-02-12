@@ -84,18 +84,18 @@ INSERT INTO admins (email, senha) VALUES ('admin@exemplo.com', '123456');
 -- Inserção de Dados na Tabela de Compras
 INSERT INTO compras (user_id, tipo_comida, campus, valor, status)
 VALUES
-  (1, 'Almoço', 'Campus A', 5.00, 'concluído'),
-  (2, 'Jantar', 'Campus B', 7.50, 'pendente'),
-  (3, 'Almoço', 'Campus A', 5.00, 'concluído'),
-  (4, 'Café da Manhã', 'Campus C', 3.00, 'pendente');
+  (1, 'Vegetariano', 'Campus A', 2.00, 'concluído'),
+  (2, 'Não Vegetariano', 'Campus B', 13.00, 'pendente'),
+  (3, 'Não Vegetariano', 'Campus A', 13.00, 'concluído'),
+  (4, 'Vegetariano', 'Campus C', 2.00, 'pendente');
 
 -- Inserção de Dados na Tabela de Tickets
 INSERT INTO tickets (id_usuario, campus, tipo_comida, plano, preco)
 VALUES
-  (1, 'Campus A', 'Almoço', 'Subsidiado', 5.00),
-  (2, 'Campus B', 'Jantar', 'Comum', 7.50),
-  (3, 'Campus A', 'Almoço', 'Subsidiado', 5.00),
-  (4, 'Campus C', 'Café da Manhã', 'Comum', 3.00);
+  (1, 'Campus A', 'Vegetariano', 'Subsidiado', 2.00),
+  (2, 'Campus B', 'Não Vegetariano', 'Comum', 13.00),
+  (3, 'Campus A', 'Vegetariano', 'Subsidiado', 13.00),
+  (4, 'Campus C', 'Não Vegetariano', 'Comum', 2.00);
 
 -- Exemplos de Consultas com Operadores Especiais
 
