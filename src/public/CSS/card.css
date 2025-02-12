@@ -68,7 +68,7 @@ header img {
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1050px;
+    max-width: auto;
     margin: auto;
     margin-top: 100px;
     padding: 20px;
@@ -77,13 +77,8 @@ header img {
 
 /* Seção de imagem */
 .image-section {
-    flex: 0 0 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
+    
+    
 }
 
 .image-section p {
@@ -283,125 +278,32 @@ p a:hover {
 }
 
 
-@media (max-width: 1200px) {
-    .image-section{
-        display: none;
-    }
- }
-
-/* Responsividade - Ajustes para dispositivos menores */
-@media (max-width: 768px) {
+/* Para telas a partir de 1300px */
+@media (max-width: 1870px) {
     .image-section {
-        flex: 0 0 100%; /* Garante que ocupa toda a largura */
-        padding: 10px;
         display: none;
-        flex-direction: column;
-        align-items: center; /* Centraliza horizontalmente */
-        justify-content: center; /* Centraliza verticalmente */
+         /* Exibe a seção de imagem como flex container */
+        justify-content: flex-start; /* Alinha à esquerda (ou para o lado desejado) */
+        align-items: center; /* Alinha verticalmente */
+        flex-direction: row; /* Alinha os itens na horizontal */
+        padding: 20px;
     }
 
     .group-photo {
-        width: auto; /* Garante que a largura se ajuste ao conteúdo */
-        height: auto; /* Mantém a proporção */
-        max-width: 100%; /* Limita a largura ao tamanho da tela */
-        max-height: 100%; /* Limita a altura ao tamanho da seção */
-    }
-
-    .image-section p {
-        font-size: 1rem;
-        max-width: 100%;
-        text-align: center; /* Centraliza o texto */
-    }
-    .footer {
-        flex-direction: column; /* Empilha os itens verticalmente */
-        padding: 0px 20px; /* Ajusta o padding */
-    }
-
-    .footer div {
-        margin: 20px 0; /* Espaçamento maior entre os elementos */
-    }
-
-    .footer .social-icons a {
-        font-size: 24px; /* Aumenta o tamanho dos ícones em telas menores */
-    }
-
-    .footer .contact input {
-        width: 100%; /* O input ocupa toda a largura disponível */
+        width: 60%; /* Imagem ocupa 60% da largura */
+        max-width: 600px; /* Limita a largura da imagem */
+        height: auto; /* Mantém a proporção da imagem */
+        transition: width 0.5s ease-in-out; /* Animação suave para redimensionar */
     }
 }
 
+
+    
+
+
+
+/* Para dispositivos com largura máxima de 480px */
 @media (max-width: 480px) {
-    /* Container principal */
-    .container {
-        width: 100%; /* Aumenta a largura da container para 100% */
-        padding: 10px; /* Reduz o padding para evitar que o conteúdo fique apertado */
-        box-shadow: none; /* Remove a sombra para um layout mais simples */
-    }
-
-    /* Cabeçalho */
-    header {
-        padding: 8px; /* Reduz o padding para economizar espaço */
-    }
-
-    header img {
-        height: 40px; /* Reduz o tamanho da imagem no cabeçalho */
-    }
-
-    /* Seção de imagem */
-    .image-section {
-        flex: 0 0 100%; /* Garante que a imagem ocupe toda a largura */
-        display: none; /* Oculta a seção de imagem em telas muito pequenas */
-    }
-
-    .group-photo {
-        width: 80%; /* Reduz a largura da imagem */
-        max-width: 250px; /* Limita a largura da imagem */
-        height: auto; /* Mantém a proporção */
-    }
-
-    /* Formulários e inputs */
-    .login-section {
-        padding: 15px; /* Ajusta o padding para se adaptar melhor a telas menores */
-    }
-
-    input, .btn, .admin-btn {
-        font-size: 14px; /* Reduz o tamanho da fonte para melhor aproveitamento do espaço */
-        padding: 8px; /* Ajusta o padding */
-    }
-
-    .btn {
-        font-size: 15px; /* Reduz um pouco o tamanho do texto no botão */
-    }
-
-    /* Links */
-    .links a {
-        font-size: 10px; /* Diminui o tamanho da fonte */
-    }
-
-    /* Footer */
-    .footer {
-        flex-direction: column; /* Empilha os itens verticalmente */
-        padding: 20px 10px; /* Ajusta o padding */
-    }
-
-    .footer div {
-        margin: 15px 0; /* Reduz o espaçamento entre os elementos */
-    }
-
-    .footer .social-icons a {
-        font-size: 20px; /* Reduz o tamanho dos ícones */
-    }
-
-    .footer .contact input {
-        width: 100%; /* O input ocupa toda a largura */
-    }
-
-    .footer .contact button {
-        padding: 8px 16px; /* Reduz o tamanho do botão */
-    }
-}
-
-@media (max-width: 400px) {
     /* Container principal */
     .container {
         width: 100%; /* Aumenta a largura da container para 100% */

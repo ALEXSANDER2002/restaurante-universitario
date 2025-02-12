@@ -4,7 +4,7 @@ const mysql = require('mysql2/promise');
 
 // Criando o pool com mysql2/promise
 const pool = mysql.createPool({
-    host: 'localhost',
+    host: 'db',
     user: 'root',
     password: 'admin',
     database: 'restaurante_universitario',

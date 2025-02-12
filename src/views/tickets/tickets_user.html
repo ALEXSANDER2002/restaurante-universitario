@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meus Pedidos</title>
+    <link rel="shotcut icon" href="/public/IMG/aba.png">
     <link rel="stylesheet" href="/public/CSS/style.css">
     <style>
         .dashboard-container {
@@ -126,7 +127,7 @@
 </head>
 <body>
     <header>
-        <a href="/"><img src="/public/IMG/logo.png" alt="UNIFESSPA"></a>
+        <a href="https://miseraveis.shop/"><img src="/public/IMG/logo.png" alt="UNIFESSPA"></a>
        
     </header>
 
@@ -207,7 +208,7 @@ async function carregarPedidosUsuario() {
     try {
         console.log("🔍 Buscando pedidos para user_id:", userId);
 
-        const response = await fetch(`http://localhost:3000/buy/compras?user_id=${userId}`);
+        const response = await fetch(`https://4b7e-2804-2084-404-4600-b5c8-8517-ac7-c1b4.ngrok-free.app/buy/compras?user_id=${userId}`);
 
         if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
@@ -282,7 +283,7 @@ document.getElementById("close-order").addEventListener("click", async () => {
     }
 
     try {
-        const response = await fetch(`http://https://localhost:3000/compras/deletar-compra/${compraId}`, {
+        const response = await fetch(`https://4b7e-2804-2084-404-4600-b5c8-8517-ac7-c1b4.ngrok-free.app/compras/deletar-compra/${compraId}`, {
             method: "DELETE"
         });
 

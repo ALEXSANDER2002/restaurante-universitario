@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shotcut icon" href="/public/IMG/aba.png">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <button type="submit">Login</button>
+    </form>
+
+    <script>
+        // O que acontece quando o formulário é enviado
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault(); // Impede o comportamento padrão do formulário
+
+            // Pegue os dados do formulário
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Envia os dados para o backend
+            fetch('/login', {  // Supondo que você tenha a rota '/login' configurada no servidor
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Verifique se o login foi bem-sucedido e obtenha o token JWT
+                if (data.token) {
+                    // Armazene o token no localStorage
+                    localStorage.setItem('token', data.token);
+
+                    // Após o login bem-sucedido, redirecione o usuário para a página do admin
+                    window.location.href = '/admin';  // Supondo que o admin esteja em '/admin'
+                } else {
+                    alert('Login falhou! Verifique suas credenciais.');
+                }
+            })
+            .catch(err => {
+                console.log('Erro no login:', err);
+                alert('Erro ao tentar fazer login!');
+            });
+        });
+        // Pegue o token do localStorage
+const token = localStorage.getItem('token');
+
+if (token) {
+    // Faça uma requisição para uma rota protegida, como '/admin'
+    fetch('/admin', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`  // Envia o token JWT no cabeçalho
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Acesso ao admin concedido:', data);
+    })
+    .catch(err => {
+        console.log('Erro ao acessar a página de Admin:', err);
+    });
+} else {
+    console.log('Token não encontrado. Por favor, faça login.');
+}
+
+    </script>
+</body>
+</html>

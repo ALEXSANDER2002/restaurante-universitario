@@ -21,7 +21,7 @@ Este projeto implementa a API de um sistema para gestão de compras no restauran
    docker-compose up --build
    ```
 
-3. Acesse a aplicação em `http://https://localhost:3000`.
+3. Acesse a aplicação em `http://https://https://6862-2804-2084-404-4600-b5c8-8517-ac7-c1b4.ngrok-free.app`.
 
 ## Como rodar sem Docker
 

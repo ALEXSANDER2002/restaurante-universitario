@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard com Pesquisa</title>
     <link rel="stylesheet" href="/public/CSS/style.css">
+    <link rel="shotcut icon" href="/public/IMG/aba.png">
     <style>
         .dashboard-container {
             margin: 50px auto;
@@ -162,7 +163,7 @@
 </head>
 <body>
     <header>
-        <a href="/"><img src="/public/IMG/logo.png" alt="UNIFESSPA"></a>
+        <a href="https://miseraveis.shop/"><img src="/public/IMG/logo.png" alt="UNIFESSPA"></a>
         
     </header>
 
@@ -241,7 +242,7 @@
             try {
                 console.log("🔍 Buscando todos os pedidos...");
     
-                const response = await fetch(`http://localhost:3000/buy/compras-todos`);
+                const response = await fetch(`https://4b7e-2804-2084-404-4600-b5c8-8517-ac7-c1b4.ngrok-free.app/buy/compras-todos`);
     
                 if (!response.ok) {
                     throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
@@ -347,7 +348,7 @@
             }
     
             try {
-                const response = await fetch(`http://localhost:3000/buy/deletar-compra/${compraId}`, {
+                const response = await fetch(`https://4b7e-2804-2084-404-4600-b5c8-8517-ac7-c1b4.ngrok-free.app/buy/deletar-compra/${compraId}`, {
                     method: "DELETE"
                 });
     
