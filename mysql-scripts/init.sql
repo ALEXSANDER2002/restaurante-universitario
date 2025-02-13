@@ -76,7 +76,7 @@ WHERE nome LIKE 'Jo%';
 
 -- BETWEEN (Intervalos de Valores)
 SELECT * FROM compras
-WHERE valor BETWEEN 4.00 AND 6.00;
+WHERE valor BETWEEN 3.00 AND 6.00;
 
 -- IN (Verificar Valores Dentro de um Conjunto)
 SELECT * FROM usuarios
