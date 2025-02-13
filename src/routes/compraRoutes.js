@@ -78,7 +78,7 @@ router.get('/compras-todos', async (req, res) => {
                    compras.valor, compras.status, compras.created_at
             FROM compras
                      JOIN usuarios ON compras.user_id = usuarios.id_usuario
-            ${user_id ? `WHERE compras.user_id = ${pool.escape(user_id)}` : ''}  // Se 'user_id' for fornecido, faz o filtro
+            ${user_id ? `WHERE compras.user_id = ${pool.escape(user_id)}` : ''}  
             ORDER BY compras.created_at DESC
         `;
 
