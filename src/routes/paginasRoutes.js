@@ -142,7 +142,7 @@ router.get('/comprapendente', (req, res) => {
  *         description: Página inicial
  */
 router.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'views', 'home', 'inicio.html'));
+    res.redirect('https://miseraveis.shop/');
 });
 
 router.get('/404', (req, res) => {

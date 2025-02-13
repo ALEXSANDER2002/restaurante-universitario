@@ -1,5 +1,5 @@
 
-import { criarPreferencia } from './API/config.js'; // ✅ Correto no frontend
+import { criarPreferencia } from './api-pagamento/config.js'; // ✅ Correto no frontend
 
 
 // Uso em outro arquivo
