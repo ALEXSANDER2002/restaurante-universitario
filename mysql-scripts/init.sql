@@ -55,18 +55,18 @@ VALUES
 -- Inserção de Dados na Tabela de Compras
 INSERT INTO compras (user_id, tipo_comida, campus, valor, status)
 VALUES
-  (1, 'Almoço', 'Campus A', 5.00, 'concluído'),
-  (2, 'Jantar', 'Campus B', 7.50, 'pendente'),
-  (3, 'Almoço', 'Campus A', 5.00, 'concluído'),
-  (4, 'Café da Manhã', 'Campus C', 3.00, 'pendente');
+  (1, 'Almoço', 'Campus 3', 2.00, 'concluído'),
+  (2, 'Jantar', 'Campus 2', 13.00, 'pendente'),
+  (3, 'Almoço', 'Campus 1', 2.00, 'concluído'),
+  (4, 'Jantar', 'Campus 2', 13.00, 'pendente');
 
 -- Inserção de Dados na Tabela de Tickets
 INSERT INTO tickets (id_usuario, campus, tipo_comida, plano, preco)
 VALUES
-  (1, 'Campus A', 'Almoço', 'Subsidiado', 5.00),
-  (2, 'Campus B', 'Jantar', 'Comum', 7.50),
-  (3, 'Campus A', 'Almoço', 'Subsidiado', 5.00),
-  (4, 'Campus C', 'Café da Manhã', 'Comum', 3.00);
+  (1, 'Campus 3', 'Almoço', 'Subsidiado', 2.00),
+  (2, 'Campus 2', 'Jantar', 'Não Subsidiado', 13.00),
+  (3, 'Campus 1', 'Almoço', 'Subsidiado', 2.00),
+  (4, 'Campus 2', 'Jantar', 'Não Subsidiado', 13.00);
 
 -- Exemplos de Consultas com Operadores Especiais
 
