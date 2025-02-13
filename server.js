@@ -56,7 +56,7 @@ class Server {
         });
     }
     
-    // Configuração de tarefas agendadas com cron
+    // Configuração de tarefas agendadas com cron ....
     cronJobs() {
         // Tarefa cron para rodar todos os dias à meia-noite, executando a limpeza de compras antigas
         cron.schedule("0 0 * * *", Compra.limparCompras);
