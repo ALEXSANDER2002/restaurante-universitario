@@ -1,8 +1,10 @@
-const express = require('express');
-const compraController = require('../controllers/compraController');
-const router = express.Router();
-const pool = require('../config/database');
+// Importando os módulos necessários
+const express = require('express'); // Framework para a criação de rotas
+const compraController = require('../controllers/compraController'); // Controlador para manipulação de compras
+const router = express.Router(); // Instância do roteador do Express
+const pool = require('../config/database'); // Conexão com o banco de dados
 
+// Rota para listar as compras de um usuário específico
 /**
  * @swagger
  * /compras:
@@ -25,18 +27,19 @@ const pool = require('../config/database');
  */
 router.get('/compras', async (req, res) => {
     try {
-        const { user_id } = req.query;
+        const { user_id } = req.query; // Obtendo o 'user_id' a partir da query string
         if (!user_id) {
-            return res.status(400).json({ error: "Usuário não especificado" });
+            return res.status(400).json({ error: "Usuário não especificado" }); // Caso o 'user_id' não seja fornecido, erro 400
         }
 
-        const compras = await compraController.listarCompras(user_id);
-        res.json(compras);
+        const compras = await compraController.listarCompras(user_id); // Chama o controlador para listar as compras
+        res.json(compras); // Retorna a lista de compras em formato JSON
     } catch (err) {
-        res.status(500).json({ error: "Erro ao buscar compras" });
+        res.status(500).json({ error: "Erro ao buscar compras" }); // Caso ocorra algum erro, retorna erro 500
     }
 });
 
+// Rota para listar todas as compras, com possibilidade de filtrar por 'user_id'
 /**
  * @swagger
  * /compras-todos:
@@ -57,7 +60,7 @@ router.get('/compras', async (req, res) => {
  */
 router.get('/compras-todos', async (req, res) => {
     try {
-        const { user_id } = req.query;
+        const { user_id } = req.query; // Verifica se há filtro por 'user_id'
 
         let sql = `
             SELECT compras.id, usuarios.nome AS usuario_nome, usuarios.matricula,
@@ -75,19 +78,20 @@ router.get('/compras-todos', async (req, res) => {
                    compras.valor, compras.status, compras.created_at
             FROM compras
                      JOIN usuarios ON compras.user_id = usuarios.id_usuario
-            ${user_id ? `WHERE compras.user_id = ${pool.escape(user_id)}` : ''}
+            ${user_id ? `WHERE compras.user_id = ${pool.escape(user_id)}` : ''}  // Se 'user_id' for fornecido, faz o filtro
             ORDER BY compras.created_at DESC
         `;
 
-        const [results] = await pool.query(sql);
+        const [results] = await pool.query(sql); // Executa a consulta no banco de dados
 
-        res.json(results);
+        res.json(results); // Retorna os resultados das compras
     } catch (err) {
-        console.error("❌ Erro ao buscar compras:", err);
-        res.status(500).json({ error: "Erro ao buscar compras" });
+        console.error("❌ Erro ao buscar compras:", err); // Registra o erro
+        res.status(500).json({ error: "Erro ao buscar compras" }); // Retorna erro 500 caso ocorra algum problema
     }
 });
 
+// Rota para deletar uma compra usando o ID
 /**
  * @swagger
  * /buy/deletar-compra/{id}:
@@ -109,23 +113,24 @@ router.get('/compras-todos', async (req, res) => {
  *         description: Erro ao excluir compra
  */
 router.delete('/deletar-compra/:id', async (req, res) => {
-    const { id } = req.params;
+    const { id } = req.params; // Obtém o 'id' da compra a partir dos parâmetros da rota
 
     try {
-        const sql = 'DELETE FROM compras WHERE id = ?';
-        const [result] = await pool.query(sql, [id]);
+        const sql = 'DELETE FROM compras WHERE id = ?'; // Query SQL para deletar a compra
+        const [result] = await pool.query(sql, [id]); // Executa a consulta de deleção
 
         if (result.affectedRows > 0) {
-            res.status(200).json({ message: 'Pedido excluído com sucesso.' });
+            res.status(200).json({ message: 'Pedido excluído com sucesso.' }); // Retorna sucesso caso a compra tenha sido deletada
         } else {
-            res.status(404).json({ error: 'Pedido não encontrado.' });
+            res.status(404).json({ error: 'Pedido não encontrado.' }); // Retorna erro 404 se a compra não for encontrada
         }
     } catch (err) {
-        console.error('❌ Erro ao excluir pedido:', err);
-        res.status(500).json({ error: 'Erro ao excluir pedido.' });
+        console.error('❌ Erro ao excluir pedido:', err); // Registra o erro
+        res.status(500).json({ error: 'Erro ao excluir pedido.' }); // Retorna erro 500 em caso de falha
     }
 });
 
+// Rota para criar uma nova compra
 /**
  * @swagger
  * /buy/criar-compra:
@@ -190,24 +195,24 @@ router.delete('/deletar-compra/:id', async (req, res) => {
  *                   type: string
  *                   example: "Erro ao criar compra"
  */
-
 router.post('/criar-compra', async (req, res) => {
     try {
-        const { user_id, tipo_comida, campus, valor } = req.body;
+        const { user_id, tipo_comida, campus, valor } = req.body; // Obtém os dados da compra a partir do corpo da requisição
 
         if (!user_id || !tipo_comida || !campus || !valor) {
-            return res.status(400).json({ error: "Todos os campos são obrigatórios" });
+            return res.status(400).json({ error: "Todos os campos são obrigatórios" }); // Retorna erro 400 se algum campo obrigatório estiver faltando
         }
 
-        // Inserindo a compra no banco de dados
+        // Query SQL para inserir uma nova compra no banco de dados
         const sql = 'INSERT INTO compras (user_id, tipo_comida, campus, valor) VALUES (?, ?, ?, ?)';
         const [result] = await pool.query(sql, [user_id, tipo_comida, campus, valor]);
 
-        res.status(200).json({ message: "Compra registrada!", id: result.insertId });
+        res.status(200).json({ message: "Compra registrada!", id: result.insertId }); // Retorna sucesso com o ID da compra criada
     } catch (err) {
-        console.error("❌ Erro ao criar compra:", err);
-        res.status(500).json({ error: "Erro ao criar compra" });
+        console.error("❌ Erro ao criar compra:", err); // Registra o erro
+        res.status(500).json({ error: "Erro ao criar compra" }); // Retorna erro 500 caso ocorra algum problema
     }
 });
 
+// Exportando o roteador para ser usado em outras partes da aplicação
 module.exports = router;

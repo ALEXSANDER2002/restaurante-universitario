@@ -1,35 +1,38 @@
 services:
+  # Definindo o serviço para o app (aplicação)
   app:
-    build: .
-    container_name: app
+    build: .  # Constrói a imagem do container a partir do Dockerfile no diretório atual
+    container_name: app  # Define o nome do container para o app
     ports:
-      - "3000:3000"
+      - "3000:3000"  # Expõe a porta 3000 do container na porta 3000 da máquina local
     depends_on:
       db:
-        condition: service_healthy  # ✅ Agora o app espera o MySQL ficar pronto
+        condition: service_healthy  # ✅ Agora o app espera o MySQL ficar pronto (usando a verificação de saúde do MySQL)
    
     networks:
-      - app-network
+      - app-network  # Conecta o serviço 'app' à rede 'app-network'
 
+  # Definindo o serviço para o banco de dados (MySQL)
   db:
-    image: mysql:8.0
-    container_name: db
+    image: mysql:8.0  # Usa a imagem oficial do MySQL versão 8.0
+    container_name: db  # Define o nome do container para o banco de dados
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: restaurante_universitario
+      MYSQL_ROOT_PASSWORD: admin  # Define a senha do usuário root do MySQL
+      MYSQL_DATABASE: restaurante_universitario  # Define o nome do banco de dados a ser criado
     ports:
-      - "3307:3306"  # ✅ Corrigido para que o app se conecte corretamente
+      - "3307:3306"  # ✅ Corrigido para que o app se conecte corretamente ao MySQL na porta 3306 do container, mapeada para a porta 3307 na máquina local
     volumes:
-      - ./mysql-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./mysql-scripts/init.sql:/docker-entrypoint-initdb.d/init.sql  # Inicializa o banco de dados com um script SQL (init.sql) no diretório mysql-scripts
     networks:
-      - app-network
-    command: --default-authentication-plugin=mysql_native_password
+      - app-network  # Conecta o serviço 'db' à mesma rede 'app-network'
+    command: --default-authentication-plugin=mysql_native_password  # Define o plugin de autenticação do MySQL
     healthcheck:  # ✅ O MySQL só será considerado "pronto" quando puder aceitar conexões
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]  # Verifica se o MySQL está aceitando conexões com o comando 'mysqladmin ping'
+      interval: 10s  # Intervalo entre as verificações de saúde
+      timeout: 5s  # Tempo limite para a execução do comando
+      retries: 5  # Número de tentativas antes de considerar o serviço como "não saudável"
 
+# Definindo as redes
 networks:
   app-network:
-    driver: bridge
+    driver: bridge  # Define o tipo de rede como 'bridge', permitindo que os containers se comuniquem entre si
