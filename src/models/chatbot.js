@@ -1,4 +1,4 @@
-function sendMessage() {
+/*function sendMessage() {
   const input = document.getElementById("user-input");
   const message = input.value.trim();
 
@@ -22,3 +22,4 @@ function sendMessage() {
   input.value = "";
   chatBody.scrollTop = chatBody.scrollHeight;
 }
+*/

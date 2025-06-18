@@ -52,21 +52,14 @@
         </div>
     </div>
 
-    <!-- Botão flutuante -->
-<div id="chat-toggle-btn" onclick="toggleChat()">
-  💬
-</div>
-
-<!-- Botão flutuante -->
-<div id="chat-toggle-btn" onclick="toggleChat()">
-  💬
-</div>
+   <!-- Botão flutuante (apenas um) -->
+<div id="chat-toggle-btn" onclick="toggleChat()">💬</div>
 
 <!-- Janela do chat -->
 <div id="chat-window" class="hidden">
   <div class="chat-header">
     Assistente do RU
-    <span onclick="toggleChat()" style="cursor: pointer;">✖</span>
+    <span id="close-chat" style="cursor: pointer;">✖</span>
   </div>
   <div class="chat-body" id="chat-body">
     <div class="chat-message bot">
@@ -78,8 +71,6 @@
     <button onclick="sendMessage()">Enviar</button>
   </div>
 </div>
-
-
 
 </div>
 <footer class="footer">
@@ -149,13 +140,66 @@
 </script>
 
 
-  
-<script>
+  <script>
 function toggleChat() {
+  console.log("Toggling chat window");
+  const chat = document.getElementById("chat-window");
+  chat.classList.toggle("hidden");
+  console.log("Classe hidden está presente?", chat.classList.contains("hidden"));
+}
+document.getElementById("close-chat").addEventListener("click", toggleChat);
+
+function sendMessage() {
+  const input = document.getElementById("chat-input");
+  const msg = input.value.trim();
+  if (!msg) return;
+
+  addMessage("user", msg);
+  input.value = "";
+
+  setTimeout(() => {
+    respondToUser(msg.toLowerCase());
+  }, 600);
+}
+
+function handleKey(event) {
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+}
+
+function addMessage(sender, text) {
+  const chatBody = document.getElementById("chat-body");
+  const msgDiv = document.createElement("div");
+  msgDiv.className = `chat-message ${sender}`;
+  msgDiv.textContent = text;
+  chatBody.appendChild(msgDiv);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function respondToUser(msg) {
+  let response;
+  if (msg.includes("horário") || msg.includes("funciona") || msg.includes("abre")) {
+    response = "O RU funciona de segunda a sexta-feira, das 11h às 13h30.";
+  } else if (msg.includes("preço") || msg.includes("valor") || msg.includes("quanto")) {
+    response = "A refeição custa R$ 3,00 para estudantes e R$ 10,00 para visitantes.";
+  } else if (msg.includes("cardápio") || msg.includes("comida") || msg.includes("refeição")) {
+    response = "O cardápio de hoje é: arroz, feijão, carne assada, salada de alface com tomate e suco de abacaxi.";
+  } else if (msg.includes("erro") || msg.includes("senha") || msg.includes("login") || msg.includes("entrar")) {
+    response = "Se você está enfrentando erros no login, tente redefinir sua senha ou entre em contato com o suporte: suporte@universitario.com";
+  } else {
+    response = "Desculpe, não entendi sua pergunta. Tente perguntar sobre horários, preços, cardápio ou problemas de login!";
+  }
+
+  addMessage("bot", response);
+}
+function toggleChat() {
+  console.log("Toggling chat window"); // Adicione para depuração
   const chat = document.getElementById("chat-window");
   chat.classList.toggle("hidden");
 }
 
+document.getElementById("close-chat").addEventListener("click", toggleChat);
 function sendMessage() {
   const input = document.getElementById("chat-input");
   const msg = input.value.trim();

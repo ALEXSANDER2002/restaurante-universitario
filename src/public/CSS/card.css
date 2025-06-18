@@ -222,7 +222,9 @@ p a:hover {
     margin-bottom: 10px;
     font-size: 20px;
 }
-
+.hidden {
+  display: none !important;
+}
 .footer p {
     margin-bottom: 15px;
     font-size: 14px;
